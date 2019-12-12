@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://nodejs.cn/api/errors.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Error | Node.js API 文档</title>
+  <link rel="stylesheet" href="res/api.css">
+</head>
+<body class="alt apidoc" id="api-section-errors">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+</ul>
+<div class="line"></div>
+
+<ul>
+<li><a class="nav-assert" href="assert.html">Assert (断言)</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons" href="addons.html">C/C++ 插件</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+<li><a class="nav-cli" href="cli.html">CLI (命令行选项)</a></li>
+<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto (加密)</a></li>
+<li><a class="nav-debugger" href="debugger.html">Debugger (调试器)</a></li>
+<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+<li><a class="nav-errors active" href="./errors_files/errors.htm">Error (错误)</a></li>
+<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+<li><a class="nav-fs" href="fs.html">File System (文件系统)</a></li>
+<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+<li><a class="nav-http" href="http.html">HTTP</a></li>
+<li><a class="nav-https" href="https.html">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring" href="querystring.html">Query Strings (查询字符串)</a></li>
+<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+<li><a class="nav-timers" href="timers.html">Timer (定时器)</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty" href="tty.html">TTY (终端)</a></li>
+<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+</ul>
+<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="errors" class="interior">
+      <header>
+        <h1>Node.js v6.10.2 文档</h1>
+        <div id="gtoc">
+          <p>
+            <a href="" name="toc">返回文档首页</a>
+            <!--<a href="/api/all.html">单页面显示</a> |-->
+            <!--<a href="/api/errors.json">JSON格式</a> |-->
+            <!--<a href="/api/en/errors.html">查看英文版</a>-->
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>目录</h2>
+        <ul>
+<li><span class="stability_undefined"><a href="errors.html#errors_errors">Error 错误</a></span><ul>
+<li><span class="stability_undefined"><a href="errors.html#errors_error_propagation_and_interception">错误的冒泡和捕获</a></span><ul>
+<li><span class="stability_undefined"><a href="errors.html#errors_node_js_style_callbacks">Node.js 风格的回调</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="errors.html#errors_class_error">Error 类</a></span><ul>
+<li><span class="stability_undefined"><a href="errors.html#errors_new_error_message">new Error(message)</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_error_capturestacktrace_targetobject_constructoropt">Error.captureStackTrace(targetObject[, constructorOpt])</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_error_stacktracelimit">Error.stackTraceLimit</a></span><ul>
+<li><span class="stability_undefined"><a href="errors.html#errors_error_message">error.message</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_error_stack">error.stack</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="errors.html#errors_class_rangeerror">RangeError 类</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_class_referenceerror">ReferenceError 类</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_class_syntaxerror">SyntaxError 类</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_class_typeerror">TypeError 类</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_exceptions_vs_errors">异常与错误</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_system_errors">系统错误</a></span><ul>
+<li><span class="stability_undefined"><a href="errors.html#errors_class_system_error">系统错误类</a></span><ul>
+<li><span class="stability_undefined"><a href="errors.html#errors_error_code">error.code</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_error_errno">error.errno</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_error_syscall">error.syscall</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_error_path">error.path</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_error_address">error.address</a></span></li>
+<li><span class="stability_undefined"><a href="errors.html#errors_error_port">error.port</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="errors.html#errors_common_system_errors">常见的系统错误</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>Error 错误<span><a class="mark" href="errors.html#errors_errors" id="errors_errors">#</a></span></h1><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_errors">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/errors.md">参与翻译</a></p>
+<!--type=misc-->
+<p>Node.js 中运行的应用程序一般会遇到以下四类错误：</p>
+<ul>
+<li>标准的 JavaScript 错误：<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError" class="type">&lt;EvalError&gt;</a> : 当调用 <code>eval()</code> 失败时抛出。</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError" class="type">&lt;SyntaxError&gt;</a> : 当 JavaScript 语法错误时抛出。</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError" class="type">&lt;RangeError&gt;</a> : 当一个值不在预期范围内时抛出。</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError" class="type">&lt;ReferenceError&gt;</a> : 当使用未定义的变量时抛出。</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError" class="type">&lt;TypeError&gt;</a> : 当传入错误类型的参数时抛出。</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError" class="type">&lt;URIError&gt;</a> : 当一个全局的 URI 处理函数被误用时抛出。</li>
+</ul>
+</li>
+<li>由底层操作系的触发的系统错误，例如试图打开一个不存在的文件、试图向一个已关闭的 socket 发送数据等。</li>
+<li>由应用程序代码触发的用户自定义的错误。</li>
+<li>断言错误是错误的一个特殊的类，每当 Node.js 检测到一个不应该发生的异常逻辑时会触发。
+这类错误通常由 <code>assert</code> 模块触发。</li>
+</ul>
+<p>所有 Node.js 引起的 JavaScript 和系统错误都是继承自或实例化自标准的 JavaScript 的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a> 类，且保证至少提供类中的可用的属性。</p>
+<h2>错误的冒泡和捕获<span><a class="mark" href="errors.html#errors_error_propagation_and_interception" id="errors_error_propagation_and_interception">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_error_propagation_and_interception">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/error_propagation_and_interception.md">参与翻译</a></p>
+<!--type=misc-->
+<p>Node.js 支持几种当应用程序运行时发生的错误的冒泡和处理的机制。
+如何报告和处理这些错误完全取决于错误的类型和被调用的 API 的风格。</p>
+<p>所有 JavaScript 错误都会被作为异常处理，异常会立即产生并使用标准的 JavaScript <code>throw</code> 机制抛出一个错误。
+这些都是使用 JavaScript 语言提供的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch"><code>try / catch</code> 语句</a>处理的。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 抛出一个 ReferenceError，因为 z 为 undefined</span>
+<span class="sh_keyword">try</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">const</span> m <span class="sh_symbol">=</span> <span class="sh_number">1</span><span class="sh_symbol">;</span>
+  <span class="sh_keyword">const</span> n <span class="sh_symbol">=</span> m <span class="sh_symbol">+</span> z<span class="sh_symbol">;</span>
+<span class="sh_cbracket">}</span> <span class="sh_keyword">catch</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// 在这里处理错误。</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p>JavaScript 的 <code>throw</code> 机制的任何使用都会引起异常，异常必须使用 <code>try / catch</code> 处理，否则 Node.js 进程会立即退出。</p>
+<p>除了少数例外，同步的 API（任何不接受 <code>callback</code> 函数的阻塞方法，例如 <a href="fs.html#fs_fs_readfilesync_file_options"><code>fs.readFileSync</code></a>）会使用 <code>throw</code> 报告错误。</p>
+<p>异步的 API 中发生的错误可能会以多种方式进行报告：</p>
+<ul>
+<li><p>大多数的异步方法都接受一个 <code>callback</code> 函数，该函数会接受一个 <code>Error</code> 对象传入作为第一个参数。
+如果第一个参数不是 <code>null</code> 而是一个 <code>Error</code> 实例，则说明发生了错误，应该进行处理。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> fs <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'fs'</span><span class="sh_symbol">);</span>
+fs<span class="sh_symbol">.</span><span class="sh_function">readFile</span><span class="sh_symbol">(</span><span class="sh_string">'一个不存在的文件'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> data<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span><span class="sh_string">'读取文件出错！'</span><span class="sh_symbol">,</span> err<span class="sh_symbol">);</span>
+    <span class="sh_keyword">return</span><span class="sh_symbol">;</span>
+  <span class="sh_cbracket">}</span>
+  <span class="sh_comment">// 否则处理数据</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+</li>
+<li><p>当一个异步方法被一个 <code>EventEmitter</code> 对象调用时，错误会被分发到对象的 <code>'error'</code> 事件上。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> net <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'net'</span><span class="sh_symbol">);</span>
+<span class="sh_keyword">const</span> connection <span class="sh_symbol">=</span> net<span class="sh_symbol">.</span><span class="sh_function">connect</span><span class="sh_symbol">(</span><span class="sh_string">'localhost'</span><span class="sh_symbol">);</span>
+
+<span class="sh_comment">// 添加一个 'error' 事件句柄到一个流：</span>
+connection<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'error'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// 如果连接被服务器重置，或无法连接，或发生任何错误，则错误会被发送到这里。 </span>
+  console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span>err<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+
+connection<span class="sh_symbol">.</span><span class="sh_function">pipe</span><span class="sh_symbol">(</span>process<span class="sh_symbol">.</span>stdout<span class="sh_symbol">);</span>
+</code></pre>
+</li>
+<li><p>Node.js API 中有一小部分普通的异步方法仍可能使用 <code>throw</code> 机制抛出异常，且必须使用 <code>try / catch</code> 处理。
+这些方法并没有一个完整的列表；请参阅各个方法的文档以确定所需的合适的错误处理机制。</p>
+</li>
+</ul>
+<p><code>'error'</code> 事件机制的使用常见于<a href="stream.html">基于流</a>和<a href="events.html#events_class_eventemitter">基于事件触发器</a>的 API，它们本身就代表了一系列的异步操作（相对于要么成功要么失败的单一操作）。</p>
+<p>对于所有的 <code>EventEmitter</code> 对象，如果没有提供一个 <code>'error'</code> 事件句柄，则错误会被抛出，并造成 Node.js 进程报告一个未处理的异常且随即崩溃，除非：
+适当地使用 <a href="domain.html"><code>domain</code></a> 模块或已经注册了一个 <a href="process.html#process_event_uncaughtexception"><code>process.on('uncaughtException')</code></a> 事件的句柄。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> EventEmitter <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'events'</span><span class="sh_symbol">);</span>
+<span class="sh_keyword">const</span> ee <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">EventEmitter</span><span class="sh_symbol">();</span>
+
+<span class="sh_function">setImmediate</span><span class="sh_symbol">(()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// 这会使进程崩溃，因为还为添加 'error' 事件句柄。</span>
+  ee<span class="sh_symbol">.</span><span class="sh_function">emit</span><span class="sh_symbol">(</span><span class="sh_string">'error'</span><span class="sh_symbol">,</span> <span class="sh_keyword">new</span> <span class="sh_predef_func">Error</span><span class="sh_symbol">(</span><span class="sh_string">'这会崩溃'</span><span class="sh_symbol">));</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>这种方式产生的错误无法使用 <code>try / catch</code> 截获，因为它们是在调用的代码已经退出后抛出的。</p>
+<p>开发者必须查阅各个方法的文档以明确在错误发生时这些方法是如何冒泡的。</p>
+<h3>Node.js 风格的回调<span><a class="mark" href="errors.html#errors_node_js_style_callbacks" id="errors_node_js_style_callbacks">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_node_js_style_callbacks">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/node_js_style_callbacks.md">参与翻译</a></p>
+<!--type=misc-->
+<p>大多数由 Node.js 核心 API 暴露出来的异步方法都遵循一个被称为“Node.js 风格的回调”的惯用模式。
+使用这种模式，一个回调函数是作为一个参数传给方法的。
+当操作完成或发生错误时，回调函数会被调用，并带上错误对象（如果有）作为第一个参数。
+如果没有发生错误，则第一个参数为 <code>null</code>。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> fs <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'fs'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">function</span> <span class="sh_function">nodeStyleCallback</span><span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> data<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+ <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+   console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span><span class="sh_string">'有一个错误'</span><span class="sh_symbol">,</span> err<span class="sh_symbol">);</span>
+   <span class="sh_keyword">return</span><span class="sh_symbol">;</span>
+ <span class="sh_cbracket">}</span>
+ console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>data<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+fs<span class="sh_symbol">.</span><span class="sh_function">readFile</span><span class="sh_symbol">(</span><span class="sh_string">'/some/file/that/does-not-exist'</span><span class="sh_symbol">,</span> nodeStyleCallback<span class="sh_symbol">);</span>
+fs<span class="sh_symbol">.</span><span class="sh_function">readFile</span><span class="sh_symbol">(</span><span class="sh_string">'/some/file/that/does-exist'</span><span class="sh_symbol">,</span> nodeStyleCallback<span class="sh_symbol">)</span>
+</code></pre>
+<p>JavaScript 的 <code>try / catch</code> 机制无法用于捕获由异步 API 引起的错误。
+尝试使用 <code>throw</code> 而不是一个 Node.js 风格的回调，是初学者常犯的错误：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 这无法使用：</span>
+<span class="sh_keyword">const</span> fs <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'fs'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">try</span> <span class="sh_cbracket">{</span>
+  fs<span class="sh_symbol">.</span><span class="sh_function">readFile</span><span class="sh_symbol">(</span><span class="sh_string">'/some/file/that/does-not-exist'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> data<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    <span class="sh_comment">// 假设的错误：在这里抛出</span>
+    <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+      <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span> <span class="sh_keyword">catch</span><span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// 这不会捕获到抛出！</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>err<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p>这无法使用，因为传给 <code>fs.readFile()</code> 的回调函数是被异步地调用。
+当回调被调用时，周围的代码（包括 <code>try { } catch(err) { }</code> 区域）已经退出。
+大多数情况下，在回调内抛出一个错误会使 Node.js 进程崩溃。
+如果<a href="domain.html">域</a>已启用，或已在 <code>process.on('uncaughtException')</code> 注册了一个句柄，则这些错误可被捕获。</p>
+<h2>Error 类<span><a class="mark" href="errors.html#errors_class_error" id="errors_class_error">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_class_error">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/class_error.md">参与翻译</a></p>
+<!--type=class-->
+<p>一个通用的 JavaScript <code>Error</code> 对象，它不表示错误发生的具体情况。
+<code>Error</code> 对象会捕捉一个“堆栈跟踪”，详细说明被实例化的 <code>Error</code> 对象在代码中的位置，并可能提供错误的文字描述。</p>
+<p>所有由 Node.js 产生的错误，包括所有系统的和 JavaScript 的错误都实例化自或继承自 <code>Error</code> 类。</p>
+<h3>new Error(message)<span><a class="mark" href="errors.html#errors_new_error_message" id="errors_new_error_message">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_new_error_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/new_error_message.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><code>message</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+</div><p>新建一个 <code>Error</code> 实例，并设置 <code>error.message</code> 属性以提供文本信息。
+如果 <code>message</code> 传的是一个对象，则会调用 <code>message.toString()</code> 生成文本信息。
+<code>error.stack</code> 属性表示被调用的 <code>new Error()</code> 在代码中的位置。
+堆栈跟踪是基于 <a href="https://github.com/v8/v8/wiki/Stack-Trace-API">V8 的堆栈跟踪 API</a> 的。
+堆栈跟踪只会取（a）异步代码执行的开头或（b）<code>Error.stackTraceLimit</code> 属性给出的栈帧中的最小项。</p>
+<h3>Error.captureStackTrace(targetObject[, constructorOpt])<span><a class="mark" href="errors.html#errors_error_capturestacktrace_targetobject_constructoropt" id="errors_error_capturestacktrace_targetobject_constructoropt">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_error_capturestacktrace_targetobject_constructoropt">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/error_capturestacktrace_targetobject_constructoropt.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><code>targetObject</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+<li><code>constructorOpt</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+</div><p>在 <code>targetObject</code> 上创建一个 <code>.stack</code> 属性，当访问时返回一个表示代码中调用 <code>Error.captureStackTrace()</code> 的位置的字符串。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> myObject <span class="sh_symbol">=</span> <span class="sh_cbracket">{}</span><span class="sh_symbol">;</span>
+<span class="sh_predef_func">Error</span><span class="sh_symbol">.</span><span class="sh_function">captureStackTrace</span><span class="sh_symbol">(</span>myObject<span class="sh_symbol">);</span>
+myObject<span class="sh_symbol">.</span>stack  <span class="sh_comment">// 类似 `new Error().stack`</span>
+</code></pre>
+<p>跟踪的第一行，不是前缀为 <code>ErrorType: message</code>，而是调用 <code>targetObject.toString()</code> 的结果。</p>
+<p>可选的 <code>constructorOpt</code> 参数接受一个函数。
+如果提供了，则 <code>constructorOpt</code> 之上包括自身在内的全部栈帧都会被生成的堆栈跟踪省略。</p>
+<p><code>constructorOpt</code> 参数用在向最终用户隐藏错误生成的具体细节时非常有用。例如：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">function</span> <span class="sh_function">MyError</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span>
+  <span class="sh_predef_func">Error</span><span class="sh_symbol">.</span><span class="sh_function">captureStackTrace</span><span class="sh_symbol">(</span><span class="sh_keyword">this</span><span class="sh_symbol">,</span> MyError<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_comment">// 没传入 MyError 到 captureStackTrace，MyError 帧会显示在 .stack 属性。</span>
+<span class="sh_comment">// 通过传入构造函数，可以省略该帧及其之上的所有帧。</span>
+<span class="sh_keyword">new</span> <span class="sh_function">MyError</span><span class="sh_symbol">().</span>stack
+</code></pre>
+<h3>Error.stackTraceLimit<span><a class="mark" href="errors.html#errors_error_stacktracelimit" id="errors_error_stacktracelimit">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_error_stacktracelimit">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/error_stacktracelimit.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+</ul>
+</div><p><code>Error.stackTraceLimit</code> 属性指定了堆栈跟踪收集的栈帧数量（无论是 <code>new Error().stack</code> 或 <code>Error.captureStackTrace(obj)</code> 产生的）。</p>
+<p>默认值为 <code>10</code> ，但可设为任何有效的 JavaScript 数值。
+值改变后的变化会影响所有捕获到的堆栈跟踪。</p>
+<p>如果设为一个非数值或负数，则堆栈跟踪不会捕捉任何栈帧。</p>
+<h4>error.message<span><a class="mark" href="errors.html#errors_error_message" id="errors_error_message">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_error_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/error_message.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+</div><p><code>error.message</code> 属性是错误的字符串描述，通过调用 <code>new Error(message)</code> 设置。
+传给构造函数的 <code>message</code> 也会出现在 <code>Error</code> 的堆栈跟踪的第一行。
+但是，<code>Error</code> 对象创建后改变这个属性可能不会改变堆栈跟踪的第一行（比如当 <code>error.stack</code> 在该属性被改变之前被读取）。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> err <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_predef_func">Error</span><span class="sh_symbol">(</span><span class="sh_string">'错误信息'</span><span class="sh_symbol">);</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>err<span class="sh_symbol">.</span>message<span class="sh_symbol">);</span>
+<span class="sh_comment">// 打印: 错误信息</span>
+</code></pre>
+<h4>error.stack<span><a class="mark" href="errors.html#errors_error_stack" id="errors_error_stack">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_error_stack">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/error_stack.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+</div><p><code>error.stack</code> 属性是一个字符串，描述代码中 <code>Error</code> 被实例化的位置。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-txt"><span class="sh_predef_func">Error</span><span class="sh_symbol">:</span> Things keep happening<span class="sh_symbol">!</span>
+   <span class="sh_normal">at </span><span class="sh_symbol">/</span><span class="sh_normal">home</span><span class="sh_symbol">/</span><span class="sh_normal">gbusey</span><span class="sh_symbol">/</span>file<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">525</span><span class="sh_symbol">:</span><span class="sh_number">2</span>
+   at Frobnicator<span class="sh_symbol">.</span><span class="sh_function">refrobulate</span> <span class="sh_symbol">(</span><span class="sh_regexp">/home/g</span><span class="sh_normal">busey</span><span class="sh_symbol">/</span>business<span class="sh_symbol">-</span>logic<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">424</span><span class="sh_symbol">:</span><span class="sh_number">21</span><span class="sh_symbol">)</span>
+   at Actor<span class="sh_symbol">.&lt;</span>anonymous<span class="sh_symbol">&gt;</span> <span class="sh_symbol">(</span><span class="sh_regexp">/home/g</span><span class="sh_normal">busey</span><span class="sh_symbol">/</span>actors<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">400</span><span class="sh_symbol">:</span><span class="sh_number">8</span><span class="sh_symbol">)</span>
+   at <span class="sh_function">increaseSynergy</span> <span class="sh_symbol">(</span><span class="sh_regexp">/home/g</span><span class="sh_normal">busey</span><span class="sh_symbol">/</span>actors<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">701</span><span class="sh_symbol">:</span><span class="sh_number">6</span><span class="sh_symbol">)</span>
+</code></pre>
+<p>第一行会被格式化为 <code>&lt;error class name&gt;: &lt;error message&gt;</code>，且带上一系列栈帧（每一行都以 "at " 开头）。
+每一帧描述了一个代码中导致错误生成的调用点。
+V8 引擎会试图显示每个函数的名称（变量名、函数名、或对象的方法名），但偶尔也可能找不到一个合适的名称。
+如果 V8 引擎没法确定一个函数的名称，则只显示帧的位置信息。
+否则，在位置信息的旁边会显示明确的函数名。</p>
+<p>注意，帧只由 JavaScript 函数产生。
+例如，同步地执行一个名为 <code>cheetahify</code> 的 C++ 插件，且插件自身调用一个 JavaScript 函数，代表 <code>cheetahify</code> 回调的栈帧不会出现在堆栈跟踪里：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> cheetahify <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./native-binding.node'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">function</span> <span class="sh_function">makeFaster</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// cheetahify 同步地调用 speedy.</span>
+  <span class="sh_function">cheetahify</span><span class="sh_symbol">(</span><span class="sh_keyword">function</span> <span class="sh_function">speedy</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">throw</span> <span class="sh_keyword">new</span> <span class="sh_predef_func">Error</span><span class="sh_symbol">(</span><span class="sh_string">'oh no!'</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_function">makeFaster</span><span class="sh_symbol">();</span> <span class="sh_comment">// 会抛出：</span>
+  <span class="sh_comment">// /home/gbusey/file.js:6</span>
+  <span class="sh_comment">//     throw new Error('oh no!');</span>
+  <span class="sh_comment">//           ^</span>
+  <span class="sh_comment">// Error: oh no!</span>
+  <span class="sh_comment">//     at speedy (/home/gbusey/file.js:6:11)</span>
+  <span class="sh_comment">//     at makeFaster (/home/gbusey/file.js:5:3)</span>
+  <span class="sh_comment">//     at Object.&lt;anonymous&gt; (/home/gbusey/file.js:10:1)</span>
+  <span class="sh_comment">//     at Module._compile (module.js:456:26)</span>
+  <span class="sh_comment">//     at Object.Module._extensions..js (module.js:474:10)</span>
+  <span class="sh_comment">//     at Module.load (module.js:356:32)</span>
+  <span class="sh_comment">//     at Function.Module._load (module.js:312:12)</span>
+  <span class="sh_comment">//     at Function.Module.runMain (module.js:497:10)</span>
+  <span class="sh_comment">//     at startup (node.js:119:16)</span>
+  <span class="sh_comment">//     at node.js:906:3</span>
+</code></pre>
+<p>位置信息会是其中之一：</p>
+<ul>
+<li><code>native</code>，帧表示一个 V8 引擎内部的调用（比如，<code>[].forEach</code>）。</li>
+<li><code>plain-filename.js:line:column</code>，帧表示一个 Node.js 内部的调用。</li>
+<li><code>/absolute/path/to/file.js:line:column</code>，帧表示一个用户程序或其依赖的调用。</li>
+</ul>
+<p>代表堆栈跟踪的字符串是在 <code>error.stack</code> 属性被访问时才生成的。</p>
+<p>堆栈跟踪捕获的帧的数量是由 <code>Error.stackTraceLimit</code> 或当前事件循环中可用的帧数量的最小值界定的。</p>
+<p>系统级的错误是由扩展的 <code>Error</code> 实例产生的，详见<a href="errors.html#errors_system_errors">系统错误</a>。</p>
+<h2>RangeError 类<span><a class="mark" href="errors.html#errors_class_rangeerror" id="errors_class_rangeerror">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_class_rangeerror">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/class_rangeerror.md">参与翻译</a></p>
+<p><code>Error</code> 的一个子类，表明一个函数的一个给定的参数的值不在可接受的集合或范围内；
+无论是一个数字范围还是给定函数参数的选项的集合。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'net'</span><span class="sh_symbol">).</span><span class="sh_function">connect</span><span class="sh_symbol">(-</span><span class="sh_number">1</span><span class="sh_symbol">);</span>
+  <span class="sh_comment">// 抛出 RangeError，端口应该是 &gt; 0 &amp;&amp; &lt; 65536</span>
+</code></pre>
+<p>Node.js 会生成并以参数校验的形式立即抛出 <code>RangeError</code> 实例。</p>
+<h2>ReferenceError 类<span><a class="mark" href="errors.html#errors_class_referenceerror" id="errors_class_referenceerror">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_class_referenceerror">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/class_referenceerror.md">参与翻译</a></p>
+<p><code>Error</code> 的一个子类，表明试图访问一个未定义的变量。
+这些错误通常表明代码有拼写错误或程序已损坏。</p>
+<p>虽然客户端代码可能产生和传播这些错误，但在实践中，只有 V8 引擎会这么做。</p>
+<pre class="sh_sourceCode"><code class="lang-js">doesNotExist<span class="sh_symbol">;</span>
+  <span class="sh_comment">// 抛出 ReferenceError，在这个程序中 doesNotExist 不是一个变量。</span>
+</code></pre>
+<p><code>ReferenceError</code> 实例有一个 <code>error.arguments</code> 属性，其值是一个只有单个元素（一个代表未定义的变量的字符串）的数组。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+<span class="sh_keyword">try</span> <span class="sh_cbracket">{</span>
+  doesNotExist<span class="sh_symbol">;</span>
+<span class="sh_cbracket">}</span> <span class="sh_keyword">catch</span><span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_function">assert</span><span class="sh_symbol">(</span>err<span class="sh_symbol">.</span><span class="sh_predef_var">arguments</span><span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">],</span> <span class="sh_string">'doesNotExist'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p>除非应用程序是动态生成并运行的代码，否则 <code>ReferenceError</code> 实例应该始终被视为代码中或其依赖中的错误。</p>
+<h2>SyntaxError 类<span><a class="mark" href="errors.html#errors_class_syntaxerror" id="errors_class_syntaxerror">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_class_syntaxerror">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/class_syntaxerror.md">参与翻译</a></p>
+<p><code>Error</code> 的一个子类，表明程序不是有效的 JavaScript 代码。
+这些错误是代码执行的结果产生和传播的。
+代码执行可能产生自 <code>eval</code>、<code>Function</code>、<code>require</code> 或 <a href="vm.html">vm</a>。
+这些错误几乎都表明程序已损坏。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">try</span> <span class="sh_cbracket">{</span>
+  <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'vm'</span><span class="sh_symbol">).</span><span class="sh_function">runInThisContext</span><span class="sh_symbol">(</span><span class="sh_string">'binary ! isNotOk'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span> <span class="sh_keyword">catch</span><span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// err 是一个 SyntaxError</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p><code>SyntaxError</code> 实例在创建它们的上下文中是不可恢复的。
+它们只可被其他上下文捕获。</p>
+<h2>TypeError 类<span><a class="mark" href="errors.html#errors_class_typeerror" id="errors_class_typeerror">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_class_typeerror">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/class_typeerror.md">参与翻译</a></p>
+<p><code>Error</code> 的一个子类，表明提供的参数不是一个被允许的类型。
+例如，将一个函数传给一个期望字符串的参数会被视为一个 <code>TypeError</code>。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'url'</span><span class="sh_symbol">).</span><span class="sh_function">parse</span><span class="sh_symbol">(()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span> <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+  <span class="sh_comment">// 抛出 TypeError，因为它期望的是一个字符串</span>
+</code></pre>
+<p>Node.js 会生成并以参数校验的形式立即抛出 <code>TypeError</code> 实例。</p>
+<h2>异常与错误<span><a class="mark" href="errors.html#errors_exceptions_vs_errors" id="errors_exceptions_vs_errors">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_exceptions_vs_errors">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/exceptions_vs_errors.md">参与翻译</a></p>
+<!--type=misc-->
+<p>JavaScript 异常是一个作为一个无效操作的结果或作为一个 <code>throw</code> 声明的目标所抛出的值。
+虽然它不要求这些值是 <code>Error</code> 的实例或继承自 <code>Error</code> 的类的实例，但所有通过 Node.js 或 JavaScript 运行时抛出的异常都是 <code>Error</code> 实例。</p>
+<p>有些异常在 JavaScript 层是无法恢复的。
+这些异常总会引起 Node.js 进程的崩溃。
+例如 <code>assert()</code> 检测或在 C++ 层调用的 <code>abort()</code>。</p>
+<h2>系统错误<span><a class="mark" href="errors.html#errors_system_errors" id="errors_system_errors">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_system_errors">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/system_errors.md">参与翻译</a></p>
+<p>系统错误是当程序运行环境中发生异常时产生的。
+特别是，当应用程序违反了操作系统的限制时发生的操作错误，例如试图读取一个不存在的文件或用户没有足够的权限。</p>
+<p>系统错误通常产生于系统调用层级。
+在大多数 Unix 系统上，可通过运行 <code>man 2 intro</code>、<code>man 3 errno</code>、或<a href="http://man7.org/linux/man-pages/man3/errno.3.html">在线文档</a>获取错误代码的详细清单和含义。</p>
+<p>系统错误是由扩展的 <code>Error</code> 对象加上附加属性表现的。</p>
+<h3>系统错误类<span><a class="mark" href="errors.html#errors_class_system_error" id="errors_class_system_error">#</a></span></h3>
+<h4>error.code<span><a class="mark" href="errors.html#errors_error_code" id="errors_error_code">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_error_code">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/error_code.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+</div><p><code>error.code</code> 属性是一个表示错误码的字符串，总是 <code>E</code> 带上一串大写字母。</p>
+<h4>error.errno<span><a class="mark" href="errors.html#errors_error_errno" id="errors_error_errno">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_error_errno">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/error_errno.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+</ul>
+</div><p><code>error.errno</code> 属性是一个数值或字符串。
+如果返回一个数值，则数值是一个负数，对应 <a href="http://docs.libuv.org/en/v1.x/errors.html"><code>libuv 错误处理</code></a> 中定义的错误码。
+详见 uv-errno.h 头文件（Node.js 源代码中的 <code>deps/uv/include/uv-errno.h</code>）。
+如果返回一个字符串，则同 <code>error.code</code>。</p>
+<h4>error.syscall<span><a class="mark" href="errors.html#errors_error_syscall" id="errors_error_syscall">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_error_syscall">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/error_syscall.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+</div><p><code>error.syscall</code> 属性是一个字符串，描述失败的 <a href="http://man7.org/linux/man-pages/man2/syscall.2.html">系统调用</a>。</p>
+<h4>error.path<span><a class="mark" href="errors.html#errors_error_path" id="errors_error_path">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_error_path">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/error_path.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+</div><p>When present (e.g. in <code>fs</code> or <code>child_process</code>), the <code>error.path</code> property is a string
+containing a relevant invalid pathname.</p>
+<h4>error.address<span><a class="mark" href="errors.html#errors_error_address" id="errors_error_address">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_error_address">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/error_address.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+</div><p>When present (e.g. in <code>net</code> or <code>dgram</code>), the <code>error.address</code> property is a string
+describing the address to which the connection failed.</p>
+<h4>error.port<span><a class="mark" href="errors.html#errors_error_port" id="errors_error_port">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_error_port">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/error_port.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+</ul>
+</div><p>When present (e.g. in <code>net</code> or <code>dgram</code>), the <code>error.port</code> property is a number representing
+the connection's port that is not available.</p>
+<h3>常见的系统错误<span><a class="mark" href="errors.html#errors_common_system_errors" id="errors_common_system_errors">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/errors.html#errors_common_system_errors">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/errors/common_system_errors.md">参与翻译</a></p>
+<p>以下列表是不完整的，但列举了编写 Node.js 程序时会遇到的一些常见的系统错误。
+详细的列表可从 <a href="http://man7.org/linux/man-pages/man3/errno.3.html">ERRNO 文档</a>找到。</p>
+<ul>
+<li><p><code>EACCES</code> (拒绝访问): 试图以被一个文件的访问权限禁止的方式访问一个文件。</p>
+</li>
+<li><p><code>EADDRINUSE</code> (地址已被使用):  试图绑定一个服务器（<a href="net.html"><code>net</code></a>、<a href="http.html"><code>http</code></a> 或 <a href="https.html"><code>https</code></a>）到本地地址，但因另一个本地系统的服务器已占用了该地址而导致失败。</p>
+</li>
+<li><p><code>ECONNREFUSED</code> (连接被拒绝): 无法连接，因为目标机器积极拒绝。
+这通常是因为试图连接到外部主机上的废弃的服务。</p>
+</li>
+<li><p><code>ECONNRESET</code> (连接被重置): 一个连接被强行关闭。
+这通常是因为连接到远程 socket 超时或重启。
+常发生于 <a href="http.html"><code>http</code></a> 和 <a href="net.html"><code>net</code></a> 模块。</p>
+</li>
+<li><p><code>EEXIST</code> (文件已存在): 一个操作的目标文件已存在，而要求目标不存在。</p>
+</li>
+<li><p><code>EISDIR</code> (是一个目录): 一个操作要求一个文件，但给定的路径是一个目录。</p>
+</li>
+<li><p><code>EMFILE</code> (系统打开了太多文件): 已达到系统<a href="https://en.wikipedia.org/wiki/File_descriptor">文件描述符</a>允许的最大数量，且描述符的请求不能被满足直到至少关闭其中一个。
+当一次并行打开多个文件时会发生这个错误，尤其是在进程的文件描述限制数量较低的操作系统（如 OS X）。
+要解决这个限制，可在运行 Node.js 进程的同一 shell 中运行 <code>ulimit -n 2048</code>。</p>
+</li>
+<li><p><code>ENOENT</code> (无此文件或目录): 通常是由 <a href="fs.html"><code>fs</code></a> 操作引起的，表明指定的路径不存在，即给定的路径找不到文件或目录。</p>
+</li>
+<li><p><code>ENOTDIR</code> (不是一个目录): 给定的路径虽然存在，但不是一个目录。
+通常是由 <a href="fs.html#fs_fs_readdir_path_options_callback"><code>fs.readdir</code></a> 引起的。</p>
+</li>
+<li><p><code>ENOTEMPTY</code> (目录非空): 一个操作的目标是一个非空的目录，而要求的是一个空目录。
+通常是由 <a href="fs.html#fs_fs_unlink_path_callback"><code>fs.unlink</code></a> 引起的。</p>
+</li>
+<li><p><code>EPERM</code> (操作不被允许): 试图执行一个需要更高权限的操作。</p>
+</li>
+<li><p><code>EPIPE</code> (管道损坏): 写入一个管道、socket 或 FIFO 时没有进程读取数据。
+常见于 <a href="net.html"><code>net</code></a> 和 <a href="http.html"><code>http</code></a> 层，表明远端要写入的流已被关闭。</p>
+</li>
+<li><p><code>ETIMEDOUT</code> (操作超时): 一个连接或发送的请求失败，因为连接方在一段时间后没有做出合适的响应。
+常见于 <a href="http.html"><code>http</code></a> 或 <a href="net.html"><code>net</code></a>。
+往往标志着 <code>socket.end()</code> 没有被正确地调用。</p>
+</li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+  <script src="res/api.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+</body></html>

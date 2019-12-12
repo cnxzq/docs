@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://nodejs.cn/api/https.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>https | Node.js API 文档</title>
+  <link rel="stylesheet" href="res/api.css">
+</head>
+<body class="alt apidoc" id="api-section-https">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+</ul>
+<div class="line"></div>
+
+<ul>
+<li><a class="nav-assert" href="assert.html">Assert (断言)</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons" href="addons.html">C/C++ 插件</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+<li><a class="nav-cli" href="cli.html">CLI (命令行选项)</a></li>
+<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto (加密)</a></li>
+<li><a class="nav-debugger" href="debugger.html">Debugger (调试器)</a></li>
+<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+<li><a class="nav-errors" href="errors.html">Error (错误)</a></li>
+<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+<li><a class="nav-fs" href="fs.html">File System (文件系统)</a></li>
+<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+<li><a class="nav-http" href="http.html">HTTP</a></li>
+<li><a class="nav-https active" href="./https_files/https.htm">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring" href="querystring.html">Query Strings (查询字符串)</a></li>
+<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+<li><a class="nav-timers" href="timers.html">Timer (定时器)</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty" href="tty.html">TTY (终端)</a></li>
+<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+</ul>
+<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="https" class="interior">
+      <header>
+        <h1>Node.js v6.10.2 文档</h1>
+        <div id="gtoc">
+          <p>
+            <a href="" name="toc">返回文档首页</a>
+            <!--<a href="/api/all.html">单页面显示</a> |-->
+            <!--<a href="/api/https.json">JSON格式</a> |-->
+            <!--<a href="/api/en/https.html">查看英文版</a>-->
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>目录</h2>
+        <ul>
+<li><span class="stability_2"><a href="https.html#https_https">https</a></span><ul>
+<li><span class="stability_undefined"><a href="https.html#https_class_https_agent">https.Agent 类</a></span></li>
+<li><span class="stability_undefined"><a href="https.html#https_class_https_server">https.Server 类</a></span><ul>
+<li><span class="stability_undefined"><a href="https.html#https_server_settimeout_msecs_callback">server.setTimeout(msecs, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="https.html#https_server_timeout">server.timeout</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="https.html#https_https_createserver_options_requestlistener">https.createServer(options[, requestListener])</a></span><ul>
+<li><span class="stability_undefined"><a href="https.html#https_server_close_callback">server.close([callback])</a></span></li>
+<li><span class="stability_undefined"><a href="https.html#https_server_listen_handle_callback">server.listen(handle[, callback])</a></span></li>
+<li><span class="stability_undefined"><a href="https.html#https_server_listen_path_callback">server.listen(path[, callback])</a></span></li>
+<li><span class="stability_undefined"><a href="https.html#https_server_listen_port_host_backlog_callback">server.listen(port[, host][, backlog][, callback])</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="https.html#https_https_get_options_callback">https.get(options, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="https.html#https_https_globalagent">https.globalAgent</a></span></li>
+<li><span class="stability_undefined"><a href="https.html#https_https_request_options_callback">https.request(options, callback)</a></span></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>https<span><a class="mark" href="https.html#https_https" id="https_https">#</a></span></h1><p style="font-size:12px;margin-top:-1em"><a href="en/https.html#https_https">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/https/https.md">参与翻译</a></p>
+<pre class="api_stability api_stability_2 sh_sourceCode">稳定性<span class="sh_symbol">:</span> <span class="sh_number">2</span> <span class="sh_symbol">-</span> 稳定的</pre><p>HTTPS 是 HTTP 基于 TLS/SSL 的版本。在 Node.js 中，它被实现为一个独立的模块。</p>
+<h2>https.Agent 类<span><a class="mark" href="https.html#https_class_https_agent" id="https_class_https_agent">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/https.html#https_class_https_agent">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/https/class_https_agent.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.5</span>
+</div><p>HTTPS 的一个类似于 <a href="http.html#http_class_http_agent"><code>http.Agent</code></a> 的代理对象。查看 <a href="https.html#https_https_request_options_callback"><code>https.request()</code></a> 获取更多信息。</p>
+<h2>https.Server 类<span><a class="mark" href="https.html#https_class_https_server" id="https_class_https_server">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/https.html#https_class_https_server">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/https/class_https_server.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.4</span>
+</div><p>这个类是 <code>tls.Server</code> 的子类，跟 <a href="http.html#http_class_http_server"><code>http.Server</code></a> 一样触发事件。查看<a href="http.html#http_class_http_server"><code>http.Server</code></a> 获取更多信息。</p>
+<h3>server.setTimeout(msecs, callback)<span><a class="mark" href="https.html#https_server_settimeout_msecs_callback" id="https_server_settimeout_msecs_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/https.html#https_server_settimeout_msecs_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/https/server_settimeout_msecs_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.2</span>
+</div><p>查看 <a href="http.html#http_server_settimeout_msecs_callback"><code>http.Server#setTimeout()</code></a>。</p>
+<h3>server.timeout<span><a class="mark" href="https.html#https_server_timeout" id="https_server_timeout">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/https.html#https_server_timeout">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/https/server_timeout.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.2</span>
+</div><p>查看 <a href="http.html#http_server_timeout"><code>http.Server#timeout</code></a>。</p>
+<h2>https.createServer(options[, requestListener])<span><a class="mark" href="https.html#https_https_createserver_options_requestlistener" id="https_https_createserver_options_requestlistener">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/https.html#https_https_createserver_options_requestlistener">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/https/https_createserver_options_requestlistener.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.4</span>
+</div><p>返回一个新的 HTTPS 网络服务器对象。
+参数 <code>options</code> 类似于 <a href="tls.html#tls_tls_createserver_options_secureconnectionlistener"><code>tls.createServer()</code></a>。
+参数 <code>requestListener</code> 是一个自动被加到 <code>'request'</code> 事件中的函数。</p>
+<p>例子:</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// curl -k https://localhost:8000/</span>
+<span class="sh_keyword">const</span> https <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'https'</span><span class="sh_symbol">);</span>
+<span class="sh_keyword">const</span> fs <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'fs'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">const</span> options <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  key<span class="sh_symbol">:</span> fs<span class="sh_symbol">.</span><span class="sh_function">readFileSync</span><span class="sh_symbol">(</span><span class="sh_string">'test/fixtures/keys/agent2-key.pem'</span><span class="sh_symbol">),</span>
+  cert<span class="sh_symbol">:</span> fs<span class="sh_symbol">.</span><span class="sh_function">readFileSync</span><span class="sh_symbol">(</span><span class="sh_string">'test/fixtures/keys/agent2-cert.pem'</span><span class="sh_symbol">)</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+
+https<span class="sh_symbol">.</span><span class="sh_function">createServer</span><span class="sh_symbol">(</span>options<span class="sh_symbol">,</span> <span class="sh_symbol">(</span>req<span class="sh_symbol">,</span> res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">writeHead</span><span class="sh_symbol">(</span><span class="sh_number">200</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">(</span><span class="sh_string">'hello world</span><span class="sh_specialchar">\n</span><span class="sh_string">'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">).</span><span class="sh_function">listen</span><span class="sh_symbol">(</span><span class="sh_number">8000</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>或者</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> https <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'https'</span><span class="sh_symbol">);</span>
+<span class="sh_keyword">const</span> fs <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'fs'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">const</span> options <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  pfx<span class="sh_symbol">:</span> fs<span class="sh_symbol">.</span><span class="sh_function">readFileSync</span><span class="sh_symbol">(</span><span class="sh_string">'server.pfx'</span><span class="sh_symbol">)</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+
+https<span class="sh_symbol">.</span><span class="sh_function">createServer</span><span class="sh_symbol">(</span>options<span class="sh_symbol">,</span> <span class="sh_symbol">(</span>req<span class="sh_symbol">,</span> res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">writeHead</span><span class="sh_symbol">(</span><span class="sh_number">200</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">(</span><span class="sh_string">'hello world</span><span class="sh_specialchar">\n</span><span class="sh_string">'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">).</span><span class="sh_function">listen</span><span class="sh_symbol">(</span><span class="sh_number">8000</span><span class="sh_symbol">);</span>
+</code></pre>
+<h3>server.close([callback])<span><a class="mark" href="https.html#https_server_close_callback" id="https_server_close_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/https.html#https_server_close_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/https/server_close_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.90</span>
+</div><p>查看 <a href="http.html#http_server_close_callback"><code>http.close()</code></a> 获取细节。</p>
+<h3>server.listen(handle[, callback])<span><a class="mark" href="https.html#https_server_listen_handle_callback" id="https_server_listen_handle_callback">#</a></span></h3>
+<h3>server.listen(path[, callback])<span><a class="mark" href="https.html#https_server_listen_path_callback" id="https_server_listen_path_callback">#</a></span></h3>
+<h3>server.listen(port[, host][, backlog][, callback])<span><a class="mark" href="https.html#https_server_listen_port_host_backlog_callback" id="https_server_listen_port_host_backlog_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/https.html#https_server_listen_port_host_backlog_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/https/server_listen_port_host_backlog_callback.md">参与翻译</a></p>
+<p>查看 <a href="http.html#http_server_listen_port_hostname_backlog_callback"><code>http.listen()</code></a> 获取细节。</p>
+<h2>https.get(options, callback)<span><a class="mark" href="https.html#https_https_get_options_callback" id="https_https_get_options_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/https.html#https_https_get_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/https/https_get_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.6</span>
+</div><p>类似 <a href="http.html#http_http_get_options_callback"><code>http.get()</code></a>，但是用于 HTTPS。</p>
+<p>参数 <code>options</code> 可以是一个对象或是一个字符串。
+如果参数 <code>options</code> 是一个字符串, 它自动被 <a href="url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost"><code>url.parse()</code></a> 所解析。</p>
+<p>例子:</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> https <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'https'</span><span class="sh_symbol">);</span>
+
+https<span class="sh_symbol">.</span><span class="sh_function">get</span><span class="sh_symbol">(</span><span class="sh_string">'https://encrypted.google.com/'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'状态码：'</span><span class="sh_symbol">,</span> res<span class="sh_symbol">.</span>statusCode<span class="sh_symbol">);</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'请求头：'</span><span class="sh_symbol">,</span> res<span class="sh_symbol">.</span>headers<span class="sh_symbol">);</span>
+
+  res<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'data'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>d<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    process<span class="sh_symbol">.</span>stdout<span class="sh_symbol">.</span><span class="sh_function">write</span><span class="sh_symbol">(</span>d<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+
+<span class="sh_cbracket">}</span><span class="sh_symbol">).</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'error'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>e<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span>e<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<h2>https.globalAgent<span><a class="mark" href="https.html#https_https_globalagent" id="https_https_globalagent">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/https.html#https_https_globalagent">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/https/https_globalagent.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.9</span>
+</div><p><a href="https.html#https_class_https_agent"><code>https.Agent</code></a> 的全局实例，用于所有 HTTPS 客户端请求。</p>
+<h2>https.request(options, callback)<span><a class="mark" href="https.html#https_https_request_options_callback" id="https_https_request_options_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/https.html#https_https_request_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/https/https_request_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.6</span>
+</div><p>向一个安全的服务器发起一个请求。</p>
+<p>参数 <code>options</code> 可以是一个对象或是一个字符串。
+如果参数 <code>options</code> 是一个字符串, 它自动被 <a href="url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost"><code>url.parse()</code></a> 所解析。</p>
+<p>所有来自 <a href="http.html#http_http_request_options_callback"><code>http.request()</code></a> 的参数都是可用的。</p>
+<p>例子:</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> https <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'https'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">var</span> options <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  hostname<span class="sh_symbol">:</span> <span class="sh_string">'encrypted.google.com'</span><span class="sh_symbol">,</span>
+  port<span class="sh_symbol">:</span> <span class="sh_number">443</span><span class="sh_symbol">,</span>
+  path<span class="sh_symbol">:</span> <span class="sh_string">'/'</span><span class="sh_symbol">,</span>
+  method<span class="sh_symbol">:</span> <span class="sh_string">'GET'</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+
+<span class="sh_keyword">var</span> req <span class="sh_symbol">=</span> https<span class="sh_symbol">.</span><span class="sh_function">request</span><span class="sh_symbol">(</span>options<span class="sh_symbol">,</span> <span class="sh_symbol">(</span>res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'状态码：'</span><span class="sh_symbol">,</span> res<span class="sh_symbol">.</span>statusCode<span class="sh_symbol">);</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'请求头：'</span><span class="sh_symbol">,</span> res<span class="sh_symbol">.</span>headers<span class="sh_symbol">);</span>
+
+  res<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'data'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>d<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    process<span class="sh_symbol">.</span>stdout<span class="sh_symbol">.</span><span class="sh_function">write</span><span class="sh_symbol">(</span>d<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+
+req<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'error'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>e<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span>e<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+req<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">();</span>
+</code></pre>
+<p><code>options</code> 参数可以有以下选择：</p>
+<ul>
+<li><code>host</code>: 一个处理请求的服务器的域名或者IP地址，默认是 <code>loaclhost</code>。</li>
+<li><code>hostname</code>: <code>host</code> 的别名。为了更好地支持 <code>url.parse()</code>，<code>hostname</code> 比 <code>host</code> 更被推荐使用。</li>
+<li><code>family</code>: 用于解析 <code>host</code> and <code>hostname</code> 的 IP 地址族。
+<code>4</code> 或者 <code>6</code> 都是有效数值。当不被指定时，IPv4 和 IPv6 都将被使用。</li>
+<li><code>port</code>: 远程服务器的端口。默认是 443。</li>
+<li><code>localAddress</code>: 用来绑定网络连接的本地接口。</li>
+<li><code>socketPath</code>: Unix 域 Socket（使用 host:port 或者 socketPath）。</li>
+<li><code>method</code>: 一个用来指定 HTTP 请求方法的字符串。默认是 <code>'GET'</code>。</li>
+<li><code>path</code>: 请求路径。默认是<code>'/'</code>。如果有的话，应该包含请求字符串。
+例如 <code>'/index.html?page=12'</code>。当请求路径包含非法字符的时候，将抛出异常。目前只有空格字符被拒绝，但是未来可能会有改变。</li>
+<li><code>headers</code>: 一个包含请求头的对象。</li>
+<li><code>auth</code>: 基本认证，例如 <code>'user:password'</code> 来计算认证头。</li>
+<li><code>agent</code>: 控制 <a href="https.html#https_class_https_agent"><code>Agent</code></a> 的行为。当用代理时，请求默认是<code>Connection: keep-alive</code>。可能的值有:<ul>
+<li><code>undefined</code> (默认): 这个主机和端口使用 <a href="https.html#https_https_globalagent"><code>globalAgent</code></a>。</li>
+<li><code>Agent</code> 对象: 显式地在 <code>Agent</code> 中用传进来的参数。</li>
+<li><code>false</code>: 不对连接池使用 Agent, 默认是 <code>Connection: close</code>。</li>
+</ul>
+</li>
+</ul>
+<p>下面是来自 <a href="tls.html#tls_tls_connect_options_callback"><code>tls.connect()</code></a> 的参数，它也可以被设置为:</p>
+<ul>
+<li><code>pfx</code>: 证书, 用于 SSL 的私钥和 CA 证书。默认是 <code>null</code>。</li>
+<li><code>key</code>: 用于 SSL 的私钥。默认是 <code>null</code>。</li>
+<li><code>passphrase</code>: 用于私钥或是 pfx 的密码字符串。默认是 <code>null</code>。</li>
+<li><code>cert</code>: 公共 x509 证书。默认是 <code>null</code>。</li>
+<li><code>ca</code>: 一个字符串、<a href="buffer.html#buffer_buffer"><code>Buffer</code></a>、字符串数组、或 PEM 格式的可信赖证书的 <a href="buffer.html#buffer_buffer"><code>Buffer</code></a>。 
+如果这被忽略，那么著名的根证书将被使用，比如说 VeriSign 数字证书。这些被用来授权连接。</li>
+<li><code>ciphers</code>: 一个用来描述要使用或排除的密码的字符串。
+查看 <a href="https://www.openssl.org/docs/man1.0.2/apps/ciphers.html#CIPHER-LIST-FORMAT">https://www.openssl.org/docs/man1.0.2/apps/ciphers.html#CIPHER-LIST-FORMAT</a> 获取格式的细节。</li>
+<li><code>rejectUnauthorized</code>: 如果设置为 <code>true</code>, 服务器证书根据CA提供的列表来进行验证。 
+如果验证失败的话，一个 <code>'error'</code> 事件将被触发。
+验证发生在连接层次, <em>早于</em> HTTP请求的发送。默认是 <code>true</code>。</li>
+<li><code>secureProtocol</code>: 使用的 SSL 方法，
+例如 <code>SSLv3_method</code> 来强制使用 SSL 版本 3。
+可能的值取决于安装的 OpenSSL 的版本，它被定义在 <a href="https://www.openssl.org/docs/man1.0.2/ssl/ssl.html#DEALING-WITH-PROTOCOL-METHODS"><code>SSL_METHODS</code></a> 常数中。</li>
+<li><code>servername</code>: SNI (Server Name Indication) TLS 扩展的服务器名。</li>
+</ul>
+<p>为了确定这些参数, 用一个定制的 <a href="https.html#https_class_https_agent"><code>Agent</code></a>。</p>
+<p>例子:</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">var</span> options <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  hostname<span class="sh_symbol">:</span> <span class="sh_string">'encrypted.google.com'</span><span class="sh_symbol">,</span>
+  port<span class="sh_symbol">:</span> <span class="sh_number">443</span><span class="sh_symbol">,</span>
+  path<span class="sh_symbol">:</span> <span class="sh_string">'/'</span><span class="sh_symbol">,</span>
+  method<span class="sh_symbol">:</span> <span class="sh_string">'GET'</span><span class="sh_symbol">,</span>
+  key<span class="sh_symbol">:</span> fs<span class="sh_symbol">.</span><span class="sh_function">readFileSync</span><span class="sh_symbol">(</span><span class="sh_string">'test/fixtures/keys/agent2-key.pem'</span><span class="sh_symbol">),</span>
+  cert<span class="sh_symbol">:</span> fs<span class="sh_symbol">.</span><span class="sh_function">readFileSync</span><span class="sh_symbol">(</span><span class="sh_string">'test/fixtures/keys/agent2-cert.pem'</span><span class="sh_symbol">)</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+options<span class="sh_symbol">.</span>agent <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> https<span class="sh_symbol">.</span><span class="sh_function">Agent</span><span class="sh_symbol">(</span>options<span class="sh_symbol">);</span>
+
+<span class="sh_keyword">var</span> req <span class="sh_symbol">=</span> https<span class="sh_symbol">.</span><span class="sh_function">request</span><span class="sh_symbol">(</span>options<span class="sh_symbol">,</span> <span class="sh_symbol">(</span>res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_symbol">...</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>也可以不对连接池使用 <code>Agent</code>。</p>
+<p>例子:</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">var</span> options <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  hostname<span class="sh_symbol">:</span> <span class="sh_string">'encrypted.google.com'</span><span class="sh_symbol">,</span>
+  port<span class="sh_symbol">:</span> <span class="sh_number">443</span><span class="sh_symbol">,</span>
+  path<span class="sh_symbol">:</span> <span class="sh_string">'/'</span><span class="sh_symbol">,</span>
+  method<span class="sh_symbol">:</span> <span class="sh_string">'GET'</span><span class="sh_symbol">,</span>
+  key<span class="sh_symbol">:</span> fs<span class="sh_symbol">.</span><span class="sh_function">readFileSync</span><span class="sh_symbol">(</span><span class="sh_string">'test/fixtures/keys/agent2-key.pem'</span><span class="sh_symbol">),</span>
+  cert<span class="sh_symbol">:</span> fs<span class="sh_symbol">.</span><span class="sh_function">readFileSync</span><span class="sh_symbol">(</span><span class="sh_string">'test/fixtures/keys/agent2-cert.pem'</span><span class="sh_symbol">),</span>
+  agent<span class="sh_symbol">:</span> <span class="sh_keyword">false</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+
+<span class="sh_keyword">var</span> req <span class="sh_symbol">=</span> https<span class="sh_symbol">.</span><span class="sh_function">request</span><span class="sh_symbol">(</span>options<span class="sh_symbol">,</span> <span class="sh_symbol">(</span>res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_symbol">...</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+
+      </div>
+    </div>
+  </div>
+  <script src="res/api.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+</body></html>

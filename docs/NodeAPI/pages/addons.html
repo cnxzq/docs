@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)addons.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>C/C++ 插件 | Node.js API 文档</title>
+  <link rel="stylesheet" href="res/api.css">
+</head>
+<body class="alt apidoc" id="api-section-addons">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+</ul>
+<div class="line"></div>
+
+<ul>
+<li><a class="nav-assert" href="assert.html">Assert (断言)</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons active" href="addons.html">C/C++ 插件</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+<li><a class="nav-cli" href="cli.html">CLI (命令行选项)</a></li>
+<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto (加密)</a></li>
+<li><a class="nav-debugger" href="debugger.html">Debugger (调试器)</a></li>
+<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+<li><a class="nav-errors" href="errors.html">Error (错误)</a></li>
+<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+<li><a class="nav-fs" href="fs.html">File System (文件系统)</a></li>
+<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+<li><a class="nav-http" href="http.html">HTTP</a></li>
+<li><a class="nav-https" href="https.html">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring" href="querystring.html">Query Strings (查询字符串)</a></li>
+<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+<li><a class="nav-timers" href="timers.html">Timer (定时器)</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty" href="tty.html">TTY (终端)</a></li>
+<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+</ul>
+<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="addons" class="interior">
+      <header>
+        <h1>Node.js v6.10.2 文档</h1>
+        <div id="gtoc">
+          <p>
+            <a href="" name="toc">返回文档首页</a>
+            <!--<a href="/api/all.html">单页面显示</a> |-->
+            <!--<a href="/api/addons.json">JSON格式</a> |-->
+            <!--<a href="/api/en/addons.html">查看英文版</a>-->
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>目录</h2>
+        <ul>
+<li><span class="stability_undefined"><a href="addons.html#addons_c_c_addons">C/C++ 插件</a></span><ul>
+<li><span class="stability_undefined"><a href="addons.html#addons_hello_world">Hello world</a></span><ul>
+<li><span class="stability_undefined"><a href="addons.html#addons_building">构建</a></span></li>
+<li><span class="stability_undefined"><a href="addons.html#addons_linking_to_node_js_own_dependencies">链接到 Node.js 自有的依赖</a></span></li>
+<li><span class="stability_undefined"><a href="addons.html#addons_loading_addons_using_require">使用 require() 加载插件</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="addons.html#addons_native_abstractions_for_node_js">Node.js 的原生抽象</a></span></li>
+<li><span class="stability_undefined"><a href="addons.html#addons_addon_examples">插件示例</a></span><ul>
+<li><span class="stability_undefined"><a href="addons.html#addons_function_arguments">函数的参数</a></span></li>
+<li><span class="stability_undefined"><a href="addons.html#addons_callbacks">回调</a></span></li>
+<li><span class="stability_undefined"><a href="addons.html#addons_object_factory">对象工厂</a></span></li>
+<li><span class="stability_undefined"><a href="addons.html#addons_function_factory">函数工厂</a></span></li>
+<li><span class="stability_undefined"><a href="addons.html#addons_wrapping_c_objects">包装 C++ 对象</a></span></li>
+<li><span class="stability_undefined"><a href="addons.html#addons_factory_of_wrapped_objects">包装对象的工厂</a></span></li>
+<li><span class="stability_undefined"><a href="addons.html#addons_passing_wrapped_objects_around">传递包装的对象</a></span></li>
+<li><span class="stability_undefined"><a href="addons.html#addons_atexit_hooks">AtExit 钩子</a></span><ul>
+<li><span class="stability_undefined"><a href="addons.html#addons_void_atexit_callback_args">void AtExit(callback, args)</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>C/C++ 插件<span><a class="mark" href="addons.html#addons_c_c_addons" id="addons_c_c_addons">#</a></span></h1><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_c_c_addons">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/c_c_addons.md">参与翻译</a></p>
+<p>Node.js 插件是用 C 或 C++ 编写的动态链接共享对象，可以使用 <a href="globals.html#globals_require"><code>require()</code></a> 函数加载到 Node.js 中，且像普通的 Node.js 模块一样被使用。
+它们主要用于为运行于 Node.js 的 JavaScript 和 C/C++ 库之间提供接口。</p>
+<p>目前用于实现插件的方法相当复杂，涉及多个组件和 API 的知识：</p>
+<ul>
+<li><p>V8：Node.js 当前用于提供 JavaScript 实现的 C++ 库。
+V8 提供了用于创建对象、调用函数等机制。
+V8 的 API 文档主要在 <code>v8.h</code> 头文件中（Node.js 源代码中的 <code>deps/v8/include/v8.h</code>），也可以在查看 <a href="https://v8docs.nodesource.com/">V8 在线文档</a>。</p>
+</li>
+<li><p><a href="https://github.com/libuv/libuv">libuv</a>：实现了 Node.js 的事件循环、工作线程、与平台所有的的异步操作的 C 库。
+它也是一个跨平台的抽象库，使所有主流操作系统中可以像 POSIX 一样访问常用的系统任务，比如与文件系统、socket、定时器和系统事件的交互。
+libuv 还提供了一个类似 POSIX 多线程的线程抽象，可被用于强化更复杂的需要超越标准事件循环的异步插件。
+鼓励插件开发者多思考如何通过在 libuv 的非阻塞系统操作、工作线程、或自定义的 libuv 线程中降低工作负载来避免在 I/O 或其他时间密集型任务中阻塞事件循环。</p>
+</li>
+<li><p>内置的 Node.js 库。Node.js 自身开放了一些插件可以使用的 C/C++ API。
+其中最重要的是 <code>node::ObjectWrap</code> 类。</p>
+</li>
+<li><p>Node.js 包含一些其他的静态链接库，如 OpenSSL。
+这些库位于 Node.js 源代码中的 <code>deps/</code> 目录。
+只有 V8 和 OpenSSL 符号是被 Node.js 有目的地再导出，并且通过插件被用于不同的场景。
+更多信息请查看<a href="addons.html#addons_linking_to_node_js_own_dependencies">链接到 Node.js 自身的依赖</a>。</p>
+</li>
+</ul>
+<p>以下例子可从 <a href="https://github.com/nodejs/node-addon-examples">Node 插件示例</a>下载，并作为你自己插件的起点。</p>
+<h2>Hello world<span><a class="mark" href="addons.html#addons_hello_world" id="addons_hello_world">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_hello_world">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/hello_world.md">参与翻译</a></p>
+<p>“Hello World” 示例是一个简单的插件，用 C++ 编写，相当于以下 JavaScript 代码：</p>
+<pre class="sh_sourceCode"><code class="lang-js">module<span class="sh_symbol">.</span>exports<span class="sh_symbol">.</span>hello <span class="sh_symbol">=</span> <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_string">'world'</span><span class="sh_symbol">;</span>
+</code></pre>
+<p>首先，创建 <code>hello.cc</code> 文件：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// hello.cc</span>
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">String</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">;</span>
+
+void <span class="sh_function">Method</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+  args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span><span class="sh_predef_func">String</span><span class="sh_symbol">::</span><span class="sh_function">NewFromUtf8</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> <span class="sh_string">"world"</span><span class="sh_symbol">));</span>
+<span class="sh_cbracket">}</span>
+
+void <span class="sh_function">init</span><span class="sh_symbol">(</span>Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_function">NODE_SET_METHOD</span><span class="sh_symbol">(</span>exports<span class="sh_symbol">,</span> <span class="sh_string">"hello"</span><span class="sh_symbol">,</span> Method<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_function">NODE_MODULE</span><span class="sh_symbol">(</span>addon<span class="sh_symbol">,</span> init<span class="sh_symbol">)</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>注意，所有的 Node.js 插件必须导出一个如下模式的初始化函数：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp">void <span class="sh_function">Initialize</span><span class="sh_symbol">(</span>Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">);</span>
+<span class="sh_function">NODE_MODULE</span><span class="sh_symbol">(</span>module_name<span class="sh_symbol">,</span> Initialize<span class="sh_symbol">)</span>
+</code></pre>
+<p><code>NODE_MODULE</code> 后面没有分号，因为它不是一个函数（详见 <code>node.h</code>）。</p>
+<p><code>module_name</code> 必须匹配最终的二进制文件名（不包括 .node 后缀）。</p>
+<p>在 <code>hello.cc</code> 示例中，初始化函数是 <code>init</code>，插件模块名是 <code>addon</code>。</p>
+<h3>构建<span><a class="mark" href="addons.html#addons_building" id="addons_building">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_building">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/building.md">参与翻译</a></p>
+<p>当源代码已被编写，它必须被编译成二进制 <code>addon.node</code> 文件。
+要做到这点，需在项目的顶层创建一个名为 <code>binding.gyp</code> 的文件，它使用一个类似 JSON 的格式来描述你的模块的构建配置。
+该文件会被 <a href="https://github.com/nodejs/node-gyp">node-gyp</a>（一个用于编译 Node.js 插件的工具）使用。</p>
+<pre class="sh_sourceCode"><code class="lang-json"><span class="sh_cbracket">{</span>
+  <span class="sh_string">"targets"</span><span class="sh_symbol">:</span> <span class="sh_symbol">[</span>
+    <span class="sh_cbracket">{</span>
+      <span class="sh_string">"target_name"</span><span class="sh_symbol">:</span> <span class="sh_string">"addon"</span><span class="sh_symbol">,</span>
+      <span class="sh_string">"sources"</span><span class="sh_symbol">:</span> <span class="sh_symbol">[</span> <span class="sh_string">"hello.cc"</span> <span class="sh_symbol">]</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_symbol">]</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p>注意：Node.js 会捆绑与发布一个版本的 <code>node-gyp</code> 工具作为 <code>npm</code> 的一部分。
+该版本不可以直接被开发者使用，仅为了支持使用 <code>npm install</code> 命令编译与安装插件的能力。
+需要直接使用 <code>node-gyp</code> 的开发者可以使用 <code>npm install -g node-gyp</code> 命令进行安装。
+查看 <code>node-gyp</code> <a href="https://github.com/nodejs/node-gyp#installation">安装说明</a>了解更多信息，包括平台特定的要求。</p>
+<p>但 <code>binding.gyp</code> 文件已被创建，使用 <code>node-gyp configure</code> 为当前平台生成相应的项目构建文件。
+这会在 <code>build/</code> 目录下生成一个 <code>Makefile</code> 文件（在 Unix 平台上）或 <code>vcxproj</code> 文件（在 Windows 上）。</p>
+<p>下一步，调用 <code>node-gyp build</code> 命令生成编译后的 <code>addon.node</code> 的文件。
+它会被放进 <code>build/Release/</code> 目录。</p>
+<p>当使用 <code>npm install</code> 安装一个 Node.js 插件时，npm 会使用自身捆绑的 <code>node-gyp</code> 版本来执行同样的一套动作，为用户要求的平台生成一个插件编译后的版本。</p>
+<p>当构建完成时，二进制插件就可以在 Node.js 中被使用，通过 <a href="globals.html#globals_require"><code>require()</code></a> 构建后的 <code>addon.node</code> 模块：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// hello.js</span>
+<span class="sh_keyword">const</span> addon <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./build/Release/addon'</span><span class="sh_symbol">);</span>
+
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>addon<span class="sh_symbol">.</span><span class="sh_function">hello</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 打印: 'world'</span>
+</code></pre>
+<p>请查看 <a href="https://github.com/arturadib/node-qt">https://github.com/arturadib/node-qt</a> 了解生产环境中的例子。</p>
+<p>因为编译后的二进制插件的确切路径取决于它如何被编译（比如有时它可能在 <code>./build/Debug/</code> 中），所以插件可以使用 <a href="https://github.com/TooTallNate/node-bindings">bindings</a> 包加载编译后的模块。</p>
+<p>注意，虽然 <code>bindings</code> 包在如何定位插件模块的实现上更复杂，但它本质上使用了一个 <code>try-catch</code> 模式，类似如下：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">try</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">return</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./build/Release/addon.node'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span> <span class="sh_keyword">catch</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">return</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./build/Debug/addon.node'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<h3>链接到 Node.js 自有的依赖<span><a class="mark" href="addons.html#addons_linking_to_node_js_own_dependencies" id="addons_linking_to_node_js_own_dependencies">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_linking_to_node_js_own_dependencies">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/linking_to_node_js_own_dependencies.md">参与翻译</a></p>
+<p>Node.js 使用了一些静态链接库，比如 V8 引擎、libuv 和 OpenSSL。
+所有的插件都需要链接到 V8，也可能链接到任何其他依赖。
+通常情况下，只要简单地包含相应的 <code>#include &lt;...&gt;</code> 声明（如 <code>#include &lt;v8.h&gt;</code>），则 <code>node-gyp</code> 会自动定位到相应的头文件。
+但是也有一些注意事项需要注意：</p>
+<ul>
+<li><p>当 <code>node-gyp</code> 运行时，它会检测指定的 Node.js 发行版本，并下载完整的源代码包或只是头文件。
+如果下载了完整的源代码，则插件对全套的 Node.js 依赖有完全的访问权限。
+如果只下载了 Node.js 的文件头，则只有 Node.js 导出的符号可用。</p>
+</li>
+<li><p><code>node-gyp</code> 可使用指向一个本地 Node.js 源代码镜像的 <code>--nodedir</code> 标志来运行。
+如果使用该选项，则插件有全套依赖的访问权限。</p>
+</li>
+</ul>
+<h3>使用 require() 加载插件<span><a class="mark" href="addons.html#addons_loading_addons_using_require" id="addons_loading_addons_using_require">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_loading_addons_using_require">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/loading_addons_using_require.md">参与翻译</a></p>
+<p>编译后的二进制插件的文件扩展名是 <code>.node</code>（而不是 <code>.dll</code> 或 <code>.so</code>）。
+<a href="globals.html#globals_require"><code>require()</code></a> 函数用于查找具有 <code>.node</code> 文件扩展名的文件，并初始化为动态链接库。</p>
+<p>当调用 <a href="globals.html#globals_require"><code>require()</code></a> 时，<code>.node</code> 拓展名通常可被省略，Node.js 仍会找到并初始化该插件。
+注意，Node.js 会优先尝试查找并加载同名的模块或 JavaScript 文件。
+例如，如果与二进制的 <code>addon.node</code> 同一目录下有一个 <code>addon.js</code> 文件，则 <a href="globals.html#globals_require"><code>require('addon')</code></a> 会优先加载 <code>addon.js</code> 文件。</p>
+<h2>Node.js 的原生抽象<span><a class="mark" href="addons.html#addons_native_abstractions_for_node_js" id="addons_native_abstractions_for_node_js">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_native_abstractions_for_node_js">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/native_abstractions_for_node_js.md">参与翻译</a></p>
+<p>文档中所示的每个例子都直接使用 Node.js 和 V8 的 API 来实现插件。
+V8 的 API 可能并且已经与下一个 V8 的发行版本有显著的变化。
+伴随着每次变化，插件为了能够继续工作，可能需要进行更新和重新编译。
+Node.js 的发布计划会尽量减少这种变化的频率和影响，但 Node.js 目前可以确保 V8 API 的稳定性。</p>
+<p><a href="https://github.com/nodejs/nan">Node.js 的原生抽象</a>（或称为 <code>nan</code>）提供了一组工具，建议插件开发者使用这些工具来保持插件在过往与将来的 V8 和 Node.js 的版本之间的兼容性。
+查看 <a href="https://github.com/nodejs/nan/tree/master/examples/"><code>nan</code> 示例</a>了解它是如何被使用的。</p>
+<h2>插件示例<span><a class="mark" href="addons.html#addons_addon_examples" id="addons_addon_examples">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_addon_examples">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/addon_examples.md">参与翻译</a></p>
+<p>以下是一些插件示例，用于帮助开发者入门。
+这些例子使用了 V8 的 API。
+查看在线的 <a href="https://v8docs.nodesource.com/">V8 文档</a>有助于了解各种 V8 调用，V8 的<a href="https://github.com/v8/v8/wiki/Embedder's%20Guide">嵌入器指南</a>解释了句柄、作用域和函数模板等的一些概念。</p>
+<p>每个示例都使用以下的 <code>binding.gyp</code> 文件：</p>
+<pre class="sh_sourceCode"><code class="lang-json"><span class="sh_cbracket">{</span>
+  <span class="sh_string">"targets"</span><span class="sh_symbol">:</span> <span class="sh_symbol">[</span>
+    <span class="sh_cbracket">{</span>
+      <span class="sh_string">"target_name"</span><span class="sh_symbol">:</span> <span class="sh_string">"addon"</span><span class="sh_symbol">,</span>
+      <span class="sh_string">"sources"</span><span class="sh_symbol">:</span> <span class="sh_symbol">[</span> <span class="sh_string">"addon.cc"</span> <span class="sh_symbol">]</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_symbol">]</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p>如果有一个以上的 <code>.cc</code> 文件，则只需添加额外的文件名到 <code>sources</code> 数组。
+例如：</p>
+<pre class="sh_sourceCode"><code class="lang-json"><span class="sh_string">"sources"</span><span class="sh_symbol">:</span> <span class="sh_symbol">[</span><span class="sh_string">"addon.cc"</span><span class="sh_symbol">,</span> <span class="sh_string">"myexample.cc"</span><span class="sh_symbol">]</span>
+</code></pre>
+<p>当 <code>binding.gyp</code> 文件准备就绪，则插件示例可以使用 <code>node-gyp</code> 进行配置和构建：</p>
+<pre class="sh_sourceCode"><code class="lang-console">$ node<span class="sh_symbol">-</span>gyp configure build
+</code></pre>
+<h3>函数的参数<span><a class="mark" href="addons.html#addons_function_arguments" id="addons_function_arguments">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_function_arguments">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/function_arguments.md">参与翻译</a></p>
+<p>插件通常会开放一些对象和函数，供运行在 Node.js 中的 JavaScript 访问。
+当从 JavaScript 调用函数时，输入参数和返回值必须与 C/C++ 代码相互映射。</p>
+<p>以下例子描述了如何读取从 JavaScript 传入的函数参数与如何返回结果：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// addon.cc</span>
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using v8<span class="sh_symbol">::</span>Exception<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Number</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">String</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">;</span>
+
+<span class="sh_comment">// 这是 "add" 方法的实现</span>
+<span class="sh_comment">// 输入参数使用 const FunctionCallbackInfo&lt;Value&gt;&amp; args 结构传入</span>
+void <span class="sh_function">Add</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  <span class="sh_comment">// 检查传入的参数的个数</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>args<span class="sh_symbol">.</span><span class="sh_function">Length</span><span class="sh_symbol">()</span> <span class="sh_symbol">&lt;</span> <span class="sh_number">2</span><span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    <span class="sh_comment">// 抛出一个错误并传回到 JavaScript</span>
+    isolate<span class="sh_symbol">-&gt;</span><span class="sh_function">ThrowException</span><span class="sh_symbol">(</span>Exception<span class="sh_symbol">::</span><span class="sh_predef_func">TypeError</span><span class="sh_symbol">(</span>
+        <span class="sh_predef_func">String</span><span class="sh_symbol">::</span><span class="sh_function">NewFromUtf8</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> <span class="sh_string">"参数的数量错误"</span><span class="sh_symbol">)));</span>
+    <span class="sh_keyword">return</span><span class="sh_symbol">;</span>
+  <span class="sh_cbracket">}</span>
+
+  <span class="sh_comment">// 检查参数的类型</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(!</span>args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">IsNumber</span><span class="sh_symbol">()</span> <span class="sh_symbol">||</span> <span class="sh_symbol">!</span>args<span class="sh_symbol">[</span><span class="sh_number">1</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">IsNumber</span><span class="sh_symbol">())</span> <span class="sh_cbracket">{</span>
+    isolate<span class="sh_symbol">-&gt;</span><span class="sh_function">ThrowException</span><span class="sh_symbol">(</span>Exception<span class="sh_symbol">::</span><span class="sh_predef_func">TypeError</span><span class="sh_symbol">(</span>
+        <span class="sh_predef_func">String</span><span class="sh_symbol">::</span><span class="sh_function">NewFromUtf8</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> <span class="sh_string">"参数错误"</span><span class="sh_symbol">)));</span>
+    <span class="sh_keyword">return</span><span class="sh_symbol">;</span>
+  <span class="sh_cbracket">}</span>
+
+  <span class="sh_comment">// 执行操作</span>
+  double value <span class="sh_symbol">=</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">NumberValue</span><span class="sh_symbol">()</span> <span class="sh_symbol">+</span> args<span class="sh_symbol">[</span><span class="sh_number">1</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">NumberValue</span><span class="sh_symbol">();</span>
+  Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Number</span><span class="sh_symbol">&gt;</span> num <span class="sh_symbol">=</span> <span class="sh_predef_func">Number</span><span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> value<span class="sh_symbol">);</span>
+
+  <span class="sh_comment">// 设置返回值</span>
+  args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span>num<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+void <span class="sh_function">Init</span><span class="sh_symbol">(</span>Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_function">NODE_SET_METHOD</span><span class="sh_symbol">(</span>exports<span class="sh_symbol">,</span> <span class="sh_string">"add"</span><span class="sh_symbol">,</span> Add<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_function">NODE_MODULE</span><span class="sh_symbol">(</span>addon<span class="sh_symbol">,</span> Init<span class="sh_symbol">)</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>但已被编译，示例插件就可以在 Node.js 中引入和使用：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// test.js</span>
+<span class="sh_keyword">const</span> addon <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./build/Release/addon'</span><span class="sh_symbol">);</span>
+
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'This should be eight:'</span><span class="sh_symbol">,</span> addon<span class="sh_symbol">.</span><span class="sh_function">add</span><span class="sh_symbol">(</span><span class="sh_number">3</span><span class="sh_symbol">,</span> <span class="sh_number">5</span><span class="sh_symbol">));</span>
+</code></pre>
+<h3>回调<span><a class="mark" href="addons.html#addons_callbacks" id="addons_callbacks">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_callbacks">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/callbacks.md">参与翻译</a></p>
+<p>把 JavaScript 函数传入到一个 C++ 函数并在那里执行它们，这在插件里是常见的做法。
+以下例子描述了如何调用这些回调：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// addon.cc</span>
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Function</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Null<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">String</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">;</span>
+
+void <span class="sh_function">RunCallback</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+  Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> cb <span class="sh_symbol">=</span> Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;::</span><span class="sh_function">Cast</span><span class="sh_symbol">(</span>args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]);</span>
+  <span class="sh_keyword">const</span> unsigned argc <span class="sh_symbol">=</span> <span class="sh_number">1</span><span class="sh_symbol">;</span>
+  Local<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;</span> argv<span class="sh_symbol">[</span>argc<span class="sh_symbol">]</span> <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span> <span class="sh_predef_func">String</span><span class="sh_symbol">::</span><span class="sh_function">NewFromUtf8</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> <span class="sh_string">"hello world"</span><span class="sh_symbol">)</span> <span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+  cb<span class="sh_symbol">-&gt;</span><span class="sh_function">Call</span><span class="sh_symbol">(</span><span class="sh_function">Null</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">),</span> argc<span class="sh_symbol">,</span> argv<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+void <span class="sh_function">Init</span><span class="sh_symbol">(</span>Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">,</span> Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> module<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_function">NODE_SET_METHOD</span><span class="sh_symbol">(</span>module<span class="sh_symbol">,</span> <span class="sh_string">"exports"</span><span class="sh_symbol">,</span> RunCallback<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_function">NODE_MODULE</span><span class="sh_symbol">(</span>addon<span class="sh_symbol">,</span> Init<span class="sh_symbol">)</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>注意，该例子使用了一个带有两个参数的 <code>Init()</code>，它接收完整的 <code>module</code> 对象作为第二个参数。
+这使得插件可以用一个单一的函数完全地重写 <code>exports</code>，而不是添加函数作为 <code>exports</code> 的属性。</p>
+<p>为了验证它，运行以下 JavaScript：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// test.js</span>
+<span class="sh_keyword">const</span> addon <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./build/Release/addon'</span><span class="sh_symbol">);</span>
+
+<span class="sh_function">addon</span><span class="sh_symbol">((</span>msg<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>msg<span class="sh_symbol">);</span>
+<span class="sh_comment">// 打印: 'hello world'</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>注意，在这个例子中，回调函数是被同步地调用。</p>
+<h3>对象工厂<span><a class="mark" href="addons.html#addons_object_factory" id="addons_object_factory">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_object_factory">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/object_factory.md">参与翻译</a></p>
+<p>插件可从 C++ 函数中创建并返回新的对象，如以下例子所示。
+一个带有 <code>msg</code> 属性的对象被创建并返回，该属性会输出传入 <code>createObject()</code> 的字符串：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// addon.cc</span>
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">String</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">;</span>
+
+void <span class="sh_function">CreateObject</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> obj <span class="sh_symbol">=</span> <span class="sh_predef_func">Object</span><span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">);</span>
+  obj<span class="sh_symbol">-&gt;</span><span class="sh_function">Set</span><span class="sh_symbol">(</span><span class="sh_predef_func">String</span><span class="sh_symbol">::</span><span class="sh_function">NewFromUtf8</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> <span class="sh_string">"msg"</span><span class="sh_symbol">),</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">ToString</span><span class="sh_symbol">());</span>
+
+  args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span>obj<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+void <span class="sh_function">Init</span><span class="sh_symbol">(</span>Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">,</span> Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> module<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_function">NODE_SET_METHOD</span><span class="sh_symbol">(</span>module<span class="sh_symbol">,</span> <span class="sh_string">"exports"</span><span class="sh_symbol">,</span> CreateObject<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_function">NODE_MODULE</span><span class="sh_symbol">(</span>addon<span class="sh_symbol">,</span> Init<span class="sh_symbol">)</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>在 JavaScript 中测试它：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// test.js</span>
+<span class="sh_keyword">const</span> addon <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./build/Release/addon'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">const</span> obj1 <span class="sh_symbol">=</span> <span class="sh_function">addon</span><span class="sh_symbol">(</span><span class="sh_string">'hello'</span><span class="sh_symbol">);</span>
+<span class="sh_keyword">const</span> obj2 <span class="sh_symbol">=</span> <span class="sh_function">addon</span><span class="sh_symbol">(</span><span class="sh_string">'world'</span><span class="sh_symbol">);</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">.</span>msg<span class="sh_symbol">,</span> obj2<span class="sh_symbol">.</span>msg<span class="sh_symbol">);</span>
+<span class="sh_comment">// 打印: 'hello world'</span>
+</code></pre>
+<h3>函数工厂<span><a class="mark" href="addons.html#addons_function_factory" id="addons_function_factory">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_function_factory">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/function_factory.md">参与翻译</a></p>
+<p>另一种常见情况是创建 JavaScript 函数来包装 C++ 函数，并返回到 JavaScript：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// addon.cc</span>
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Function</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>FunctionTemplate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">String</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">;</span>
+
+void <span class="sh_function">MyFunction</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+  args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span><span class="sh_predef_func">String</span><span class="sh_symbol">::</span><span class="sh_function">NewFromUtf8</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> <span class="sh_string">"hello world"</span><span class="sh_symbol">));</span>
+<span class="sh_cbracket">}</span>
+
+void <span class="sh_function">CreateFunction</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  Local<span class="sh_symbol">&lt;</span>FunctionTemplate<span class="sh_symbol">&gt;</span> tpl <span class="sh_symbol">=</span> FunctionTemplate<span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> MyFunction<span class="sh_symbol">);</span>
+  Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> fn <span class="sh_symbol">=</span> tpl<span class="sh_symbol">-&gt;</span><span class="sh_function">GetFunction</span><span class="sh_symbol">();</span>
+
+  <span class="sh_comment">// 可以省略这步使它匿名</span>
+  fn<span class="sh_symbol">-&gt;</span><span class="sh_function">SetName</span><span class="sh_symbol">(</span><span class="sh_predef_func">String</span><span class="sh_symbol">::</span><span class="sh_function">NewFromUtf8</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> <span class="sh_string">"theFunction"</span><span class="sh_symbol">));</span>
+
+  args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span>fn<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+void <span class="sh_function">Init</span><span class="sh_symbol">(</span>Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">,</span> Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> module<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_function">NODE_SET_METHOD</span><span class="sh_symbol">(</span>module<span class="sh_symbol">,</span> <span class="sh_string">"exports"</span><span class="sh_symbol">,</span> CreateFunction<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_function">NODE_MODULE</span><span class="sh_symbol">(</span>addon<span class="sh_symbol">,</span> Init<span class="sh_symbol">)</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>测试它：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// test.js</span>
+<span class="sh_keyword">const</span> addon <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./build/Release/addon'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">const</span> fn <span class="sh_symbol">=</span> <span class="sh_function">addon</span><span class="sh_symbol">();</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_function">fn</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 打印: 'hello world'</span>
+</code></pre>
+<h3>包装 C++ 对象<span><a class="mark" href="addons.html#addons_wrapping_c_objects" id="addons_wrapping_c_objects">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_wrapping_c_objects">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/wrapping_c_objects.md">参与翻译</a></p>
+<p>也可以包装 C++ 对象/类使其可以使用 JavaScript 的 <code>new</code> 操作来创建新的实例：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// addon.cc</span>
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+#include <span class="sh_string">"myobject.h"</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+
+void <span class="sh_function">InitAll</span><span class="sh_symbol">(</span>Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  MyObject<span class="sh_symbol">::</span><span class="sh_function">Init</span><span class="sh_symbol">(</span>exports<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_function">NODE_MODULE</span><span class="sh_symbol">(</span>addon<span class="sh_symbol">,</span> InitAll<span class="sh_symbol">)</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>然后，在 <code>myobject.h</code> 中，包装类继承自 <code>node::ObjectWrap</code>：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// myobject.h</span>
+#ifndef MYOBJECT_H
+#define MYOBJECT_H
+
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+#include <span class="sh_symbol">&lt;</span>node_object_wrap<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+<span class="sh_keyword">class</span> MyObject <span class="sh_symbol">:</span> <span class="sh_keyword">public</span> node<span class="sh_symbol">::</span>ObjectWrap <span class="sh_cbracket">{</span>
+ <span class="sh_keyword">public</span><span class="sh_symbol">:</span>
+  <span class="sh_keyword">static</span> void <span class="sh_function">Init</span><span class="sh_symbol">(</span>v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">&lt;</span>v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">);</span>
+
+ <span class="sh_keyword">private</span><span class="sh_symbol">:</span>
+  explicit <span class="sh_function">MyObject</span><span class="sh_symbol">(</span>double value <span class="sh_symbol">=</span> <span class="sh_number">0</span><span class="sh_symbol">);</span>
+  <span class="sh_symbol">~</span><span class="sh_function">MyObject</span><span class="sh_symbol">();</span>
+
+  <span class="sh_keyword">static</span> void <span class="sh_function">New</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">&lt;</span>v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">);</span>
+  <span class="sh_keyword">static</span> void <span class="sh_function">PlusOne</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">&lt;</span>v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">);</span>
+  <span class="sh_keyword">static</span> v8<span class="sh_symbol">::</span>Persistent<span class="sh_symbol">&lt;</span>v8<span class="sh_symbol">::</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> constructor<span class="sh_symbol">;</span>
+  double value_<span class="sh_symbol">;</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+
+#endif
+</code></pre>
+<p>在 <code>myobject.cc</code> 中，实现要被开放的各种方法。
+下面，通过把 <code>plusOne()</code> 添加到构造函数的原型来开放它：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// myobject.cc</span>
+#include <span class="sh_string">"myobject.h"</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using v8<span class="sh_symbol">::</span>Context<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Function</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>FunctionTemplate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Number</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Persistent<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">String</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">;</span>
+
+Persistent<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> MyObject<span class="sh_symbol">::</span>constructor<span class="sh_symbol">;</span>
+
+MyObject<span class="sh_symbol">::</span><span class="sh_function">MyObject</span><span class="sh_symbol">(</span>double value<span class="sh_symbol">)</span> <span class="sh_symbol">:</span> <span class="sh_function">value_</span><span class="sh_symbol">(</span>value<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+<span class="sh_cbracket">}</span>
+
+MyObject<span class="sh_symbol">::~</span><span class="sh_function">MyObject</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span>
+<span class="sh_cbracket">}</span>
+
+void MyObject<span class="sh_symbol">::</span><span class="sh_function">Init</span><span class="sh_symbol">(</span>Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> exports<span class="sh_symbol">-&gt;</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  <span class="sh_comment">// 准备构造函数模版</span>
+  Local<span class="sh_symbol">&lt;</span>FunctionTemplate<span class="sh_symbol">&gt;</span> tpl <span class="sh_symbol">=</span> FunctionTemplate<span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> New<span class="sh_symbol">);</span>
+  tpl<span class="sh_symbol">-&gt;</span><span class="sh_function">SetClassName</span><span class="sh_symbol">(</span><span class="sh_predef_func">String</span><span class="sh_symbol">::</span><span class="sh_function">NewFromUtf8</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> <span class="sh_string">"MyObject"</span><span class="sh_symbol">));</span>
+  tpl<span class="sh_symbol">-&gt;</span><span class="sh_function">InstanceTemplate</span><span class="sh_symbol">()-&gt;</span><span class="sh_function">SetInternalFieldCount</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">);</span>
+
+  <span class="sh_comment">// 原型</span>
+  <span class="sh_function">NODE_SET_PROTOTYPE_METHOD</span><span class="sh_symbol">(</span>tpl<span class="sh_symbol">,</span> <span class="sh_string">"plusOne"</span><span class="sh_symbol">,</span> PlusOne<span class="sh_symbol">);</span>
+
+  constructor<span class="sh_symbol">.</span><span class="sh_function">Reset</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> tpl<span class="sh_symbol">-&gt;</span><span class="sh_function">GetFunction</span><span class="sh_symbol">());</span>
+  exports<span class="sh_symbol">-&gt;</span><span class="sh_function">Set</span><span class="sh_symbol">(</span><span class="sh_predef_func">String</span><span class="sh_symbol">::</span><span class="sh_function">NewFromUtf8</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> <span class="sh_string">"MyObject"</span><span class="sh_symbol">),</span>
+               tpl<span class="sh_symbol">-&gt;</span><span class="sh_function">GetFunction</span><span class="sh_symbol">());</span>
+<span class="sh_cbracket">}</span>
+
+void MyObject<span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>args<span class="sh_symbol">.</span><span class="sh_function">IsConstructCall</span><span class="sh_symbol">())</span> <span class="sh_cbracket">{</span>
+    <span class="sh_comment">// 像构造函数一样调用：`new MyObject(...)`</span>
+    double value <span class="sh_symbol">=</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">IsUndefined</span><span class="sh_symbol">()</span> <span class="sh_symbol">?</span> <span class="sh_number">0</span> <span class="sh_symbol">:</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">NumberValue</span><span class="sh_symbol">();</span>
+    MyObject<span class="sh_symbol">*</span> obj <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">MyObject</span><span class="sh_symbol">(</span>value<span class="sh_symbol">);</span>
+    obj<span class="sh_symbol">-&gt;</span><span class="sh_function">Wrap</span><span class="sh_symbol">(</span>args<span class="sh_symbol">.</span><span class="sh_function">This</span><span class="sh_symbol">());</span>
+    args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span>args<span class="sh_symbol">.</span><span class="sh_function">This</span><span class="sh_symbol">());</span>
+  <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+    <span class="sh_comment">// 像普通方法 `MyObject(...)` 一样调用，转为构造调用。</span>
+    <span class="sh_keyword">const</span> int argc <span class="sh_symbol">=</span> <span class="sh_number">1</span><span class="sh_symbol">;</span>
+    Local<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;</span> argv<span class="sh_symbol">[</span>argc<span class="sh_symbol">]</span> <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]</span> <span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+    Local<span class="sh_symbol">&lt;</span>Context<span class="sh_symbol">&gt;</span> context <span class="sh_symbol">=</span> isolate<span class="sh_symbol">-&gt;</span><span class="sh_function">GetCurrentContext</span><span class="sh_symbol">();</span>
+    Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> cons <span class="sh_symbol">=</span> Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> constructor<span class="sh_symbol">);</span>
+    Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> result <span class="sh_symbol">=</span>
+        cons<span class="sh_symbol">-&gt;</span><span class="sh_function">NewInstance</span><span class="sh_symbol">(</span>context<span class="sh_symbol">,</span> argc<span class="sh_symbol">,</span> argv<span class="sh_symbol">).</span><span class="sh_function">ToLocalChecked</span><span class="sh_symbol">();</span>
+    args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span>result<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span>
+
+void MyObject<span class="sh_symbol">::</span><span class="sh_function">PlusOne</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  MyObject<span class="sh_symbol">*</span> obj <span class="sh_symbol">=</span> ObjectWrap<span class="sh_symbol">::</span>Unwrap<span class="sh_symbol">&lt;</span>MyObject<span class="sh_symbol">&gt;(</span>args<span class="sh_symbol">.</span><span class="sh_function">Holder</span><span class="sh_symbol">());</span>
+  obj<span class="sh_symbol">-&gt;</span>value_ <span class="sh_symbol">+=</span> <span class="sh_number">1</span><span class="sh_symbol">;</span>
+
+  args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span><span class="sh_predef_func">Number</span><span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> obj<span class="sh_symbol">-&gt;</span>value_<span class="sh_symbol">));</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>要构建这个例子，<code>myobject.cc</code> 文件必须被添加到 <code>binding.gyp</code>：</p>
+<pre class="sh_sourceCode"><code class="lang-json"><span class="sh_cbracket">{</span>
+  <span class="sh_string">"targets"</span><span class="sh_symbol">:</span> <span class="sh_symbol">[</span>
+    <span class="sh_cbracket">{</span>
+      <span class="sh_string">"target_name"</span><span class="sh_symbol">:</span> <span class="sh_string">"addon"</span><span class="sh_symbol">,</span>
+      <span class="sh_string">"sources"</span><span class="sh_symbol">:</span> <span class="sh_symbol">[</span>
+        <span class="sh_string">"addon.cc"</span><span class="sh_symbol">,</span>
+        <span class="sh_string">"myobject.cc"</span>
+      <span class="sh_symbol">]</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_symbol">]</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p>测试：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// test.js</span>
+<span class="sh_keyword">const</span> addon <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./build/Release/addon'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">const</span> obj <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> addon<span class="sh_symbol">.</span><span class="sh_function">MyObject</span><span class="sh_symbol">(</span><span class="sh_number">10</span><span class="sh_symbol">);</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>obj<span class="sh_symbol">.</span><span class="sh_function">plusOne</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 打印: 11</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>obj<span class="sh_symbol">.</span><span class="sh_function">plusOne</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 打印: 12</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>obj<span class="sh_symbol">.</span><span class="sh_function">plusOne</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 打印: 13</span>
+</code></pre>
+<h3>包装对象的工厂<span><a class="mark" href="addons.html#addons_factory_of_wrapped_objects" id="addons_factory_of_wrapped_objects">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_factory_of_wrapped_objects">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/factory_of_wrapped_objects.md">参与翻译</a></p>
+<p>也可以使用一个工厂模式，避免显式地使用 JavaScript 的 <code>new</code> 操作来创建对象实例：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> obj <span class="sh_symbol">=</span> addon<span class="sh_symbol">.</span><span class="sh_function">createObject</span><span class="sh_symbol">();</span>
+<span class="sh_comment">// 而不是：</span>
+<span class="sh_comment">// const obj = new addon.Object();</span>
+</code></pre>
+<p>首先，在 <code>addon.cc</code> 中实现 <code>createObject()</code> 方法：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// addon.cc</span>
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+#include <span class="sh_string">"myobject.h"</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">String</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">;</span>
+
+void <span class="sh_function">CreateObject</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  MyObject<span class="sh_symbol">::</span><span class="sh_function">NewInstance</span><span class="sh_symbol">(</span>args<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+void <span class="sh_function">InitAll</span><span class="sh_symbol">(</span>Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">,</span> Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> module<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  MyObject<span class="sh_symbol">::</span><span class="sh_function">Init</span><span class="sh_symbol">(</span>exports<span class="sh_symbol">-&gt;</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">());</span>
+
+  <span class="sh_function">NODE_SET_METHOD</span><span class="sh_symbol">(</span>module<span class="sh_symbol">,</span> <span class="sh_string">"exports"</span><span class="sh_symbol">,</span> CreateObject<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_function">NODE_MODULE</span><span class="sh_symbol">(</span>addon<span class="sh_symbol">,</span> InitAll<span class="sh_symbol">)</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>在 <code>myobject.h</code> 中，添加静态方法 <code>NewInstance()</code> 来处理实例化对象。
+这个方法用来代替在 JavaScript 中使用 <code>new</code>：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// myobject.h</span>
+#ifndef MYOBJECT_H
+#define MYOBJECT_H
+
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+#include <span class="sh_symbol">&lt;</span>node_object_wrap<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+<span class="sh_keyword">class</span> MyObject <span class="sh_symbol">:</span> <span class="sh_keyword">public</span> node<span class="sh_symbol">::</span>ObjectWrap <span class="sh_cbracket">{</span>
+ <span class="sh_keyword">public</span><span class="sh_symbol">:</span>
+  <span class="sh_keyword">static</span> void <span class="sh_function">Init</span><span class="sh_symbol">(</span>v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">*</span> isolate<span class="sh_symbol">);</span>
+  <span class="sh_keyword">static</span> void <span class="sh_function">NewInstance</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">&lt;</span>v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">);</span>
+
+ <span class="sh_keyword">private</span><span class="sh_symbol">:</span>
+  explicit <span class="sh_function">MyObject</span><span class="sh_symbol">(</span>double value <span class="sh_symbol">=</span> <span class="sh_number">0</span><span class="sh_symbol">);</span>
+  <span class="sh_symbol">~</span><span class="sh_function">MyObject</span><span class="sh_symbol">();</span>
+
+  <span class="sh_keyword">static</span> void <span class="sh_function">New</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">&lt;</span>v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">);</span>
+  <span class="sh_keyword">static</span> void <span class="sh_function">PlusOne</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">&lt;</span>v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">);</span>
+  <span class="sh_keyword">static</span> v8<span class="sh_symbol">::</span>Persistent<span class="sh_symbol">&lt;</span>v8<span class="sh_symbol">::</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> constructor<span class="sh_symbol">;</span>
+  double value_<span class="sh_symbol">;</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+
+#endif
+</code></pre>
+<p><code>myobject.cc</code> 中的实现类似与之前的例子：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// myobject.cc</span>
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+#include <span class="sh_string">"myobject.h"</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using v8<span class="sh_symbol">::</span>Context<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Function</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>FunctionTemplate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Number</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Persistent<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">String</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">;</span>
+
+Persistent<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> MyObject<span class="sh_symbol">::</span>constructor<span class="sh_symbol">;</span>
+
+MyObject<span class="sh_symbol">::</span><span class="sh_function">MyObject</span><span class="sh_symbol">(</span>double value<span class="sh_symbol">)</span> <span class="sh_symbol">:</span> <span class="sh_function">value_</span><span class="sh_symbol">(</span>value<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+<span class="sh_cbracket">}</span>
+
+MyObject<span class="sh_symbol">::~</span><span class="sh_function">MyObject</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span>
+<span class="sh_cbracket">}</span>
+
+void MyObject<span class="sh_symbol">::</span><span class="sh_function">Init</span><span class="sh_symbol">(</span>Isolate<span class="sh_symbol">*</span> isolate<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// 准备构造函数模版</span>
+  Local<span class="sh_symbol">&lt;</span>FunctionTemplate<span class="sh_symbol">&gt;</span> tpl <span class="sh_symbol">=</span> FunctionTemplate<span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> New<span class="sh_symbol">);</span>
+  tpl<span class="sh_symbol">-&gt;</span><span class="sh_function">SetClassName</span><span class="sh_symbol">(</span><span class="sh_predef_func">String</span><span class="sh_symbol">::</span><span class="sh_function">NewFromUtf8</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> <span class="sh_string">"MyObject"</span><span class="sh_symbol">));</span>
+  tpl<span class="sh_symbol">-&gt;</span><span class="sh_function">InstanceTemplate</span><span class="sh_symbol">()-&gt;</span><span class="sh_function">SetInternalFieldCount</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">);</span>
+
+  <span class="sh_comment">// 原型</span>
+  <span class="sh_function">NODE_SET_PROTOTYPE_METHOD</span><span class="sh_symbol">(</span>tpl<span class="sh_symbol">,</span> <span class="sh_string">"plusOne"</span><span class="sh_symbol">,</span> PlusOne<span class="sh_symbol">);</span>
+
+  constructor<span class="sh_symbol">.</span><span class="sh_function">Reset</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> tpl<span class="sh_symbol">-&gt;</span><span class="sh_function">GetFunction</span><span class="sh_symbol">());</span>
+<span class="sh_cbracket">}</span>
+
+void MyObject<span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>args<span class="sh_symbol">.</span><span class="sh_function">IsConstructCall</span><span class="sh_symbol">())</span> <span class="sh_cbracket">{</span>
+    <span class="sh_comment">// 像构造函数一样调用：`new MyObject(...)`</span>
+    double value <span class="sh_symbol">=</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">IsUndefined</span><span class="sh_symbol">()</span> <span class="sh_symbol">?</span> <span class="sh_number">0</span> <span class="sh_symbol">:</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">NumberValue</span><span class="sh_symbol">();</span>
+    MyObject<span class="sh_symbol">*</span> obj <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">MyObject</span><span class="sh_symbol">(</span>value<span class="sh_symbol">);</span>
+    obj<span class="sh_symbol">-&gt;</span><span class="sh_function">Wrap</span><span class="sh_symbol">(</span>args<span class="sh_symbol">.</span><span class="sh_function">This</span><span class="sh_symbol">());</span>
+    args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span>args<span class="sh_symbol">.</span><span class="sh_function">This</span><span class="sh_symbol">());</span>
+  <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+    <span class="sh_comment">// 像普通方法 `MyObject(...)` 一样调用，转为构造调用。</span>
+    <span class="sh_keyword">const</span> int argc <span class="sh_symbol">=</span> <span class="sh_number">1</span><span class="sh_symbol">;</span>
+    Local<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;</span> argv<span class="sh_symbol">[</span>argc<span class="sh_symbol">]</span> <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]</span> <span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+    Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> cons <span class="sh_symbol">=</span> Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> constructor<span class="sh_symbol">);</span>
+    Local<span class="sh_symbol">&lt;</span>Context<span class="sh_symbol">&gt;</span> context <span class="sh_symbol">=</span> isolate<span class="sh_symbol">-&gt;</span><span class="sh_function">GetCurrentContext</span><span class="sh_symbol">();</span>
+    Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> instance <span class="sh_symbol">=</span>
+        cons<span class="sh_symbol">-&gt;</span><span class="sh_function">NewInstance</span><span class="sh_symbol">(</span>context<span class="sh_symbol">,</span> argc<span class="sh_symbol">,</span> argv<span class="sh_symbol">).</span><span class="sh_function">ToLocalChecked</span><span class="sh_symbol">();</span>
+    args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span>instance<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span>
+
+void MyObject<span class="sh_symbol">::</span><span class="sh_function">NewInstance</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  <span class="sh_keyword">const</span> unsigned argc <span class="sh_symbol">=</span> <span class="sh_number">1</span><span class="sh_symbol">;</span>
+  Local<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;</span> argv<span class="sh_symbol">[</span>argc<span class="sh_symbol">]</span> <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]</span> <span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+  Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> cons <span class="sh_symbol">=</span> Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> constructor<span class="sh_symbol">);</span>
+  Local<span class="sh_symbol">&lt;</span>Context<span class="sh_symbol">&gt;</span> context <span class="sh_symbol">=</span> isolate<span class="sh_symbol">-&gt;</span><span class="sh_function">GetCurrentContext</span><span class="sh_symbol">();</span>
+  Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> instance <span class="sh_symbol">=</span>
+      cons<span class="sh_symbol">-&gt;</span><span class="sh_function">NewInstance</span><span class="sh_symbol">(</span>context<span class="sh_symbol">,</span> argc<span class="sh_symbol">,</span> argv<span class="sh_symbol">).</span><span class="sh_function">ToLocalChecked</span><span class="sh_symbol">();</span>
+
+  args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span>instance<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+void MyObject<span class="sh_symbol">::</span><span class="sh_function">PlusOne</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  MyObject<span class="sh_symbol">*</span> obj <span class="sh_symbol">=</span> ObjectWrap<span class="sh_symbol">::</span>Unwrap<span class="sh_symbol">&lt;</span>MyObject<span class="sh_symbol">&gt;(</span>args<span class="sh_symbol">.</span><span class="sh_function">Holder</span><span class="sh_symbol">());</span>
+  obj<span class="sh_symbol">-&gt;</span>value_ <span class="sh_symbol">+=</span> <span class="sh_number">1</span><span class="sh_symbol">;</span>
+
+  args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span><span class="sh_predef_func">Number</span><span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> obj<span class="sh_symbol">-&gt;</span>value_<span class="sh_symbol">));</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>要构建这个例子，<code>myobject.cc</code> 文件必须被添加到 <code>binding.gyp</code>：</p>
+<pre class="sh_sourceCode"><code class="lang-json"><span class="sh_cbracket">{</span>
+  <span class="sh_string">"targets"</span><span class="sh_symbol">:</span> <span class="sh_symbol">[</span>
+    <span class="sh_cbracket">{</span>
+      <span class="sh_string">"target_name"</span><span class="sh_symbol">:</span> <span class="sh_string">"addon"</span><span class="sh_symbol">,</span>
+      <span class="sh_string">"sources"</span><span class="sh_symbol">:</span> <span class="sh_symbol">[</span>
+        <span class="sh_string">"addon.cc"</span><span class="sh_symbol">,</span>
+        <span class="sh_string">"myobject.cc"</span>
+      <span class="sh_symbol">]</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_symbol">]</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p>测试：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// test.js</span>
+<span class="sh_keyword">const</span> createObject <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./build/Release/addon'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">const</span> obj <span class="sh_symbol">=</span> <span class="sh_function">createObject</span><span class="sh_symbol">(</span><span class="sh_number">10</span><span class="sh_symbol">);</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>obj<span class="sh_symbol">.</span><span class="sh_function">plusOne</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 打印: 11</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>obj<span class="sh_symbol">.</span><span class="sh_function">plusOne</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 打印: 12</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>obj<span class="sh_symbol">.</span><span class="sh_function">plusOne</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 打印: 13</span>
+
+<span class="sh_keyword">const</span> obj2 <span class="sh_symbol">=</span> <span class="sh_function">createObject</span><span class="sh_symbol">(</span><span class="sh_number">20</span><span class="sh_symbol">);</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>obj2<span class="sh_symbol">.</span><span class="sh_function">plusOne</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 打印: 21</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>obj2<span class="sh_symbol">.</span><span class="sh_function">plusOne</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 打印: 22</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>obj2<span class="sh_symbol">.</span><span class="sh_function">plusOne</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 打印: 23</span>
+</code></pre>
+<h3>传递包装的对象<span><a class="mark" href="addons.html#addons_passing_wrapped_objects_around" id="addons_passing_wrapped_objects_around">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_passing_wrapped_objects_around">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/passing_wrapped_objects_around.md">参与翻译</a></p>
+<p>除了包装和返回 C++ 对象，也可以通过使用 Node.js 的辅助函数 <code>node::ObjectWrap::Unwrap</code> 进行去包装来传递包装的对象。
+以下例子展示了一个 <code>add()</code> 函数，它可以把两个 <code>MyObject</code> 对象作为输入参数：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// addon.cc</span>
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+#include <span class="sh_symbol">&lt;</span>node_object_wrap<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+#include <span class="sh_string">"myobject.h"</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Number</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">String</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">;</span>
+
+void <span class="sh_function">CreateObject</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  MyObject<span class="sh_symbol">::</span><span class="sh_function">NewInstance</span><span class="sh_symbol">(</span>args<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+void <span class="sh_function">Add</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  MyObject<span class="sh_symbol">*</span> obj1 <span class="sh_symbol">=</span> node<span class="sh_symbol">::</span>ObjectWrap<span class="sh_symbol">::</span>Unwrap<span class="sh_symbol">&lt;</span>MyObject<span class="sh_symbol">&gt;(</span>
+      args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">ToObject</span><span class="sh_symbol">());</span>
+  MyObject<span class="sh_symbol">*</span> obj2 <span class="sh_symbol">=</span> node<span class="sh_symbol">::</span>ObjectWrap<span class="sh_symbol">::</span>Unwrap<span class="sh_symbol">&lt;</span>MyObject<span class="sh_symbol">&gt;(</span>
+      args<span class="sh_symbol">[</span><span class="sh_number">1</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">ToObject</span><span class="sh_symbol">());</span>
+
+  double sum <span class="sh_symbol">=</span> obj1<span class="sh_symbol">-&gt;</span><span class="sh_function">value</span><span class="sh_symbol">()</span> <span class="sh_symbol">+</span> obj2<span class="sh_symbol">-&gt;</span><span class="sh_function">value</span><span class="sh_symbol">();</span>
+  args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span><span class="sh_predef_func">Number</span><span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> sum<span class="sh_symbol">));</span>
+<span class="sh_cbracket">}</span>
+
+void <span class="sh_function">InitAll</span><span class="sh_symbol">(</span>Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  MyObject<span class="sh_symbol">::</span><span class="sh_function">Init</span><span class="sh_symbol">(</span>exports<span class="sh_symbol">-&gt;</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">());</span>
+
+  <span class="sh_function">NODE_SET_METHOD</span><span class="sh_symbol">(</span>exports<span class="sh_symbol">,</span> <span class="sh_string">"createObject"</span><span class="sh_symbol">,</span> CreateObject<span class="sh_symbol">);</span>
+  <span class="sh_function">NODE_SET_METHOD</span><span class="sh_symbol">(</span>exports<span class="sh_symbol">,</span> <span class="sh_string">"add"</span><span class="sh_symbol">,</span> Add<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_function">NODE_MODULE</span><span class="sh_symbol">(</span>addon<span class="sh_symbol">,</span> InitAll<span class="sh_symbol">)</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>在 <code>myobject.h</code> 中，新增了一个新的公共方法用于在去包装对象后访问私有值。</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// myobject.h</span>
+#ifndef MYOBJECT_H
+#define MYOBJECT_H
+
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+#include <span class="sh_symbol">&lt;</span>node_object_wrap<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+<span class="sh_keyword">class</span> MyObject <span class="sh_symbol">:</span> <span class="sh_keyword">public</span> node<span class="sh_symbol">::</span>ObjectWrap <span class="sh_cbracket">{</span>
+ <span class="sh_keyword">public</span><span class="sh_symbol">:</span>
+  <span class="sh_keyword">static</span> void <span class="sh_function">Init</span><span class="sh_symbol">(</span>v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">*</span> isolate<span class="sh_symbol">);</span>
+  <span class="sh_keyword">static</span> void <span class="sh_function">NewInstance</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">&lt;</span>v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">);</span>
+  inline double <span class="sh_function">value</span><span class="sh_symbol">()</span> <span class="sh_keyword">const</span> <span class="sh_cbracket">{</span> <span class="sh_keyword">return</span> value_<span class="sh_symbol">;</span> <span class="sh_cbracket">}</span>
+
+ <span class="sh_keyword">private</span><span class="sh_symbol">:</span>
+  explicit <span class="sh_function">MyObject</span><span class="sh_symbol">(</span>double value <span class="sh_symbol">=</span> <span class="sh_number">0</span><span class="sh_symbol">);</span>
+  <span class="sh_symbol">~</span><span class="sh_function">MyObject</span><span class="sh_symbol">();</span>
+
+  <span class="sh_keyword">static</span> void <span class="sh_function">New</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">&lt;</span>v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">);</span>
+  <span class="sh_keyword">static</span> v8<span class="sh_symbol">::</span>Persistent<span class="sh_symbol">&lt;</span>v8<span class="sh_symbol">::</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> constructor<span class="sh_symbol">;</span>
+  double value_<span class="sh_symbol">;</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+
+#endif
+</code></pre>
+<p><code>myobject.cc</code> 中的实现类似之前的例子：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// myobject.cc</span>
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+#include <span class="sh_string">"myobject.h"</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using v8<span class="sh_symbol">::</span>Context<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Function</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>FunctionCallbackInfo<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>FunctionTemplate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Persistent<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">String</span><span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Value<span class="sh_symbol">;</span>
+
+Persistent<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> MyObject<span class="sh_symbol">::</span>constructor<span class="sh_symbol">;</span>
+
+MyObject<span class="sh_symbol">::</span><span class="sh_function">MyObject</span><span class="sh_symbol">(</span>double value<span class="sh_symbol">)</span> <span class="sh_symbol">:</span> <span class="sh_function">value_</span><span class="sh_symbol">(</span>value<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+<span class="sh_cbracket">}</span>
+
+MyObject<span class="sh_symbol">::~</span><span class="sh_function">MyObject</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span>
+<span class="sh_cbracket">}</span>
+
+void MyObject<span class="sh_symbol">::</span><span class="sh_function">Init</span><span class="sh_symbol">(</span>Isolate<span class="sh_symbol">*</span> isolate<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// Prepare constructor template</span>
+  Local<span class="sh_symbol">&lt;</span>FunctionTemplate<span class="sh_symbol">&gt;</span> tpl <span class="sh_symbol">=</span> FunctionTemplate<span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> New<span class="sh_symbol">);</span>
+  tpl<span class="sh_symbol">-&gt;</span><span class="sh_function">SetClassName</span><span class="sh_symbol">(</span><span class="sh_predef_func">String</span><span class="sh_symbol">::</span><span class="sh_function">NewFromUtf8</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> <span class="sh_string">"MyObject"</span><span class="sh_symbol">));</span>
+  tpl<span class="sh_symbol">-&gt;</span><span class="sh_function">InstanceTemplate</span><span class="sh_symbol">()-&gt;</span><span class="sh_function">SetInternalFieldCount</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">);</span>
+
+  constructor<span class="sh_symbol">.</span><span class="sh_function">Reset</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> tpl<span class="sh_symbol">-&gt;</span><span class="sh_function">GetFunction</span><span class="sh_symbol">());</span>
+<span class="sh_cbracket">}</span>
+
+void MyObject<span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>args<span class="sh_symbol">.</span><span class="sh_function">IsConstructCall</span><span class="sh_symbol">())</span> <span class="sh_cbracket">{</span>
+    <span class="sh_comment">// 像构造函数一样调用：`new MyObject(...)`</span>
+    double value <span class="sh_symbol">=</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">IsUndefined</span><span class="sh_symbol">()</span> <span class="sh_symbol">?</span> <span class="sh_number">0</span> <span class="sh_symbol">:</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]-&gt;</span><span class="sh_function">NumberValue</span><span class="sh_symbol">();</span>
+    MyObject<span class="sh_symbol">*</span> obj <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">MyObject</span><span class="sh_symbol">(</span>value<span class="sh_symbol">);</span>
+    obj<span class="sh_symbol">-&gt;</span><span class="sh_function">Wrap</span><span class="sh_symbol">(</span>args<span class="sh_symbol">.</span><span class="sh_function">This</span><span class="sh_symbol">());</span>
+    args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span>args<span class="sh_symbol">.</span><span class="sh_function">This</span><span class="sh_symbol">());</span>
+  <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+    <span class="sh_comment">// 像普通方法 `MyObject(...)` 一样调用，转为构造调用。</span>
+    <span class="sh_keyword">const</span> int argc <span class="sh_symbol">=</span> <span class="sh_number">1</span><span class="sh_symbol">;</span>
+    Local<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;</span> argv<span class="sh_symbol">[</span>argc<span class="sh_symbol">]</span> <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]</span> <span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+    Local<span class="sh_symbol">&lt;</span>Context<span class="sh_symbol">&gt;</span> context <span class="sh_symbol">=</span> isolate<span class="sh_symbol">-&gt;</span><span class="sh_function">GetCurrentContext</span><span class="sh_symbol">();</span>
+    Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> cons <span class="sh_symbol">=</span> Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> constructor<span class="sh_symbol">);</span>
+    Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> instance <span class="sh_symbol">=</span>
+        cons<span class="sh_symbol">-&gt;</span><span class="sh_function">NewInstance</span><span class="sh_symbol">(</span>context<span class="sh_symbol">,</span> argc<span class="sh_symbol">,</span> argv<span class="sh_symbol">).</span><span class="sh_function">ToLocalChecked</span><span class="sh_symbol">();</span>
+    args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span>instance<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span>
+
+void MyObject<span class="sh_symbol">::</span><span class="sh_function">NewInstance</span><span class="sh_symbol">(</span><span class="sh_keyword">const</span> FunctionCallbackInfo<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;&amp;</span> args<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> args<span class="sh_symbol">.</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">();</span>
+
+  <span class="sh_keyword">const</span> unsigned argc <span class="sh_symbol">=</span> <span class="sh_number">1</span><span class="sh_symbol">;</span>
+  Local<span class="sh_symbol">&lt;</span>Value<span class="sh_symbol">&gt;</span> argv<span class="sh_symbol">[</span>argc<span class="sh_symbol">]</span> <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span> args<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">]</span> <span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+  Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;</span> cons <span class="sh_symbol">=</span> Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Function</span><span class="sh_symbol">&gt;::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">,</span> constructor<span class="sh_symbol">);</span>
+  Local<span class="sh_symbol">&lt;</span>Context<span class="sh_symbol">&gt;</span> context <span class="sh_symbol">=</span> isolate<span class="sh_symbol">-&gt;</span><span class="sh_function">GetCurrentContext</span><span class="sh_symbol">();</span>
+  Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> instance <span class="sh_symbol">=</span>
+      cons<span class="sh_symbol">-&gt;</span><span class="sh_function">NewInstance</span><span class="sh_symbol">(</span>context<span class="sh_symbol">,</span> argc<span class="sh_symbol">,</span> argv<span class="sh_symbol">).</span><span class="sh_function">ToLocalChecked</span><span class="sh_symbol">();</span>
+
+  args<span class="sh_symbol">.</span><span class="sh_function">GetReturnValue</span><span class="sh_symbol">().</span><span class="sh_function">Set</span><span class="sh_symbol">(</span>instance<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>测试：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// test.js</span>
+<span class="sh_keyword">const</span> addon <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./build/Release/addon'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">const</span> obj1 <span class="sh_symbol">=</span> addon<span class="sh_symbol">.</span><span class="sh_function">createObject</span><span class="sh_symbol">(</span><span class="sh_number">10</span><span class="sh_symbol">);</span>
+<span class="sh_keyword">const</span> obj2 <span class="sh_symbol">=</span> addon<span class="sh_symbol">.</span><span class="sh_function">createObject</span><span class="sh_symbol">(</span><span class="sh_number">20</span><span class="sh_symbol">);</span>
+<span class="sh_keyword">const</span> result <span class="sh_symbol">=</span> addon<span class="sh_symbol">.</span><span class="sh_function">add</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">,</span> obj2<span class="sh_symbol">);</span>
+
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>result<span class="sh_symbol">);</span>
+<span class="sh_comment">// 打印: 30</span>
+</code></pre>
+<h3>AtExit 钩子<span><a class="mark" href="addons.html#addons_atexit_hooks" id="addons_atexit_hooks">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_atexit_hooks">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/atexit_hooks.md">参与翻译</a></p>
+<p>“AtExit” 钩子是一个函数，它在 Node.js 事件循环结束后、但在 JavaScript 虚拟机被终止与 Node.js 关闭前被调用。
+“AtExit” 钩子使用 <code>node::AtExit</code> API 注册。</p>
+<h4>void AtExit(callback, args)<span><a class="mark" href="addons.html#addons_void_atexit_callback_args" id="addons_void_atexit_callback_args">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/addons.html#addons_void_atexit_callback_args">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/addons/void_atexit_callback_args.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><code>callback</code>: <code>void (*)(void*)</code> - 一个退出时调用的函数的指针。</li>
+<li><code>args</code>: <code>void*</code> - 一个退出时传递给回调的指针。</li>
+</ul>
+</div><p>注册的 AtExit 钩子会在事件循环结束之后但虚拟机被终止之前退出。</p>
+<p>AtExit 有两个参数：一个退出时运行的回调函数的指针，和一个要传入回调的无类型的上下文数据的指针。</p>
+<p>回调按照后进先出的顺序运行。</p>
+<p>以下 <code>addon.cc</code> 实现了 AtExit：</p>
+<pre class="sh_sourceCode"><code class="lang-cpp"><span class="sh_comment">// addon.cc</span>
+#undef NDEBUG
+#include <span class="sh_symbol">&lt;</span>assert<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+#include <span class="sh_symbol">&lt;</span>stdlib<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+#include <span class="sh_symbol">&lt;</span>node<span class="sh_symbol">.</span>h<span class="sh_symbol">&gt;</span>
+
+namespace demo <span class="sh_cbracket">{</span>
+
+using node<span class="sh_symbol">::</span>AtExit<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>HandleScope<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Isolate<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span>Local<span class="sh_symbol">;</span>
+using v8<span class="sh_symbol">::</span><span class="sh_predef_func">Object</span><span class="sh_symbol">;</span>
+
+<span class="sh_keyword">static</span> char cookie<span class="sh_symbol">[]</span> <span class="sh_symbol">=</span> <span class="sh_string">"yum yum"</span><span class="sh_symbol">;</span>
+<span class="sh_keyword">static</span> int at_exit_cb1_called <span class="sh_symbol">=</span> <span class="sh_number">0</span><span class="sh_symbol">;</span>
+<span class="sh_keyword">static</span> int at_exit_cb2_called <span class="sh_symbol">=</span> <span class="sh_number">0</span><span class="sh_symbol">;</span>
+
+<span class="sh_keyword">static</span> void <span class="sh_function">at_exit_cb1</span><span class="sh_symbol">(</span>void<span class="sh_symbol">*</span> arg<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  Isolate<span class="sh_symbol">*</span> isolate <span class="sh_symbol">=</span> static_cast<span class="sh_symbol">&lt;</span>Isolate<span class="sh_symbol">*&gt;(</span>arg<span class="sh_symbol">);</span>
+  HandleScope <span class="sh_function">scope</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">);</span>
+  Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> obj <span class="sh_symbol">=</span> <span class="sh_predef_func">Object</span><span class="sh_symbol">::</span><span class="sh_function">New</span><span class="sh_symbol">(</span>isolate<span class="sh_symbol">);</span>
+  <span class="sh_function">assert</span><span class="sh_symbol">(!</span>obj<span class="sh_symbol">.</span><span class="sh_function">IsEmpty</span><span class="sh_symbol">());</span> <span class="sh_comment">// assert VM is still alive</span>
+  <span class="sh_function">assert</span><span class="sh_symbol">(</span>obj<span class="sh_symbol">-&gt;</span><span class="sh_function">IsObject</span><span class="sh_symbol">());</span>
+  at_exit_cb1_called<span class="sh_symbol">++;</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_keyword">static</span> void <span class="sh_function">at_exit_cb2</span><span class="sh_symbol">(</span>void<span class="sh_symbol">*</span> arg<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_function">assert</span><span class="sh_symbol">(</span>arg <span class="sh_symbol">==</span> static_cast<span class="sh_symbol">&lt;</span>void<span class="sh_symbol">*&gt;(</span>cookie<span class="sh_symbol">));</span>
+  at_exit_cb2_called<span class="sh_symbol">++;</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_keyword">static</span> void <span class="sh_function">sanity_check</span><span class="sh_symbol">(</span>void<span class="sh_symbol">*)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_function">assert</span><span class="sh_symbol">(</span>at_exit_cb1_called <span class="sh_symbol">==</span> <span class="sh_number">1</span><span class="sh_symbol">);</span>
+  <span class="sh_function">assert</span><span class="sh_symbol">(</span>at_exit_cb2_called <span class="sh_symbol">==</span> <span class="sh_number">2</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+void <span class="sh_function">init</span><span class="sh_symbol">(</span>Local<span class="sh_symbol">&lt;</span><span class="sh_predef_func">Object</span><span class="sh_symbol">&gt;</span> exports<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_function">AtExit</span><span class="sh_symbol">(</span>sanity_check<span class="sh_symbol">);</span>
+  <span class="sh_function">AtExit</span><span class="sh_symbol">(</span>at_exit_cb2<span class="sh_symbol">,</span> cookie<span class="sh_symbol">);</span>
+  <span class="sh_function">AtExit</span><span class="sh_symbol">(</span>at_exit_cb2<span class="sh_symbol">,</span> cookie<span class="sh_symbol">);</span>
+  <span class="sh_function">AtExit</span><span class="sh_symbol">(</span>at_exit_cb1<span class="sh_symbol">,</span> exports<span class="sh_symbol">-&gt;</span><span class="sh_function">GetIsolate</span><span class="sh_symbol">());</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_function">NODE_MODULE</span><span class="sh_symbol">(</span>addon<span class="sh_symbol">,</span> init<span class="sh_symbol">);</span>
+
+<span class="sh_cbracket">}</span>  <span class="sh_comment">// namespace demo</span>
+</code></pre>
+<p>测试：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// test.js</span>
+<span class="sh_keyword">const</span> addon <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./build/Release/addon'</span><span class="sh_symbol">);</span>
+</code></pre>
+
+      </div>
+    </div>
+ </div>
+  <script src="res/api.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+</body></html>

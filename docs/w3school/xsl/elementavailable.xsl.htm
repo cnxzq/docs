@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsl:stylesheet version="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+<html>
+<body>
+<xsl:choose>
+<xsl:when test="element-available('xsl:comment')">
+  <p>xsl:comment is supported.</p>
+</xsl:when>
+<xsl:otherwise>
+  <p>xsl:comment is not supported.</p>
+</xsl:otherwise>
+</xsl:choose>
+<xsl:choose>
+<xsl:when test="element-available('xsl:delete')">
+  <p>xsl:delete is supported.</p>
+</xsl:when>
+<xsl:otherwise>
+  <p>xsl:delete is not supported.</p>
+</xsl:otherwise>
+</xsl:choose>
+</body>
+</html>
+</xsl:template>
+
+</xsl:stylesheet>
+<br><hr><br>
+ This file is decompiled from a .CHM file <br>
+by an UNREGISTERED version of Easy CHM. <br>
+You can download Easy CHM at :
+
+<a href="http://www.etextwizard.com/" target=_blank>
+http://www.eTextWizard.com</a> <br><br>
+
+

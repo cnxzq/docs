@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://nodejs.cn/api/crypto.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>crypto | Node.js API 文档</title>
+  <link rel="stylesheet" href="pages/res/api.css">
+  <script src="pages/res/api.js"></script>
+  <script src="pages/res/jquery-1.12.3.min.js"></script>
+  <script>
+  	$(function(){
+  		$("#column2 li a").each(function(){
+  			
+  			$this = $(this);
+  			var url = $this.attr("href");
+  			$this.click(function(){
+  				$("#column2 li a").removeClass("active");
+  				
+  				$(this).addClass("active");
+  				$("#column1").load("pages/"+url + " #column1 > *",function(){
+	  				$("#column1 a[href]").each(function(){
+	  					var href = $(this).attr("href").split("#");
+	  					if(href.length==2){
+	  						$(this).attr("href","#"+href[1])
+	  					}
+	  				});
+	  				$(document.body).scrollTop(0);
+	  				_onload();
+	  				highlight(undefined, undefined, 'pre');
+  				});
+  			});
+  		}).attr("href","javascript:void(0);").eq(0).click();
+  	});
+  </script>
+</head>
+<body class="alt apidoc" id="api-section-crypto">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+				<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+				<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+			</ul>
+			<div class="line"></div>
+			<ul>
+				<li><a class="nav-assert" href="assert.html">Assert (断言)</a></li>
+				<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+				<li><a class="nav-addons" href="addons.html">C/C++ 插件</a></li>
+				<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+				<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+				<li><a class="nav-cli" href="cli.html">CLI (命令行选项)</a></li>
+				<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+				<li><a class="nav-crypto active" href="./crypto _ Node.js API 文档_files/crypto _ Node.js API 文档.html">Crypto (加密)</a></li>
+				<li><a class="nav-debugger" href="debugger.html">Debugger (调试器)</a></li>
+				<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+				<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+				<li><a class="nav-errors" href="errors.html">Error (错误)</a></li>
+				<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+				<li><a class="nav-fs" href="fs.html">File System (文件系统)</a></li>
+				<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+				<li><a class="nav-http" href="http.html">HTTP</a></li>
+				<li><a class="nav-https" href="https.html">HTTPS</a></li>
+				<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+				<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+				<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+				<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+				<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+				<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+				<li><a class="nav-querystring" href="querystring.html">Query Strings (查询字符串)</a></li>
+				<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+				<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+				<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+				<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+				<li><a class="nav-timers" href="timers.html">Timer (定时器)</a></li>
+				<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+				<li><a class="nav-tty" href="tty.html">TTY (终端)</a></li>
+				<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+				<li><a class="nav-url" href="url.html">URL</a></li>
+				<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+				<li><a class="nav-v8" href="v8.html">V8</a></li>
+				<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+				<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+			</ul>
+			<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="crypto" class="interior">
+      
+    </div>
+  </div
+</body></html>

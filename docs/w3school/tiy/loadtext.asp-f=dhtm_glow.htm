@@ -1,0 +1,52 @@
+<html>
+<head>
+<style>
+h1
+{
+width:400;
+}
+</style>
+
+<script type="text/javascript">
+var i
+function glow()
+{
+i=0
+interval=setInterval("makeglow()",10)
+}
+
+function back()
+{
+clearInterval(interval)
+document.getElementById('myHeader').style.filter=false
+}
+
+function makeglow()
+{
+i++
+if (i<5)
+	{
+	document.getElementById('myHeader').style.filter="glow(strength=" + i + ")"
+	}
+else if (window.interval)
+	{
+	clearInterval(interval)
+	}
+}
+
+</script>
+</head>
+
+<body>
+<h1 id="myHeader" onmouseover="glow()" onmouseout="back()">请把鼠标移动到这个标题上</h1>
+</body>
+
+</html><br><hr><br>
+ This file is decompiled from a .CHM file <br>
+by an UNREGISTERED version of Easy CHM. <br>
+You can download Easy CHM at :
+
+<a href="http://www.etextwizard.com/" target=_blank>
+http://www.eTextWizard.com</a> <br><br>
+
+

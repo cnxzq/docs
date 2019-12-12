@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)http://nodejs.cn/api/http.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>http | Node.js API 文档</title>
+  <link rel="stylesheet" href="res/api.css">
+</head>
+<body class="alt apidoc" id="api-section-http">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+</ul>
+<div class="line"></div>
+
+<ul>
+<li><a class="nav-assert" href="assert.html">Assert (断言)</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons" href="addons.html">C/C++ 插件</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+<li><a class="nav-cli" href="cli.html">CLI (命令行选项)</a></li>
+<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto (加密)</a></li>
+<li><a class="nav-debugger" href="debugger.html">Debugger (调试器)</a></li>
+<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+<li><a class="nav-errors" href="errors.html">Error (错误)</a></li>
+<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+<li><a class="nav-fs" href="fs.html">File System (文件系统)</a></li>
+<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+<li><a class="nav-http active" href="./http_files/http.htm">HTTP</a></li>
+<li><a class="nav-https" href="https.html">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring" href="querystring.html">Query Strings (查询字符串)</a></li>
+<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+<li><a class="nav-timers" href="timers.html">Timer (定时器)</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty" href="tty.html">TTY (终端)</a></li>
+<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+</ul>
+<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="http" class="interior">
+      <header>
+        <h1>Node.js v6.10.2 文档</h1>
+        <div id="gtoc">
+          <p>
+            <a href="" name="toc">返回文档首页</a>
+            <!--<a href="/api/all.html">单页面显示</a> |-->
+            <!--<a href="/api/http.json">JSON格式</a> |-->
+            <!--<a href="/api/en/http.html">查看英文版</a>-->
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>目录</h2>
+        <ul>
+<li><span class="stability_2"><a href="http.html#http_http">http</a></span><ul>
+<li><span class="stability_undefined"><a href="http.html#http_class_http_agent">http.Agent 类</a></span><ul>
+<li><span class="stability_undefined"><a href="http.html#http_new_agent_options">new Agent([options])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_agent_createconnection_options_callback">agent.createConnection(options[, callback])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_agent_destroy">agent.destroy()</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_agent_freesockets">agent.freeSockets</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_agent_getname_options">agent.getName(options)</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_agent_maxfreesockets">agent.maxFreeSockets</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_agent_maxsockets">agent.maxSockets</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_agent_requests">agent.requests</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_agent_sockets">agent.sockets</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="http.html#http_class_http_clientrequest">http.ClientRequest 类</a></span><ul>
+<li><span class="stability_undefined"><a href="http.html#http_event_abort">'abort' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_aborted">'aborted' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_connect">'connect' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_continue">'continue' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_response">'response' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_socket">'socket' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_upgrade">'upgrade' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_request_abort">request.abort()</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_request_aborted">request.aborted</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_request_end_data_encoding_callback">request.end([data][, encoding][, callback])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_request_flushheaders">request.flushHeaders()</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_request_setnodelay_nodelay">request.setNoDelay([noDelay])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_request_setsocketkeepalive_enable_initialdelay">request.setSocketKeepAlive([enable][, initialDelay])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_request_settimeout_timeout_callback">request.setTimeout(timeout[, callback])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_request_write_chunk_encoding_callback">request.write(chunk[, encoding][, callback])</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="http.html#http_class_http_server">http.Server 类</a></span><ul>
+<li><span class="stability_undefined"><a href="http.html#http_event_checkcontinue">'checkContinue' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_checkexpectation">'checkExpectation' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_clienterror">'clientError' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_close">'close' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_connect_1">'connect' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_connection">'connection' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_request">'request' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_upgrade_1">'upgrade' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_server_close_callback">server.close([callback])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_server_listen_handle_callback">server.listen(handle[, callback])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_server_listen_path_callback">server.listen(path[, callback])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_server_listen_port_hostname_backlog_callback">server.listen([port][, hostname][, backlog][, callback])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_server_listening">server.listening</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_server_maxheaderscount">server.maxHeadersCount</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_server_settimeout_msecs_callback">server.setTimeout(msecs, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_server_timeout">server.timeout</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="http.html#http_class_http_serverresponse">http.ServerResponse 类</a></span><ul>
+<li><span class="stability_undefined"><a href="http.html#http_event_close_1">'close' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_finish">'finish' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_addtrailers_headers">response.addTrailers(headers)</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_end_data_encoding_callback">response.end([data][, encoding][, callback])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_finished">response.finished</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_getheader_name">response.getHeader(name)</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_headerssent">response.headersSent</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_removeheader_name">response.removeHeader(name)</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_senddate">response.sendDate</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_setheader_name_value">response.setHeader(name, value)</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_settimeout_msecs_callback">response.setTimeout(msecs, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_statuscode">response.statusCode</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_statusmessage">response.statusMessage</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_write_chunk_encoding_callback">response.write(chunk[, encoding][, callback])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_writecontinue">response.writeContinue()</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_response_writehead_statuscode_statusmessage_headers">response.writeHead(statusCode[, statusMessage][, headers])</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="http.html#http_class_http_incomingmessage">http.IncomingMessage 类</a></span><ul>
+<li><span class="stability_undefined"><a href="http.html#http_event_aborted_1">'aborted' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_event_close_2">'close' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_destroy_error">message.destroy([error])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_headers">message.headers</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_httpversion">message.httpVersion</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_method">message.method</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_rawheaders">message.rawHeaders</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_rawtrailers">message.rawTrailers</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_settimeout_msecs_callback">message.setTimeout(msecs, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_statuscode">message.statusCode</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_statusmessage">message.statusMessage</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_socket">message.socket</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_trailers">message.trailers</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_message_url">message.url</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="http.html#http_http_methods">http.METHODS</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_http_status_codes">http.STATUS_CODES</a></span></li>
+<li><span class="stability_0"><a href="http.html#http_http_createclient_port_host">http.createClient([port][, host])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_http_createserver_requestlistener">http.createServer([requestListener])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_http_get_options_callback">http.get(options[, callback])</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_http_globalagent">http.globalAgent</a></span></li>
+<li><span class="stability_undefined"><a href="http.html#http_http_request_options_callback">http.request(options[, callback])</a></span></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>http<span><a class="mark" href="http.html#http_http" id="http_http">#</a></span></h1><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_http">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/http.md">参与翻译</a></p>
+<pre class="api_stability api_stability_2 sh_sourceCode">稳定性<span class="sh_symbol">:</span> <span class="sh_number">2</span> <span class="sh_symbol">-</span> 稳定的</pre><p>使用 HTTP 服务器和客户端必须 <code>require('http')</code>。</p>
+<p>Node.js 中的 HTTP 接口被设计为支持以往较难使用的协议的许多特性。
+比如，大块编码的消息。
+该接口从不缓存整个请求或响应，所以用户能够流化数据。</p>
+<p>HTTP 消息头由类似以下的对象表示：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_cbracket">{</span> <span class="sh_string">'content-length'</span><span class="sh_symbol">:</span> <span class="sh_string">'123'</span><span class="sh_symbol">,</span>
+  <span class="sh_string">'content-type'</span><span class="sh_symbol">:</span> <span class="sh_string">'text/plain'</span><span class="sh_symbol">,</span>
+  <span class="sh_string">'connection'</span><span class="sh_symbol">:</span> <span class="sh_string">'keep-alive'</span><span class="sh_symbol">,</span>
+  <span class="sh_string">'host'</span><span class="sh_symbol">:</span> <span class="sh_string">'mysite.com'</span><span class="sh_symbol">,</span>
+  <span class="sh_string">'accept'</span><span class="sh_symbol">:</span> <span class="sh_string">'*/*'</span> <span class="sh_cbracket">}</span>
+</code></pre>
+<p>键名是小写的，值是不能修改的。</p>
+<p>为了支持全部可能的 HTTP 应用，Node.js 的 HTTP API 是非常底层的。
+它只涉及流处理和消息解析。
+它把一个消息解析成头部和主体，但它不解析具体的头部或主体。</p>
+<p>详见 <a href="http.html#http_message_headers"><code>message.headers</code></a> 了解如何处理重复的头部。</p>
+<p>收到的原始消息头保存在 <code>rawHeaders</code> 属性中，它是一个 <code>[key, value, key2, value2, ...]</code> 的数组。
+例如，上面的消息头对象可能有一个类似以下的 <code>rawHeaders</code> 列表：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_symbol">[</span> <span class="sh_string">'ConTent-Length'</span><span class="sh_symbol">,</span> <span class="sh_string">'123456'</span><span class="sh_symbol">,</span>
+  <span class="sh_string">'content-LENGTH'</span><span class="sh_symbol">,</span> <span class="sh_string">'123'</span><span class="sh_symbol">,</span>
+  <span class="sh_string">'content-type'</span><span class="sh_symbol">,</span> <span class="sh_string">'text/plain'</span><span class="sh_symbol">,</span>
+  <span class="sh_string">'CONNECTION'</span><span class="sh_symbol">,</span> <span class="sh_string">'keep-alive'</span><span class="sh_symbol">,</span>
+  <span class="sh_string">'Host'</span><span class="sh_symbol">,</span> <span class="sh_string">'mysite.com'</span><span class="sh_symbol">,</span>
+  <span class="sh_string">'accepT'</span><span class="sh_symbol">,</span> <span class="sh_string">'*/*'</span> <span class="sh_symbol">]</span>
+</code></pre>
+<h2>http.Agent 类<span><a class="mark" href="http.html#http_class_http_agent" id="http_class_http_agent">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_class_http_agent">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/class_http_agent.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.4</span>
+</div><p>An <code>Agent</code> is responsible for managing connection persistence
+and reuse for HTTP clients. It maintains a queue of pending requests
+for a given host and port, reusing a single socket connection for each
+until the queue is empty, at which time the socket is either destroyed
+or put into a pool where it is kept to be used again for requests to the
+same host and port. Whether it is destroyed or pooled depends on the
+<code>keepAlive</code> <a href="http.html#http_new_agent_options">option</a>.</p>
+<p>Pooled connections have TCP Keep-Alive enabled for them, but servers may
+still close idle connections, in which case they will be removed from the
+pool and a new connection will be made when a new HTTP request is made for
+that host and port. Servers may also refuse to allow multiple requests
+over the same connection, in which case the connection will have to be
+remade for every request and cannot be pooled. The <code>Agent</code> will still make
+the requests to that server, but each one will occur over a new connection.</p>
+<p>When a connection is closed by the client or the server, it is removed
+from the pool. Any unused sockets in the pool will be unrefed so as not
+to keep the Node.js process running when there are no outstanding requests.
+(see <a href="net.html#net_socket_unref">socket.unref()</a>).</p>
+<p>It is good practice, to <a href="http.html#http_agent_destroy"><code>destroy()</code></a> an <code>Agent</code> instance when it is no
+longer in use, because unused sockets consume OS resources.</p>
+<p>Sockets are removed from an agent's pool when the socket emits either
+a <code>'close'</code> event or an <code>'agentRemove'</code> event. This means that if
+you intend to keep one HTTP request open for a long time and don't
+want it to stay in the pool you can do something along the lines of:</p>
+<pre class="sh_sourceCode"><code class="lang-js">http<span class="sh_symbol">.</span><span class="sh_function">get</span><span class="sh_symbol">(</span>options<span class="sh_symbol">,</span> <span class="sh_symbol">(</span>res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// 处理事情</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">).</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'socket'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>socket<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  socket<span class="sh_symbol">.</span><span class="sh_function">emit</span><span class="sh_symbol">(</span><span class="sh_string">'agentRemove'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>You may also use an agent for an individual request. By providing
+<code>{agent: false}</code> as an option to the <code>http.get()</code> or <code>http.request()</code>
+functions, a one-time use <code>Agent</code> with default options will be used
+for the client connection.</p>
+<p><code>agent:false</code>:</p>
+<pre class="sh_sourceCode"><code class="lang-js">http<span class="sh_symbol">.</span><span class="sh_function">get</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span>
+  hostname<span class="sh_symbol">:</span> <span class="sh_string">'localhost'</span><span class="sh_symbol">,</span>
+  port<span class="sh_symbol">:</span> <span class="sh_number">80</span><span class="sh_symbol">,</span>
+  path<span class="sh_symbol">:</span> <span class="sh_string">'/'</span><span class="sh_symbol">,</span>
+  agent<span class="sh_symbol">:</span> <span class="sh_keyword">false</span>  <span class="sh_comment">// 创建一个新的代理，只用于本次请求</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// 对响应进行处理</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<h3>new Agent([options])<span><a class="mark" href="http.html#http_new_agent_options" id="http_new_agent_options">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_new_agent_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/new_agent_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.4</span>
+</div><ul>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> 用于设置代理的配置选项的集合。可以有以下字段：<ul>
+<li><code>keepAlive</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a> 保持 socket 即使没有请求，以便它们可被将来的请求使用而无需重新建立一个 TCP 连接。默认 = <code>false</code>。</li>
+<li><code>keepAliveMsecs</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 当使用 <code>keepAlive</code> 选项时，指定 TCP <code>Keep-Alive</code> 数据包的 <a href="http.html#net_socket_setkeepalive_enable_initialdelay">初始延迟</a>。
+当 <code>keepAlive</code> 选项为 <code>false</code> 或 <code>undefined</code> 时忽视该选项。
+默认 = <code>1000</code>。</li>
+<li><code>maxSockets</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> 每个主机允许的最大 socket 数。默认= <code>Infinity</code>。</li>
+<li><code>maxFreeSockets</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> 在空闲状态下允许打开的最大 socket 数。
+仅当 <code>keepAlive</code> 被设为 <code>true</code> 有效。
+默认 = <code>256</code>.</li>
+</ul>
+</li>
+</ul>
+<p><a href="http.html#http_http_request_options_callback"><code>http.request()</code></a> 使用的默认的 <a href="http.html#http_http_globalagent"><code>http.globalAgent</code></a> 会将所有这些值设为各自的默认值。</p>
+<p>要配置其中任何一个，必须创建自己的 <a href="http.html#http_class_http_agent"><code>http.Agent</code></a> 实例。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> http <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'http'</span><span class="sh_symbol">);</span>
+<span class="sh_keyword">var</span> keepAliveAgent <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> http<span class="sh_symbol">.</span><span class="sh_function">Agent</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span> keepAlive<span class="sh_symbol">:</span> <span class="sh_keyword">true</span> <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+options<span class="sh_symbol">.</span>agent <span class="sh_symbol">=</span> keepAliveAgent<span class="sh_symbol">;</span>
+http<span class="sh_symbol">.</span><span class="sh_function">request</span><span class="sh_symbol">(</span>options<span class="sh_symbol">,</span> onResponseCallback<span class="sh_symbol">);</span>
+</code></pre>
+<h3>agent.createConnection(options[, callback])<span><a class="mark" href="http.html#http_agent_createconnection_options_callback" id="http_agent_createconnection_options_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_agent_createconnection_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/agent_createconnection_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.4</span>
+</div><ul>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> 包含连接详情的选项。详见 <a href="net.html#net_net_createconnection_options_connectlistener"><code>net.createConnection()</code></a> 了解选项的格式</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> 接收创建的 socket 的回调函数</li>
+<li>返回: <a href="net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>生产一个用于 HTTP 请求的 socket/stream。</p>
+<p>默认情况下，该函数类似于 <a href="net.html#net_net_createconnection_options_connectlistener"><code>net.createConnection()</code></a>。
+但是，如果期望更大的灵活性，自定义代理可以重写此方法。</p>
+<p>socket/stream 可以由以下两个方法提供：从该函数返回 socket/stream，或传入 <code>callback</code> 的 socket/stream。</p>
+<p><code>callback</code> 有 <code>(err, stream)</code> 参数。</p>
+<h3>agent.destroy()<span><a class="mark" href="http.html#http_agent_destroy" id="http_agent_destroy">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_agent_destroy">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/agent_destroy.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.4</span>
+</div><p>销毁当前正被代理使用的任何 socket。</p>
+<p>通常不需要这么做。
+但是，如果使用的是启用 <code>keepAlive</code> 的代理，则当知道它不再被使用时，最好显式地关闭代理。
+否则，在服务器终止之前，socket 可能会挂起开放相当长的时间。</p>
+<h3>agent.freeSockets<span><a class="mark" href="http.html#http_agent_freesockets" id="http_agent_freesockets">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_agent_freesockets">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/agent_freesockets.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.4</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>当 <code>keepAlive</code> 被启用时，返回一个对象，包含当前正在等待被代理使用的 socket 数组。
+不要修改。</p>
+<h3>agent.getName(options)<span><a class="mark" href="http.html#http_agent_getname_options" id="http_agent_getname_options">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_agent_getname_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/agent_getname_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.4</span>
+</div><ul>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> 一个提供名称生成信息的选项的集合<ul>
+<li><code>host</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 请求发送至的服务器的域名或 IP 地址</li>
+<li><code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> 远程服务器的端口</li>
+<li><code>localAddress</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 当发送请求时，要绑定到网络连接的本地接口</li>
+</ul>
+</li>
+<li>返回: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p>获取请求选项集合的唯一名称，以确定连接是否可以再利用。
+对于一个 HTTP 代理，这会返回 <code>host:port:localAddress</code>。
+对于一个 HTTPS 代理，名称会包括 CA、证书、密码和其他 HTTPS/TLS-specific 选项，以确定 socket 的可复用性。</p>
+<h3>agent.maxFreeSockets<span><a class="mark" href="http.html#http_agent_maxfreesockets" id="http_agent_maxfreesockets">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_agent_maxfreesockets">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/agent_maxfreesockets.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.7</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+</ul>
+<p>默认设为 256。
+对于已启用 <code>keepAlive</code> 的代理，它设置了在空闲状态下可打开的 socket 的最大数量。</p>
+<h3>agent.maxSockets<span><a class="mark" href="http.html#http_agent_maxsockets" id="http_agent_maxsockets">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_agent_maxsockets">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/agent_maxsockets.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.6</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+</ul>
+<p>默认设为无穷大。
+决定每个来源中代理可打开多少个并发的 socket。
+来源是一个 <code>'host:port'</code> 或 <code>'host:port:localAddress'</code> 组合。</p>
+<h3>agent.requests<span><a class="mark" href="http.html#http_agent_requests" id="http_agent_requests">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_agent_requests">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/agent_requests.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.9</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>一个包含还未被分配到 socket 的请求队列的对象。
+不要修改。</p>
+<h3>agent.sockets<span><a class="mark" href="http.html#http_agent_sockets" id="http_agent_sockets">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_agent_sockets">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/agent_sockets.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.6</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>一个包含当前正被代理使用的 socket 数组的对象。
+不要修改。</p>
+<h2>http.ClientRequest 类<span><a class="mark" href="http.html#http_class_http_clientrequest" id="http_class_http_clientrequest">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_class_http_clientrequest">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/class_http_clientrequest.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.17</span>
+</div><p>该对象在内部被创建，并从 <a href="http.html#http_http_request_options_callback"><code>http.request()</code></a> 返回。
+它表示着一个<strong>正在处理</strong>的请求，其请求头已进入队列。
+请求头仍可使用 <code>setHeader(name, value)</code>、<code>getHeader(name)</code> 和 <code>removeHeader(name)</code> API 进行修改。
+实际的请求头会与第一个数据块或关闭连接时一起被发送。</p>
+<p>要获取响应，需添加一个 <a href="http.html#http_event_response"><code>'response'</code></a> 监听器到请求对象上。
+当响应头被接收时，请求对象会触发 <a href="http.html#http_event_response"><code>'response'</code></a>。
+<a href="http.html#http_event_response"><code>'response'</code></a> 事件被执行时带有一个参数，该参数是一个 <a href="http.html#http_class_http_incomingmessage"><code>http.IncomingMessage</code></a> 实例。</p>
+<p>在 <a href="http.html#http_event_response"><code>'response'</code></a> 事件期间，可以添加监听器到响应对象；比如监听 <code>'data'</code> 事件。</p>
+<p>如果没有添加 <a href="http.html#http_event_response"><code>'response'</code></a> 句柄，则响应会被完全丢弃。
+当然，如果添加了 <a href="http.html#http_event_response"><code>'response'</code></a> 事件句柄，则<strong>必须</strong>消耗响应对象的数据（当有 <code>'readable'</code> 事件时调用 <code>response.read()</code>、或添加一个 <code>'data'</code> 句柄、或调用 <code>.resume()</code> 方法）。
+<code>'end'</code> 事件不会被触发，直到数据被消耗完。
+同样，在数据读完之前，它会消耗内存，可能会造成 'process out of memory' 错误。</p>
+<p>注意：Node.js 不会检查 Content-Length 和已发送的主体的长度是否相等。</p>
+<p>请求实现了[可写流]接口。
+这是一个包含以下事件的 <a href="events.html#events_class_eventemitter"><code>EventEmitter</code></a>：</p>
+<h3>'abort' 事件<span><a class="mark" href="http.html#http_event_abort" id="http_event_abort">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_abort">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_abort.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v1.4.1</span>
+</div><p>当请求已被客户端中止时触发。
+该事件仅在首次调用 <code>abort()</code> 时触发。</p>
+<h3>'aborted' 事件<span><a class="mark" href="http.html#http_event_aborted" id="http_event_aborted">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_aborted">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_aborted.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.8</span>
+</div><p>当请求已被服务器中止且网络 socket 已关闭时触发。</p>
+<h3>'connect' 事件<span><a class="mark" href="http.html#http_event_connect" id="http_event_connect">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_connect">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_connect.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.7.0</span>
+</div><ul>
+<li><code>response</code> <a href="http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+<li><code>socket</code> <a href="net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+<li><code>head</code> <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>每当服务器响应一个带有 <code>CONNECT</code> 方法的请求时触发。
+如果该事件未被监听，则接收到 <code>CONNECT</code> 方法的客户端会关闭它们的连接。</p>
+<p>一对客户端和服务端会展示如何监听 <code>'connect'</code> 事件：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> http <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'http'</span><span class="sh_symbol">);</span>
+<span class="sh_keyword">const</span> net <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'net'</span><span class="sh_symbol">);</span>
+<span class="sh_keyword">const</span> url <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'url'</span><span class="sh_symbol">);</span>
+
+<span class="sh_comment">// 创建一个 HTTP 通道代理</span>
+<span class="sh_keyword">var</span> proxy <span class="sh_symbol">=</span> http<span class="sh_symbol">.</span><span class="sh_function">createServer</span><span class="sh_symbol">(</span> <span class="sh_symbol">(</span>req<span class="sh_symbol">,</span> res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">writeHead</span><span class="sh_symbol">(</span><span class="sh_number">200</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span><span class="sh_string">'Content-Type'</span><span class="sh_symbol">:</span> <span class="sh_string">'text/plain'</span><span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">(</span><span class="sh_string">'okay'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+proxy<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'connect'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>req<span class="sh_symbol">,</span> cltSocket<span class="sh_symbol">,</span> head<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// 连接到一个来源服务器</span>
+  <span class="sh_keyword">var</span> srvUrl <span class="sh_symbol">=</span> url<span class="sh_symbol">.</span><span class="sh_function">parse</span><span class="sh_symbol">(</span>`http<span class="sh_symbol">:</span><span class="sh_comment">//${req.url}`);</span>
+  <span class="sh_keyword">var</span> srvSocket <span class="sh_symbol">=</span> net<span class="sh_symbol">.</span><span class="sh_function">connect</span><span class="sh_symbol">(</span>srvUrl<span class="sh_symbol">.</span>port<span class="sh_symbol">,</span> srvUrl<span class="sh_symbol">.</span>hostname<span class="sh_symbol">,</span> <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    cltSocket<span class="sh_symbol">.</span><span class="sh_function">write</span><span class="sh_symbol">(</span><span class="sh_string">'HTTP/1.1 200 连接已建立</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span> <span class="sh_symbol">+</span>
+                    <span class="sh_string">'委托代理: Node.js-代理</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span> <span class="sh_symbol">+</span>
+                    <span class="sh_string">'</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span><span class="sh_symbol">);</span>
+    srvSocket<span class="sh_symbol">.</span><span class="sh_function">write</span><span class="sh_symbol">(</span>head<span class="sh_symbol">);</span>
+    srvSocket<span class="sh_symbol">.</span><span class="sh_function">pipe</span><span class="sh_symbol">(</span>cltSocket<span class="sh_symbol">);</span>
+    cltSocket<span class="sh_symbol">.</span><span class="sh_function">pipe</span><span class="sh_symbol">(</span>srvSocket<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+
+<span class="sh_comment">// 现在代理正在运行</span>
+proxy<span class="sh_symbol">.</span><span class="sh_function">listen</span><span class="sh_symbol">(</span><span class="sh_number">1337</span><span class="sh_symbol">,</span> <span class="sh_string">'127.0.0.1'</span><span class="sh_symbol">,</span> <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+
+  <span class="sh_comment">// 发送一个请求到通道代理</span>
+  <span class="sh_keyword">var</span> options <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+    port<span class="sh_symbol">:</span> <span class="sh_number">1337</span><span class="sh_symbol">,</span>
+    hostname<span class="sh_symbol">:</span> <span class="sh_string">'127.0.0.1'</span><span class="sh_symbol">,</span>
+    method<span class="sh_symbol">:</span> <span class="sh_string">'CONNECT'</span><span class="sh_symbol">,</span>
+    path<span class="sh_symbol">:</span> <span class="sh_string">'www.google.com:80'</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+
+  <span class="sh_keyword">var</span> req <span class="sh_symbol">=</span> http<span class="sh_symbol">.</span><span class="sh_function">request</span><span class="sh_symbol">(</span>options<span class="sh_symbol">);</span>
+  req<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">();</span>
+
+  req<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'connect'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>res<span class="sh_symbol">,</span> socket<span class="sh_symbol">,</span> head<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'got connected!'</span><span class="sh_symbol">);</span>
+
+    <span class="sh_comment">// 发送一个请求到一个 HTTP 通道</span>
+    socket<span class="sh_symbol">.</span><span class="sh_function">write</span><span class="sh_symbol">(</span><span class="sh_string">'GET / HTTP/1.1</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span> <span class="sh_symbol">+</span>
+                 <span class="sh_string">'Host: www.google.com:80</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span> <span class="sh_symbol">+</span>
+                 <span class="sh_string">'Connection: close</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span> <span class="sh_symbol">+</span>
+                 <span class="sh_string">'</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span><span class="sh_symbol">);</span>
+    socket<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'data'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>chunk<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+      console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>chunk<span class="sh_symbol">.</span><span class="sh_function">toString</span><span class="sh_symbol">());</span>
+    <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+    socket<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'end'</span><span class="sh_symbol">,</span> <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+      proxy<span class="sh_symbol">.</span><span class="sh_function">close</span><span class="sh_symbol">();</span>
+    <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<h3>'continue' 事件<span><a class="mark" href="http.html#http_event_continue" id="http_event_continue">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_continue">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_continue.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.2</span>
+</div><p>当服务器发送了一个 <code>100 Continue</code> 的 HTTP 响应时触发，通常因为该请求包含 <code>Expect: 100-continue</code>。
+这是客户端应发送请求主体的指令。</p>
+<h3>'response' 事件<span><a class="mark" href="http.html#http_event_response" id="http_event_response">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_response">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_response.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.0</span>
+</div><ul>
+<li><code>response</code> <a href="http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+</ul>
+<p>当请求的响应被接收时触发。
+该事件只触发一次。</p>
+<h3>'socket' 事件<span><a class="mark" href="http.html#http_event_socket" id="http_event_socket">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_socket">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_socket.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.3</span>
+</div><ul>
+<li><code>socket</code> <a href="net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>当 socket 被分配给请求后触发。</p>
+<h3>'upgrade' 事件<span><a class="mark" href="http.html#http_event_upgrade" id="http_event_upgrade">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_upgrade">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_upgrade.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.94</span>
+</div><ul>
+<li><code>response</code> <a href="http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+<li><code>socket</code> <a href="net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+<li><code>head</code> <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>每当服务器响应一个升级请求时触发。
+如果该事件未被监听，则接收到升级请求头的客户端会关闭它们的连接。</p>
+<p>一对客户端和服务端会展示如何监听 <code>'upgrade'</code> 事件：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> http <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'http'</span><span class="sh_symbol">);</span>
+
+<span class="sh_comment">// 创建一个 HTTP 服务器</span>
+<span class="sh_keyword">var</span> srv <span class="sh_symbol">=</span> http<span class="sh_symbol">.</span><span class="sh_function">createServer</span><span class="sh_symbol">(</span> <span class="sh_symbol">(</span>req<span class="sh_symbol">,</span> res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">writeHead</span><span class="sh_symbol">(</span><span class="sh_number">200</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span><span class="sh_string">'Content-Type'</span><span class="sh_symbol">:</span> <span class="sh_string">'text/plain'</span><span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">(</span><span class="sh_string">'okay'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+srv<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'upgrade'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>req<span class="sh_symbol">,</span> socket<span class="sh_symbol">,</span> head<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  socket<span class="sh_symbol">.</span><span class="sh_function">write</span><span class="sh_symbol">(</span><span class="sh_string">'HTTP/1.1 101 Web Socket 协议握手</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span> <span class="sh_symbol">+</span>
+               <span class="sh_string">'升级: WebSocket</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span> <span class="sh_symbol">+</span>
+               <span class="sh_string">'连接: 升级</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span> <span class="sh_symbol">+</span>
+               <span class="sh_string">'</span><span class="sh_specialchar">\r\n</span><span class="sh_string">'</span><span class="sh_symbol">);</span>
+
+  socket<span class="sh_symbol">.</span><span class="sh_function">pipe</span><span class="sh_symbol">(</span>socket<span class="sh_symbol">);</span> <span class="sh_comment">// 回声</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+
+<span class="sh_comment">// 现在服务器正在运行</span>
+srv<span class="sh_symbol">.</span><span class="sh_function">listen</span><span class="sh_symbol">(</span><span class="sh_number">1337</span><span class="sh_symbol">,</span> <span class="sh_string">'127.0.0.1'</span><span class="sh_symbol">,</span> <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+
+  <span class="sh_comment">// 发送一个请求</span>
+  <span class="sh_keyword">var</span> options <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+    port<span class="sh_symbol">:</span> <span class="sh_number">1337</span><span class="sh_symbol">,</span>
+    hostname<span class="sh_symbol">:</span> <span class="sh_string">'127.0.0.1'</span><span class="sh_symbol">,</span>
+    headers<span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+      <span class="sh_string">'Connection'</span><span class="sh_symbol">:</span> <span class="sh_string">'Upgrade'</span><span class="sh_symbol">,</span>
+      <span class="sh_string">'Upgrade'</span><span class="sh_symbol">:</span> <span class="sh_string">'websocket'</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+
+  <span class="sh_keyword">var</span> req <span class="sh_symbol">=</span> http<span class="sh_symbol">.</span><span class="sh_function">request</span><span class="sh_symbol">(</span>options<span class="sh_symbol">);</span>
+  req<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">();</span>
+
+  req<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'upgrade'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>res<span class="sh_symbol">,</span> socket<span class="sh_symbol">,</span> upgradeHead<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'已升级！'</span><span class="sh_symbol">);</span>
+    socket<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">();</span>
+    process<span class="sh_symbol">.</span><span class="sh_function">exit</span><span class="sh_symbol">(</span><span class="sh_number">0</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<h3>request.abort()<span><a class="mark" href="http.html#http_request_abort" id="http_request_abort">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_request_abort">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/request_abort.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.8</span>
+</div><p>标记请求为终止。
+调用该方法将导致响应中剩余的数据会被丢弃，且 socket 会被销毁。</p>
+<h3>request.aborted<span><a class="mark" href="http.html#http_request_aborted" id="http_request_aborted">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_request_aborted">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/request_aborted.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.14</span>
+</div><p>If a request has been aborted, this value is the time when the request was
+aborted, in milliseconds since 1 January 1970 00:00:00 UTC.</p>
+<h3>request.end([data][, encoding][, callback])<span><a class="mark" href="http.html#http_request_end_data_encoding_callback" id="http_request_end_data_encoding_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_request_end_data_encoding_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/request_end_data_encoding_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.90</span>
+</div><ul>
+<li><code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>完成发送请求。
+如果主体的任何部分未被发送，则会刷新它们到流中。
+如果请求被分块，则会发送终止 <code>'0\r\n\r\n'</code>。</p>
+<p>如果指定了 <code>data</code>，则等同于调用 <code>request.end(callback)</code> 之后调用 <a href="http.html#http_response_write_chunk_encoding_callback"><code>response.write(data, encoding)</code></a>。</p>
+<p>如果指定了 <code>callback</code>，则当请求流结束时会被调用。</p>
+<h3>request.flushHeaders()<span><a class="mark" href="http.html#http_request_flushheaders" id="http_request_flushheaders">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_request_flushheaders">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/request_flushheaders.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v1.6.0</span>
+</div><p>刷新请求头。</p>
+<p>出于效率的考虑，Node.js 通常缓存请求头直到调用 <code>request.end()</code> 或写入请求数据的第一块。
+然后试图将请求头和数据打包成单一的 TCP 数据包。</p>
+<p>通常那是你想要的（它节省了 TCP 往返），除了当第一个数据块直到很久之后才被发送。
+<code>request.flushHeaders()</code> 让你绕过最优化并提前开始请求。</p>
+<h3>request.setNoDelay([noDelay])<span><a class="mark" href="http.html#http_request_setnodelay_nodelay" id="http_request_setnodelay_nodelay">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_request_setnodelay_nodelay">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/request_setnodelay_nodelay.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.9</span>
+</div><ul>
+<li><code>noDelay</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a></li>
+</ul>
+<p>一旦 socket 被分配给请求且已连接，<a href="net.html#net_socket_setnodelay_nodelay"><code>socket.setNoDelay()</code></a> 会被调用。</p>
+<h3>request.setSocketKeepAlive([enable][, initialDelay])<span><a class="mark" href="http.html#http_request_setsocketkeepalive_enable_initialdelay" id="http_request_setsocketkeepalive_enable_initialdelay">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_request_setsocketkeepalive_enable_initialdelay">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/request_setsocketkeepalive_enable_initialdelay.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.9</span>
+</div><ul>
+<li><code>enable</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a></li>
+<li><code>initialDelay</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+</ul>
+<p>一旦 socket 被分配给请求且已连接，<a href="net.html#net_socket_setkeepalive_enable_initialdelay"><code>socket.setKeepAlive()</code></a> 会被调用。</p>
+<h3>request.setTimeout(timeout[, callback])<span><a class="mark" href="http.html#http_request_settimeout_timeout_callback" id="http_request_settimeout_timeout_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_request_settimeout_timeout_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/request_settimeout_timeout_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.9</span>
+</div><ul>
+<li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> 一个请求被认为是超时的毫秒数。</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> 可选的函数，当发生超时时调用。与绑定到 <code>timeout</code> 事件的相同。</li>
+</ul>
+<p>一旦 socket 被分配给请求且已连接，<a href="net.html#net_socket_settimeout_timeout_callback"><code>socket.setTimeout()</code></a> 会被调用。</p>
+<p>返回 <code>request</code>。</p>
+<h3>request.write(chunk[, encoding][, callback])<span><a class="mark" href="http.html#http_request_write_chunk_encoding_callback" id="http_request_write_chunk_encoding_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_request_write_chunk_encoding_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/request_write_chunk_encoding_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.29</span>
+</div><ul>
+<li><code>chunk</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>发送主体的一个数据块。
+通过多次调用该方法，用户可以以流的形式将请求主体发送到一个服务器，在这种情况下，当创建请求时，建议使用 <code>['Transfer-Encoding', 'chunked']</code> 头行。</p>
+<p><code>encoding</code> 参数是可选的，且仅当 <code>chunk</code> 是一个字符串时有效。默认为 <code>'utf8'</code>。</p>
+<p><code>callback</code> 参数是可选的，且当数据块被刷新时调用。</p>
+<p>返回 <code>request</code>。</p>
+<h2>http.Server 类<span><a class="mark" href="http.html#http_class_http_server" id="http_class_http_server">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_class_http_server">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/class_http_server.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.17</span>
+</div><p>该类继承自 <a href="net.html#net_class_net_server"><code>net.Server</code></a>，且具有以下额外的事件：</p>
+<h3>'checkContinue' 事件<span><a class="mark" href="http.html#http_event_checkcontinue" id="http_event_checkcontinue">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_checkcontinue">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_checkcontinue.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.0</span>
+</div><ul>
+<li><code>request</code> <a href="http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+<li><code>response</code> <a href="http.html#http_class_http_serverresponse" class="type">&lt;http.ServerResponse&gt;</a></li>
+</ul>
+<p>每当接收到一个带有 HTTP <code>Expect: 100-continue</code> 的请求时触发。
+如果该事件未被监听，则服务器会自动响应 <code>100 Continue</code>。</p>
+<p>处理该事件时，如果客户端应该继续发送请求主体，则调 <a href="http.html#http_response_writecontinue"><code>response.writeContinue()</code></a>，否则生成一个适当的 HTTP 响应（例如 400 错误请求）。</p>
+<p>注意，当该事件被触发且处理后，<a href="http.html#http_event_request"><code>'request'</code></a> 事件不会被触发。</p>
+<h3>'checkExpectation' 事件<span><a class="mark" href="http.html#http_event_checkexpectation" id="http_event_checkexpectation">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_checkexpectation">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_checkexpectation.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v5.5.0</span>
+</div><ul>
+<li><code>request</code> <a href="http.html#http_class_http_clientrequest" class="type">&lt;http.ClientRequest&gt;</a></li>
+<li><code>response</code> <a href="http.html#http_class_http_serverresponse" class="type">&lt;http.ServerResponse&gt;</a></li>
+</ul>
+<p>每当接收到一个带有 HTTP <code>Expect</code> 请求头的请求时触发，其中值不是 <code>100-continue</code>。
+如果该事件未被监听，则服务器会自动响应 <code>417 Expectation Failed</code>。</p>
+<p>注意，当该事件被触发且处理后，<a href="http.html#http_event_request"><code>'request'</code></a> 事件不会被触发。</p>
+<h3>'clientError' 事件<span><a class="mark" href="http.html#http_event_clienterror" id="http_event_clienterror">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_clienterror">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_clienterror.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.94</span>
+</div><ul>
+<li><code>exception</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+<li><code>socket</code> <a href="net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>如果一个客户端触发了一个 <code>'error'</code> 事件，则它会被传递到这里。
+该事件的监听器会负责关闭/销毁底层的 socket。
+例如，可能希望更温和地用一个 HTTP <code>'400 Bad Request'</code> 响应关闭 socket，而不是突然地切断连接。</p>
+<p>默认行为是请求异常是立即销毁 socket。</p>
+<p><code>socket</code> 是发生错误的 <a href="net.html#net_class_net_socket"><code>net.Socket</code></a> 对象。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> http <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'http'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">const</span> server <span class="sh_symbol">=</span> http<span class="sh_symbol">.</span><span class="sh_function">createServer</span><span class="sh_symbol">((</span>req<span class="sh_symbol">,</span> res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">();</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+server<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'clientError'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> socket<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  socket<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">(</span><span class="sh_string">'HTTP/1.1 400 Bad Request</span><span class="sh_specialchar">\r\n\r\n</span><span class="sh_string">'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+server<span class="sh_symbol">.</span><span class="sh_function">listen</span><span class="sh_symbol">(</span><span class="sh_number">8000</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>当 <code>'clientError'</code> 事件发生是，不会有 <code>request</code> 或 <code>response</code> 对象，所以发送的任何 HTTP 响应，包括响应头和内容，<strong>必须</strong>被直接写入到 <code>socket</code> 对象。
+必须小心确保响应是一个被正确格式化的 HTTP 响应消息。</p>
+<h3>'close' 事件<span><a class="mark" href="http.html#http_event_close" id="http_event_close">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_close">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_close.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.4</span>
+</div><p>当服务器关闭时触发。</p>
+<h3>'connect' 事件<span><a class="mark" href="http.html#http_event_connect_1" id="http_event_connect_1">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_connect_1">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_connect_1.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.7.0</span>
+</div><ul>
+<li><code>request</code> <a href="http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a> HTTP 请求的参数，与 <a href="http.html#http_event_request"><code>'request'</code></a> 事件的相同</li>
+<li><code>socket</code> <a href="net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a> 服务器与客户端之间的网络 socket</li>
+<li><code>head</code> <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> 隧道流的第一个数据包（可能为空）</li>
+</ul>
+<p>每当一个客户端请求一个 HTTP <code>CONNECT</code> 方法时触发。
+如果该事件未被监听，则发送 <code>CONNECT</code> 方法的客户端会关闭它们的连接。</p>
+<p>当该事件被触发后，请求的 socket 不会有 <code>'data'</code> 事件监听器，也就是说需要绑定它以用来处理 socket 上被发送到服务器的数据。</p>
+<h3>'connection' 事件<span><a class="mark" href="http.html#http_event_connection" id="http_event_connection">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_connection">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_connection.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.0</span>
+</div><ul>
+<li><code>socket</code> <a href="net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>当一个新的 TCP 流被建立时触发。
+<code>socket</code> 是 <a href="net.html#net_class_net_socket"><code>net.Socket</code></a> 类型的一个对象。
+通常用户无需访问此事件。
+注意，因为协议解析器绑定到 socket 上，socket 不会触发 <code>'readable'</code> 事件。
+<code>socket</code> 也可以通过 <code>request.connection</code> 访问。</p>
+<h3>'request' 事件<span><a class="mark" href="http.html#http_event_request" id="http_event_request">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_request">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_request.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.0</span>
+</div><ul>
+<li><code>request</code> <a href="http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a></li>
+<li><code>response</code> <a href="http.html#http_class_http_serverresponse" class="type">&lt;http.ServerResponse&gt;</a></li>
+</ul>
+<p>每次接收到一个请求时触发。
+注意，每个连接可能有多个请求（在 HTTP <code>keep-alive</code> 连接的情况下）。</p>
+<h3>'upgrade' 事件<span><a class="mark" href="http.html#http_event_upgrade_1" id="http_event_upgrade_1">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_upgrade_1">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_upgrade_1.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.94</span>
+</div><ul>
+<li><code>request</code> <a href="http.html#http_class_http_incomingmessage" class="type">&lt;http.IncomingMessage&gt;</a> HTTP 请求的参数，与 <a href="http.html#http_event_request"><code>'request'</code></a> 事件的相同</li>
+<li><code>socket</code> <a href="net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a> 服务器与客户端之间的网络 socket</li>
+<li><code>head</code> <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> 升级流的第一个数据包（可能为空）</li>
+</ul>
+<p>每当一个客户端请求一个 HTTP 升级时触发。
+如果该事件未被监听，则发送升级的客户端会关闭它们的连接。</p>
+<p>当该事件被触发后，请求的 socket 不会有 <code>'data'</code> 事件监听器，也就是说需要绑定它以用来处理 socket 上被发送到服务器的数据。</p>
+<h3>server.close([callback])<span><a class="mark" href="http.html#http_server_close_callback" id="http_server_close_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_server_close_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/server_close_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.90</span>
+</div><ul>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>停止服务端接收新的连接。详见 <a href="net.html#net_server_close_callback"><code>net.Server.close()</code></a>。</p>
+<h3>server.listen(handle[, callback])<span><a class="mark" href="http.html#http_server_listen_handle_callback" id="http_server_listen_handle_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_server_listen_handle_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/server_listen_handle_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.10</span>
+</div><ul>
+<li><code>handle</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p><code>handle</code> 对象可以被设为一个服务器或 socket (任何以下划线开头的 <code>_handle</code> 成员)、或一个 <code>{fd: &lt;n&gt;}</code> 对象。</p>
+<p>这会使服务器以指定的句柄接受连接，但假定文件描述符或句柄已经被绑定到了端口或者域 socket。</p>
+<p>Windows 平台上不支持监听文件描述符。</p>
+<p>该函数是异步的。
+<code>callback</code> 会被添加到 <a href="net.html#net_event_listening"><code>'listening'</code></a> 事件的监听器中。详见 <a href="net.html#net_server_listen_handle_backlog_callback"><code>net.Server.listen()</code></a>。</p>
+<p>返回 <code>server</code>。</p>
+<p>注意，<code>server.listen()</code> 方法可能被多次调用。
+每次调用都会使用提供的选项<strong>重新打开</strong>服务器。</p>
+<h3>server.listen(path[, callback])<span><a class="mark" href="http.html#http_server_listen_path_callback" id="http_server_listen_path_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_server_listen_path_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/server_listen_path_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.90</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>启动一个 UNIX socket 服务器，并在给定的 <code>path</code> 上监听连接。</p>
+<p>该函数是异步的。
+<code>callback</code> 会被添加到 <a href="net.html#net_event_listening"><code>'listening'</code></a> 事件的监听器中。详见 <a href="net.html#net_server_listen_path_backlog_callback"><code>net.Server.listen(path)</code></a>。</p>
+<p>注意，<code>server.listen()</code> 方法可能被多次调用。
+每次调用都会使用提供的选项<strong>重新打开</strong>服务器。</p>
+<h3>server.listen([port][, hostname][, backlog][, callback])<span><a class="mark" href="http.html#http_server_listen_port_hostname_backlog_callback" id="http_server_listen_port_hostname_backlog_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_server_listen_port_hostname_backlog_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/server_listen_port_hostname_backlog_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.90</span>
+</div><ul>
+<li><code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>backlog</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>开始在指定的 <code>port</code> 和 <code>hostname</code> 上接受连接。
+如果省略了 <code>hostname</code>，则当 IPv6 可用时，服务器会接受任何 IPv6 地址（<code>::</code>）的连接，否则接受任何 IPv4 地址（<code>0.0.0.0</code>）的连接。
+省略 <code>port</code> 参数或使用端口值 <code>0</code>，则操作系统会分配一个随机的端口，该端口可在 <code>'listening'</code> 事件已被触发后通过使用 <code>server.address().port</code> 获取。</p>
+<p>要监听一个 UNIX socket，需要提供文件名而不是端口和主机名。</p>
+<p><code>backlog</code> 是等待连接的队列的最大长度。
+实际长度由操作系统通过 sysctl 设置决定，比如 Linux 上的 <code>tcp_max_syn_backlog</code> 和 <code>somaxconn</code>。
+该参数的默认值是 511（不是 512）。</p>
+<p>该函数是异步的。
+<code>callback</code> 会被添加到 <a href="net.html#net_event_listening"><code>'listening'</code></a> 事件的监听器中。详见 <a href="net.html#net_server_listen_port_hostname_backlog_callback"><code>net.Server.listen(port)</code></a>。</p>
+<p>注意，<code>server.listen()</code> 方法可能被多次调用。
+每次调用都会使用提供的选项<strong>重新打开</strong>服务器。</p>
+<h3>server.listening<span><a class="mark" href="http.html#http_server_listening" id="http_server_listening">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_server_listening">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/server_listening.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v5.7.0</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a></li>
+</ul>
+<p>一个表明服务器是否正在监听连接的布尔值。</p>
+<h3>server.maxHeadersCount<span><a class="mark" href="http.html#http_server_maxheaderscount" id="http_server_maxheaderscount">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_server_maxheaderscount">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/server_maxheaderscount.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.7.0</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+</ul>
+<p>限制最大的请求头数量, 默认为 1000。
+如果设为 0，则不做任何限制。</p>
+<h3>server.setTimeout(msecs, callback)<span><a class="mark" href="http.html#http_server_settimeout_msecs_callback" id="http_server_settimeout_msecs_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_server_settimeout_msecs_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/server_settimeout_msecs_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.9.12</span>
+</div><ul>
+<li><code>msecs</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>为 socket 设置超时值。
+如果一个超时发生，则 Server 对象上会触发一个 <code>'timeout'</code> 事件，并传入该 socket 作为一个参数。</p>
+<p>如果 Server 对象上有 <code>'timeout'</code> 事件监听器，则它会被调用，并带上超时的 socket 作为一个参数。</p>
+<p>默认情况下，服务器的超时时间是 2 分钟，且超时后的 socket 会被自动销毁。
+但是，如果你为服务器的 <code>'timeout'</code> 事件分配了一个回调函数，则你需要负责处理 socket 的超时。</p>
+<p>返回 <code>server</code>。</p>
+<h3>server.timeout<span><a class="mark" href="http.html#http_server_timeout" id="http_server_timeout">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_server_timeout">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/server_timeout.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.9.12</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> 默认 = 120000 (2 分钟)</li>
+</ul>
+<p>一个 socket 被认定为已超时的空闲毫秒数。</p>
+<p>注意，socket 的超时逻辑是在连接上设定的，所以更改这个值只影响服务器<strong>新建</strong>的连接，而不会影响任何已存在的连接。</p>
+<p>设为 0 可禁用请求连接的一切自动超时行为。</p>
+<h2>http.ServerResponse 类<span><a class="mark" href="http.html#http_class_http_serverresponse" id="http_class_http_serverresponse">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_class_http_serverresponse">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/class_http_serverresponse.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.17</span>
+</div><p>该对象是由一个 HTTP 服务器（而不是用户）内部创建的。
+它作为第二个参数被传入 <a href="http.html#http_event_request"><code>'request'</code></a> 事件。</p>
+<p>该响应实现（而不是继承自）[可写流]接口。
+这是一个有以下事件的 <a href="events.html#events_class_eventemitter"><code>EventEmitter</code></a>：</p>
+<h3>'close' 事件<span><a class="mark" href="http.html#http_event_close_1" id="http_event_close_1">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_close_1">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_close_1.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.6.7</span>
+</div><p>表明在 <a href="http.html#http_response_end_data_encoding_callback"><code>response.end()</code></a> 被调用或能够刷新之前，底层连接被终止了。</p>
+<h3>'finish' 事件<span><a class="mark" href="http.html#http_event_finish" id="http_event_finish">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_finish">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_finish.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.6</span>
+</div><p>当响应已被发送时触发。
+更具体地说，当响应头和主体的最后一部分已被交给操作系统通过网络进行传输时，触发该事件。
+这并不意味着客户端已接收到任何东西。</p>
+<p>该事件触发后，响应对象上不再触发其他事件。</p>
+<h3>response.addTrailers(headers)<span><a class="mark" href="http.html#http_response_addtrailers_headers" id="http_response_addtrailers_headers">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_addtrailers_headers">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_addtrailers_headers.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.0</span>
+</div><ul>
+<li><code>headers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>该方法会给响应添加 HTTP 追踪请求头（一个在消息尾部的请求头）。</p>
+<p>追踪<strong>仅</strong>当响应使用分块编码时才会被发送；如果不是（比如请求是 HTTP/1.0），则它们将被丢弃。</p>
+<p>注意，如果想要发送追踪，则 HTTP 要求发送 <code>Trailer</code> 请求头，且在值里带上请求头字段的列表。
+例如：</p>
+<pre class="sh_sourceCode"><code class="lang-js">response<span class="sh_symbol">.</span><span class="sh_function">writeHead</span><span class="sh_symbol">(</span><span class="sh_number">200</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span> <span class="sh_string">'Content-Type'</span><span class="sh_symbol">:</span> <span class="sh_string">'text/plain'</span><span class="sh_symbol">,</span>
+                          <span class="sh_string">'Trailer'</span><span class="sh_symbol">:</span> <span class="sh_string">'Content-MD5'</span> <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+response<span class="sh_symbol">.</span><span class="sh_function">write</span><span class="sh_symbol">(</span>fileData<span class="sh_symbol">);</span>
+response<span class="sh_symbol">.</span><span class="sh_function">addTrailers</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span><span class="sh_string">'Content-MD5'</span><span class="sh_symbol">:</span> <span class="sh_string">'7895bf4b8828b55ceaf47747b4bca667'</span><span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+response<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">();</span>
+</code></pre>
+<p>试图设置一个包含无效字符的请求头字段名称或值会导致抛出一个 <a href="errors.html#errors_class_typeerror"><code>TypeError</code></a>。</p>
+<h3>response.end([data][, encoding][, callback])<span><a class="mark" href="http.html#http_response_end_data_encoding_callback" id="http_response_end_data_encoding_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_end_data_encoding_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_end_data_encoding_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.90</span>
+</div><ul>
+<li><code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>该方法告诉服务器所有响应头和主体都已被发送；服务器应将消息视为已完成。
+对于每个响应，<code>response.end()</code> 方法<strong>必须</strong>被调用。</p>
+<p>如果指定了 <code>data</code>，则它等同于调用 <a href="http.html#http_response_write_chunk_encoding_callback"><code>response.write(data, encoding)</code></a> 之后调用 <code>response.end(callback)</code>。</p>
+<p>如果指定了 <code>callback</code>，则当响应流结束时被调用。</p>
+<h3>response.finished<span><a class="mark" href="http.html#http_response_finished" id="http_response_finished">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_finished">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_finished.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.2</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a></li>
+</ul>
+<p>布尔值，表明响应是否已完成。
+开始时为 <code>false</code>。
+执行 <a href="http.html#http_response_end_data_encoding_callback"><code>response.end()</code></a> 后，该值会变为 <code>true</code>。</p>
+<h3>response.getHeader(name)<span><a class="mark" href="http.html#http_response_getheader_name" id="http_response_getheader_name">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_getheader_name">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_getheader_name.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.0</span>
+</div><ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li>返回: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p>读出已经排队但尚未发送到客户端的消息头。
+注意，名称不区分大小写。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">var</span> contentType <span class="sh_symbol">=</span> response<span class="sh_symbol">.</span><span class="sh_function">getHeader</span><span class="sh_symbol">(</span><span class="sh_string">'content-type'</span><span class="sh_symbol">);</span>
+</code></pre>
+<h3>response.headersSent<span><a class="mark" href="http.html#http_response_headerssent" id="http_response_headerssent">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_headerssent">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_headerssent.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.9.3</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a></li>
+</ul>
+<p>布尔值（只读）。
+如果消息头已被发送则为 <code>true</code>，否则为 <code>false</code>。</p>
+<h3>response.removeHeader(name)<span><a class="mark" href="http.html#http_response_removeheader_name" id="http_response_removeheader_name">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_removeheader_name">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_removeheader_name.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.0</span>
+</div><ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p>从隐式发送的队列中移除一个消息头。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">response<span class="sh_symbol">.</span><span class="sh_function">removeHeader</span><span class="sh_symbol">(</span><span class="sh_string">'Content-Encoding'</span><span class="sh_symbol">);</span>
+</code></pre>
+<h3>response.sendDate<span><a class="mark" href="http.html#http_response_senddate" id="http_response_senddate">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_senddate">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_senddate.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.7.5</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a></li>
+</ul>
+<p>当为 <code>true</code> 时，如果消息头里还不存在日期消息头，则它会被自动生成并在响应中发送。默认为 <code>true</code>。</p>
+<p>这应该只在测试中才被禁用；HTTP 需要响应日期消息头。</p>
+<h3>response.setHeader(name, value)<span><a class="mark" href="http.html#http_response_setheader_name_value" id="http_response_setheader_name_value">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_setheader_name_value">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_setheader_name_value.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.0</span>
+</div><ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>value</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p>为隐式消息头集合设置一个的消息头值。
+如果该消息头已经存在将要发送的消息头集合中，则该值会被覆盖。
+如果需要发送多个名称相同的消息头，则使用一个字符串数组。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">response<span class="sh_symbol">.</span><span class="sh_function">setHeader</span><span class="sh_symbol">(</span><span class="sh_string">'Content-Type'</span><span class="sh_symbol">,</span> <span class="sh_string">'text/html'</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>或</p>
+<pre class="sh_sourceCode"><code class="lang-js">response<span class="sh_symbol">.</span><span class="sh_function">setHeader</span><span class="sh_symbol">(</span><span class="sh_string">'Set-Cookie'</span><span class="sh_symbol">,</span> <span class="sh_symbol">[</span><span class="sh_string">'type=ninja'</span><span class="sh_symbol">,</span> <span class="sh_string">'language=javascript'</span><span class="sh_symbol">]);</span>
+</code></pre>
+<p>试图设置一个包含无效字符的消息头字段名称或值会导致抛出一个 <a href="errors.html#errors_class_typeerror"><code>TypeError</code></a>。</p>
+<p>当消息头已使用 <a href="http.html#http_response_setheader_name_value"><code>response.setHeader()</code></a> 设置，它们会被与其他消息头合并传给 <a href="http.html#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a>，带消息头的 <a href="http.html#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a> 有更高优先级。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 返回 content-type = text/plain</span>
+<span class="sh_keyword">const</span> server <span class="sh_symbol">=</span> http<span class="sh_symbol">.</span><span class="sh_function">createServer</span><span class="sh_symbol">((</span>req<span class="sh_symbol">,</span>res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">setHeader</span><span class="sh_symbol">(</span><span class="sh_string">'Content-Type'</span><span class="sh_symbol">,</span> <span class="sh_string">'text/html'</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">setHeader</span><span class="sh_symbol">(</span><span class="sh_string">'X-Foo'</span><span class="sh_symbol">,</span> <span class="sh_string">'bar'</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">writeHead</span><span class="sh_symbol">(</span><span class="sh_number">200</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span><span class="sh_string">'Content-Type'</span><span class="sh_symbol">:</span> <span class="sh_string">'text/plain'</span><span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">(</span><span class="sh_string">'ok'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<h3>response.setTimeout(msecs, callback)<span><a class="mark" href="http.html#http_response_settimeout_msecs_callback" id="http_response_settimeout_msecs_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_settimeout_msecs_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_settimeout_msecs_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.9.12</span>
+</div><ul>
+<li><code>msecs</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>设置 socket 的超时时间为 <code>msecs</code>。
+如果提供了回调函数，则它会被作为监听器添加到响应对象的 <code>'timeout'</code> 事件。</p>
+<p>如果没有 <code>'timeout'</code> 监听器被添加到请求、响应或服务器，则 socket 会在超时后被销毁。
+如果在请求、响应或服务器的 <code>'timeout'</code> 事件上分配了句柄，则需要负责处理超时的 socket。</p>
+<p>返回 <code>response</code>。</p>
+<h3>response.statusCode<span><a class="mark" href="http.html#http_response_statuscode" id="http_response_statuscode">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_statuscode">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_statuscode.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.0</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+</ul>
+<p>当使用隐式的消息头时（没有显式地调用 <a href="http.html#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a>），在消息头被刷新时该属性会控制将被发送到客户端的状态码。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">response<span class="sh_symbol">.</span>statusCode <span class="sh_symbol">=</span> <span class="sh_number">404</span><span class="sh_symbol">;</span>
+</code></pre>
+<p>响应头被发送到客户端后，该属性表明被发出的状态码。</p>
+<h3>response.statusMessage<span><a class="mark" href="http.html#http_response_statusmessage" id="http_response_statusmessage">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_statusmessage">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_statusmessage.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.8</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p>当使用隐式的消息头时（没有显式地调用 <a href="http.html#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a>），在消息头被刷新时该属性会控制将被发送到客户端的状态信息。
+如果该值为 <code>undefined</code>，则使用状态码的标准信息。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">response<span class="sh_symbol">.</span>statusMessage <span class="sh_symbol">=</span> <span class="sh_string">'Not found'</span><span class="sh_symbol">;</span>
+</code></pre>
+<p>响应头被发送到客户端后，该属性表明被发出的状态信息。</p>
+<h3>response.write(chunk[, encoding][, callback])<span><a class="mark" href="http.html#http_response_write_chunk_encoding_callback" id="http_response_write_chunk_encoding_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_write_chunk_encoding_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_write_chunk_encoding_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.29</span>
+</div><ul>
+<li><code>chunk</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>返回: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a></li>
+</ul>
+<p>如果该方法被调用且 <a href="http.html#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a> 还未被调用，则它会切换到隐式消息头模式并刷新隐式消息头。</p>
+<p>它会发送一块响应主体。
+该方法可被多次调用，以便提供主体连续的部分。</p>
+<p><code>chunk</code> 可以是一个字符串或一个 buffer。
+如果 <code>chunk</code> 是一个字符串，则第二个参数指定如何将它编码成一个字节流。
+<code>encoding</code> 默认为 <code>'utf8'</code>。
+当数据块被刷新时，<code>callback</code> 会被调用。</p>
+<p><strong>注意</strong>：这是原始的 HTTP 主体，且与可能使用的更高级别的多部分主体编码无关。</p>
+<p><a href="http.html#http_response_write_chunk_encoding_callback"><code>response.write()</code></a> 首次被调用时，它会发送缓冲的头信息和第一块主体到客户端。
+<a href="http.html#http_response_write_chunk_encoding_callback"><code>response.write()</code></a> 第二次被调用时，Node.js 会假定你要流化数据，并将它们分别发送。
+响应会被缓冲到主体的第一个数据块。</p>
+<p>如果整个数据被成功刷新到内核缓冲区，则返回 <code>true</code>。
+如果全部或部分数据在用户内存中排队，则返回 <code>false</code>。
+当缓冲区再次空闲时，则触发 <code>'drain'</code> 事件。</p>
+<h3>response.writeContinue()<span><a class="mark" href="http.html#http_response_writecontinue" id="http_response_writecontinue">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_writecontinue">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_writecontinue.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.0</span>
+</div><p>发送一个 HTTP/1.1 100 Continue 消息到客户端，表明请求主体应该被发送。详见 <code>Server</code> 的 <a href="http.html#http_event_checkcontinue"><code>'checkContinue'</code></a> 事件。</p>
+<h3>response.writeHead(statusCode[, statusMessage][, headers])<span><a class="mark" href="http.html#http_response_writehead_statuscode_statusmessage_headers" id="http_response_writehead_statuscode_statusmessage_headers">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_response_writehead_statuscode_statusmessage_headers">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/response_writehead_statuscode_statusmessage_headers.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.30</span>
+</div><ul>
+<li><code>statusCode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+<li><code>statusMessage</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>headers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>发送一个响应头给请求。
+状态码是一个 3 个数字的 HTTP 状态代码，如 <code>404</code>。
+最后一个参数 <code>headers</code> 是响应头。
+第二个参数 <code>statusMessage</code> 是可选的。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">var</span> body <span class="sh_symbol">=</span> <span class="sh_string">'hello world'</span><span class="sh_symbol">;</span>
+response<span class="sh_symbol">.</span><span class="sh_function">writeHead</span><span class="sh_symbol">(</span><span class="sh_number">200</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span>
+  <span class="sh_string">'Content-Length'</span><span class="sh_symbol">:</span> Buffer<span class="sh_symbol">.</span><span class="sh_function">byteLength</span><span class="sh_symbol">(</span>body<span class="sh_symbol">),</span>
+  <span class="sh_string">'Content-Type'</span><span class="sh_symbol">:</span> <span class="sh_string">'text/plain'</span> <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>该方法在消息中只能被调用一次，且必须在 <a href="http.html#http_response_end_data_encoding_callback"><code>response.end()</code></a> 被调用之前调用。</p>
+<p>如果在调用该方法之前调用 <a href="http.html#http_response_write_chunk_encoding_callback"><code>response.write()</code></a> 或 <a href="http.html#http_response_end_data_encoding_callback"><code>response.end()</code></a>，则隐式或可变的消息头会被计算并调用该函数。</p>
+<p>当消息头已使用 <a href="http.html#http_response_setheader_name_value"><code>response.setHeader()</code></a> 设置，它们会被与其他消息头合并传给 <a href="http.html#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a>，带消息头的 <a href="http.html#http_response_writehead_statuscode_statusmessage_headers"><code>response.writeHead()</code></a> 有更高优先级。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 返回 content-type = text/plain</span>
+<span class="sh_keyword">const</span> server <span class="sh_symbol">=</span> http<span class="sh_symbol">.</span><span class="sh_function">createServer</span><span class="sh_symbol">((</span>req<span class="sh_symbol">,</span>res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">setHeader</span><span class="sh_symbol">(</span><span class="sh_string">'Content-Type'</span><span class="sh_symbol">,</span> <span class="sh_string">'text/html'</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">setHeader</span><span class="sh_symbol">(</span><span class="sh_string">'X-Foo'</span><span class="sh_symbol">,</span> <span class="sh_string">'bar'</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">writeHead</span><span class="sh_symbol">(</span><span class="sh_number">200</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span><span class="sh_string">'Content-Type'</span><span class="sh_symbol">:</span> <span class="sh_string">'text/plain'</span><span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">(</span><span class="sh_string">'ok'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>注意，<code>Content-Length</code> 是以字节（而不是字符）为单位给出的。
+以上的例子有效是因为字符串 <code>'hello world'</code> 仅包含单字节字符。
+如果主体包含更高编码的字符，则 <code>Buffer.byteLength()</code> 应被用来确定在给定编码中的字节数。
+Node.js 不会检查 <code>Content-Length</code> 与已发送的主体长度是否相同。</p>
+<p>试图设置一个包含无效字符的消息头字段名称或值会导致抛出一个 <a href="errors.html#errors_class_typeerror"><code>TypeError</code></a>。</p>
+<h2>http.IncomingMessage 类<span><a class="mark" href="http.html#http_class_http_incomingmessage" id="http_class_http_incomingmessage">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_class_http_incomingmessage">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/class_http_incomingmessage.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.17</span>
+</div><p><code>IncomingMessage</code> 对象由 <a href="http.html#http_class_http_server"><code>http.Server</code></a> 或 <a href="http.html#http_class_http_clientrequest"><code>http.ClientRequest</code></a> 创建，并作为第一个参数分别递给 <a href="http.html#http_event_request"><code>'request'</code></a> 和 <a href="http.html#http_event_response"><code>'response'</code></a> 事件。
+它可以用来访问响应状态、消息头、以及数据。</p>
+<p>它实现了[可读流]接口，还有以下额外的事件、方法、以及属性。</p>
+<h3>'aborted' 事件<span><a class="mark" href="http.html#http_event_aborted_1" id="http_event_aborted_1">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_aborted_1">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_aborted_1.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.8</span>
+</div><p>当请求已被客户端中止且网络 socket 已关闭时触发。</p>
+<h3>'close' 事件<span><a class="mark" href="http.html#http_event_close_2" id="http_event_close_2">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_event_close_2">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/event_close_2.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.2</span>
+</div><p>表明底层连接被关闭。
+就像 <code>'end'</code>，该事件每次响应只发生一次。</p>
+<h3>message.destroy([error])<span><a class="mark" href="http.html#http_message_destroy_error" id="http_message_destroy_error">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_destroy_error">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_destroy_error.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.0</span>
+</div><ul>
+<li><code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+</ul>
+<p>调用接收 <code>IncomingMessage</code> 的 socket 的 <code>destroy()</code>。
+如果提供了 <code>error</code>，则触发 <code>'error'</code> 事件，且把 <code>error</code> 作为一个参数传入事件的任何监听器。</p>
+<h3>message.headers<span><a class="mark" href="http.html#http_message_headers" id="http_message_headers">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_headers">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_headers.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.5</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>请求/响应头的对象。</p>
+<p>报头名称和值的键值对。
+报头名称为小写。
+例如：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 输出类似以下的东西：</span>
+<span class="sh_comment">//</span>
+<span class="sh_comment">// { 'user-agent': 'curl/7.22.0',</span>
+<span class="sh_comment">//   host: '127.0.0.1:8000',</span>
+<span class="sh_comment">//   accept: '*/*' }</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>request<span class="sh_symbol">.</span>headers<span class="sh_symbol">);</span>
+</code></pre>
+<p>原始报头中的重复数据会按以下方式根据报头名称进行处理：</p>
+<ul>
+<li>重复的 <code>age</code> 、 <code>authorization</code> 、 <code>content-length</code> 、 <code>content-type</code> 、 
+<code>etag</code> 、 <code>expires</code> 、 <code>from</code> 、 <code>host</code> 、 <code>if-modified-since</code> 、 <code>if-unmodified-since</code> 、 
+<code>last-modified</code> 、 <code>location</code> 、 <code>max-forwards</code> 、 <code>proxy-authorization</code> 、 <code>referer</code> 、 
+<code>retry-after</code> 、或 <code>user-agent</code> 会被丢弃。</li>
+<li><code>set-cookie</code> 始终是一个数组。重复的会被添加到数组。</li>
+<li>对于所有的其他报头，其值使用 ', ' 连接。</li>
+</ul>
+<h3>message.httpVersion<span><a class="mark" href="http.html#http_message_httpversion" id="http_message_httpversion">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_httpversion">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_httpversion.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.1</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p>当服务器请求时，HTTP 版本由客户端发送。
+当客户端响应时，HTTP 版本由所连接的服务器发送。
+可能的值有 <code>'1.1'</code> 或 <code>'1.0'</code>。</p>
+<p><code>message.httpVersionMajor</code> 是第一个整数，<code>message.httpVersionMinor</code> 是第二个整数。</p>
+<h3>message.method<span><a class="mark" href="http.html#http_message_method" id="http_message_method">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_method">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_method.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.1</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p><strong>仅适用于从 <a href="http.html#http_class_http_server"><code>http.Server</code></a> 获得的请求。</strong></p>
+<p>请求方法是一个字符串。
+只读。
+例如：<code>'GET'</code>、<code>'DELETE'</code>。</p>
+<h3>message.rawHeaders<span><a class="mark" href="http.html#http_message_rawheaders" id="http_message_rawheaders">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_rawheaders">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_rawheaders.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.6</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a></li>
+</ul>
+<p>接收到的原始请求/响应头列表。</p>
+<p>注意，键和值是在同一列表中。
+它<strong>不是</strong>一个元组列表。
+所以，偶数偏移量为键，奇数偏移量为对应的值。</p>
+<p>报头名称没有转换为小写，也没有合并去重。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 输出类似以下的东西：</span>
+<span class="sh_comment">//</span>
+<span class="sh_comment">// [ 'user-agent',</span>
+<span class="sh_comment">//   'this is invalid because there can be only one',</span>
+<span class="sh_comment">//   'User-Agent',</span>
+<span class="sh_comment">//   'curl/7.22.0',</span>
+<span class="sh_comment">//   'Host',</span>
+<span class="sh_comment">//   '127.0.0.1:8000',</span>
+<span class="sh_comment">//   'ACCEPT',</span>
+<span class="sh_comment">//   '*/*' ]</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>request<span class="sh_symbol">.</span>rawHeaders<span class="sh_symbol">);</span>
+</code></pre>
+<h3>message.rawTrailers<span><a class="mark" href="http.html#http_message_rawtrailers" id="http_message_rawtrailers">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_rawtrailers">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_rawtrailers.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.6</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a></li>
+</ul>
+<p>接收到的原始的请求/响应报尾的键和值。
+只在 <code>'end'</code> 事件时填入。</p>
+<h3>message.setTimeout(msecs, callback)<span><a class="mark" href="http.html#http_message_settimeout_msecs_callback" id="http_message_settimeout_msecs_callback">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_settimeout_msecs_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_settimeout_msecs_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.9</span>
+</div><ul>
+<li><code>msecs</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>调用 <code>message.connection.setTimeout(msecs, callback)</code>。</p>
+<p>返回 <code>message</code>。</p>
+<h3>message.statusCode<span><a class="mark" href="http.html#http_message_statuscode" id="http_message_statuscode">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_statuscode">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_statuscode.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.1</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+</ul>
+<p><strong>仅适用于从 <a href="http.html#http_class_http_clientrequest"><code>http.ClientRequest</code></a> 获得的响应。</strong></p>
+<p>3 位数字的 HTTP 响应状态码。
+如 <code>404</code>。</p>
+<h3>message.statusMessage<span><a class="mark" href="http.html#http_message_statusmessage" id="http_message_statusmessage">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_statusmessage">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_statusmessage.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.10</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p><strong>仅适用于从 <a href="http.html#http_class_http_clientrequest"><code>http.ClientRequest</code></a> 获得的响应。</strong></p>
+<p>HTTP 响应状态消息（原因描述）。如 <code>OK</code> 或 <code>Internal Server Error</code>。</p>
+<h3>message.socket<span><a class="mark" href="http.html#http_message_socket" id="http_message_socket">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_socket">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_socket.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.0</span>
+</div><ul>
+<li><a href="net.html#net_class_net_socket" class="type">&lt;net.Socket&gt;</a></li>
+</ul>
+<p>与连接有关的 <a href="net.html#net_class_net_socket"><code>net.Socket</code></a> 对象。</p>
+<p>通过 HTTPS 的支持，使用 <a href="tls.html#tls_tlssocket_getpeercertificate_detailed"><code>request.socket.getPeerCertificate()</code></a> 获取客户端的认证信息。</p>
+<h3>message.trailers<span><a class="mark" href="http.html#http_message_trailers" id="http_message_trailers">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_trailers">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_trailers.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.0</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>请求/响应报尾对象。
+只在 <code>'end'</code> 事件时填入。</p>
+<h3>message.url<span><a class="mark" href="http.html#http_message_url" id="http_message_url">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_message_url">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/message_url.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.90</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p><strong>仅适用于从 <a href="http.html#http_class_http_server"><code>http.Server</code></a> 获得的请求。</strong></p>
+<p>请求的 URL 字符串。
+仅包含 HTTP 请求实际存在的 URL。
+如果请求是：</p>
+<pre class="sh_sourceCode"><code class="lang-txt"><span class="sh_normal">GET </span><span class="sh_symbol">/</span>status<span class="sh_symbol">?</span>name<span class="sh_symbol">=</span>ryan <span class="sh_normal">HTTP</span><span class="sh_symbol">/</span><span class="sh_number">1.1</span><span class="sh_symbol">\</span>r<span class="sh_symbol">\</span>n
+Accept<span class="sh_symbol">:</span> <span class="sh_normal">text</span><span class="sh_symbol">/</span>plain<span class="sh_symbol">\</span>r<span class="sh_symbol">\</span>n
+<span class="sh_symbol">\</span>r<span class="sh_symbol">\</span>n
+</code></pre>
+<p>则 <code>request.url</code> 会是：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_string">'/status?name=ryan'</span>
+</code></pre>
+<p>如果想将 URL 解析成各个部分，可以使用 <code>require('url').parse(request.url)</code>。
+例子：</p>
+<pre class="sh_sourceCode"><code class="lang-txt">$ node
+<span class="sh_symbol">&gt;</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'url'</span><span class="sh_symbol">).</span><span class="sh_function">parse</span><span class="sh_symbol">(</span><span class="sh_string">'/status?name=ryan'</span><span class="sh_symbol">)</span>
+<span class="sh_cbracket">{</span>
+  href<span class="sh_symbol">:</span> <span class="sh_string">'/status?name=ryan'</span><span class="sh_symbol">,</span>
+  search<span class="sh_symbol">:</span> <span class="sh_string">'?name=ryan'</span><span class="sh_symbol">,</span>
+  query<span class="sh_symbol">:</span> <span class="sh_string">'name=ryan'</span><span class="sh_symbol">,</span>
+  pathname<span class="sh_symbol">:</span> <span class="sh_string">'/status'</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p>如果想从查询字符串中提取参数，可以使用 <code>require('querystring').parse</code> 函数，或传入 <code>true</code> 作为 <code>require('url').parse</code> 的第二个参数。
+例子：</p>
+<pre class="sh_sourceCode"><code class="lang-txt">$ node
+<span class="sh_symbol">&gt;</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'url'</span><span class="sh_symbol">).</span><span class="sh_function">parse</span><span class="sh_symbol">(</span><span class="sh_string">'/status?name=ryan'</span><span class="sh_symbol">,</span> <span class="sh_keyword">true</span><span class="sh_symbol">)</span>
+<span class="sh_cbracket">{</span>
+  href<span class="sh_symbol">:</span> <span class="sh_string">'/status?name=ryan'</span><span class="sh_symbol">,</span>
+  search<span class="sh_symbol">:</span> <span class="sh_string">'?name=ryan'</span><span class="sh_symbol">,</span>
+  query<span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>name<span class="sh_symbol">:</span> <span class="sh_string">'ryan'</span><span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+  pathname<span class="sh_symbol">:</span> <span class="sh_string">'/status'</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<h2>http.METHODS<span><a class="mark" href="http.html#http_http_methods" id="http_http_methods">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_http_methods">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/http_methods.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.8</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a></li>
+</ul>
+<p>解析器支持的 HTTP 方法列表。</p>
+<h2>http.STATUS_CODES<span><a class="mark" href="http.html#http_http_status_codes" id="http_http_status_codes">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_http_status_codes">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/http_status_codes.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.22</span>
+</div><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+</ul>
+<p>所有的标准 HTTP 响应状态码的集合，以及各自的简短描述。
+例如，<code>http.STATUS_CODES[404] === 'Not Found'</code>。</p>
+<h2>http.createClient([port][, host])<span><a class="mark" href="http.html#http_http_createclient_port_host" id="http_http_createclient_port_host">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_http_createclient_port_host">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/http_createclient_port_host.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.13</span>
+<span>废弃于: v0.3.6 </span>
+</div><pre class="api_stability api_stability_0 sh_sourceCode">稳定性<span class="sh_symbol">:</span> <span class="sh_number">0</span> <span class="sh_symbol">-</span> 废弃的<span class="sh_symbol">:</span> 使用 <a href="http.html#http_http_request_options_callback"><code>http<span class="sh_symbol">.</span><span class="sh_function">request</span><span class="sh_symbol">()</span></code></a> 代替。</pre><p>Constructs a new HTTP client. <code>port</code> and <code>host</code> refer to the server to be
+connected to.</p>
+<h2>http.createServer([requestListener])<span><a class="mark" href="http.html#http_http_createserver_requestlistener" id="http_http_createserver_requestlistener">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_http_createserver_requestlistener">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/http_createserver_requestlistener.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.13</span>
+</div><ul>
+<li>返回: <a href="http.html#http_class_http_server" class="type">&lt;http.Server&gt;</a></li>
+</ul>
+<p>返回一个新建的 <a href="http.html#http_class_http_server"><code>http.Server</code></a> 实例。</p>
+<p><code>requestListener</code> 是一个会被自动添加到 <a href="http.html#http_event_request"><code>'request'</code></a> 事件中的函数。</p>
+<h2>http.get(options[, callback])<span><a class="mark" href="http.html#http_http_get_options_callback" id="http_http_get_options_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_http_get_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/http_get_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.6</span>
+</div><ul>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>返回: <a href="http.html#http_class_http_clientrequest" class="type">&lt;http.ClientRequest&gt;</a></li>
+</ul>
+<p>因为大多数请求都是 GET 请求且不带主体，所以 Node.js 提供了这个便捷的方法。
+该方法与 <a href="http.html#http_http_request_options_callback"><code>http.request()</code></a> 唯一的区别是它设置请求方法为 GET 且自动调用 <code>req.end()</code>。
+注意，响应数据必须在回调中被消耗，原因详见 <a href="http.html#http_class_http_clientrequest"><code>http.ClientRequest</code></a> 章节。</p>
+<p><code>callback</code> 被调用时只有一个参数，它是 <a href="http.html#http_class_http_incomingmessage"><code>http.IncomingMessage</code></a> 的一个实例。</p>
+<p>一个获取 JSON 的例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">http<span class="sh_symbol">.</span><span class="sh_function">get</span><span class="sh_symbol">(</span><span class="sh_string">'http://nodejs.org/dist/index.json'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">const</span> statusCode <span class="sh_symbol">=</span> res<span class="sh_symbol">.</span>statusCode<span class="sh_symbol">;</span>
+  <span class="sh_keyword">const</span> contentType <span class="sh_symbol">=</span> res<span class="sh_symbol">.</span>headers<span class="sh_symbol">[</span><span class="sh_string">'content-type'</span><span class="sh_symbol">];</span>
+
+  let error<span class="sh_symbol">;</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>statusCode <span class="sh_symbol">!==</span> <span class="sh_number">200</span><span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    error <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_predef_func">Error</span><span class="sh_symbol">(</span>`请求失败。<span class="sh_symbol">\</span>n` <span class="sh_symbol">+</span>
+                      `状态码<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>statusCode<span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_keyword">if</span> <span class="sh_symbol">(!</span><span class="sh_regexp">/^application\/json/</span><span class="sh_symbol">.</span><span class="sh_function">test</span><span class="sh_symbol">(</span>contentType<span class="sh_symbol">))</span> <span class="sh_cbracket">{</span>
+    error <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_predef_func">Error</span><span class="sh_symbol">(</span>`无效的 content<span class="sh_symbol">-</span>type<span class="sh_symbol">.\</span>n` <span class="sh_symbol">+</span>
+                      `期望 <span class="sh_normal">application</span><span class="sh_symbol">/</span>json 但获取的是 $<span class="sh_cbracket">{</span>contentType<span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>error<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>error<span class="sh_symbol">.</span>message<span class="sh_symbol">);</span>
+    <span class="sh_comment">// 消耗响应数据以释放内存</span>
+    res<span class="sh_symbol">.</span><span class="sh_function">resume</span><span class="sh_symbol">();</span>
+    <span class="sh_keyword">return</span><span class="sh_symbol">;</span>
+  <span class="sh_cbracket">}</span>
+
+  res<span class="sh_symbol">.</span><span class="sh_function">setEncoding</span><span class="sh_symbol">(</span><span class="sh_string">'utf8'</span><span class="sh_symbol">);</span>
+  let rawData <span class="sh_symbol">=</span> <span class="sh_string">''</span><span class="sh_symbol">;</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'data'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>chunk<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> rawData <span class="sh_symbol">+=</span> chunk<span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'end'</span><span class="sh_symbol">,</span> <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">try</span> <span class="sh_cbracket">{</span>
+      let parsedData <span class="sh_symbol">=</span> JSON<span class="sh_symbol">.</span><span class="sh_function">parse</span><span class="sh_symbol">(</span>rawData<span class="sh_symbol">);</span>
+      console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>parsedData<span class="sh_symbol">);</span>
+    <span class="sh_cbracket">}</span> <span class="sh_keyword">catch</span> <span class="sh_symbol">(</span>e<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+      console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>e<span class="sh_symbol">.</span>message<span class="sh_symbol">);</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">).</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'error'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>e<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`错误<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>e<span class="sh_symbol">.</span>message<span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<h2>http.globalAgent<span><a class="mark" href="http.html#http_http_globalagent" id="http_http_globalagent">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_http_globalagent">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/http_globalagent.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.9</span>
+</div><ul>
+<li><a href="http.html#http_class_http_agent" class="type">&lt;http.Agent&gt;</a></li>
+</ul>
+<p><code>Agent</code> 的全局实例，作为所有 HTTP 客户端请求的默认 <code>Agent</code>。</p>
+<h2>http.request(options[, callback])<span><a class="mark" href="http.html#http_http_request_options_callback" id="http_http_request_options_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/http.html#http_http_request_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/http/http_request_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.6</span>
+</div><ul>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>protocol</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 使用的协议。默认为 <code>'http:'</code>。</li>
+<li><code>host</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 请求发送至的服务器的域名或 IP 地址。默认为 <code>'localhost'</code>。</li>
+<li><code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> <code>host</code> 的别名。为了支持 <a href="url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost"><code>url.parse()</code></a>，<code>hostname</code> 优于 <code>host</code>。</li>
+<li><code>family</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> 当解析 <code>host</code> 和 <code>hostname</code> 时使用的 IP 地址族。
+有效值是 <code>4</code> 或 <code>6</code>。当未指定时，则同时使用 IP v4 和 v6。</li>
+<li><code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> 远程服务器的端口。默认为 <code>80</code>。</li>
+<li><code>localAddress</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 要绑定到网络连接的本地接口。</li>
+<li><code>socketPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> Unix 域 Socket（使用 host:port 或 socketPath 的其中之一）。</li>
+<li><code>method</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 一个指定 HTTP 请求方法的字符串。默认为 <code>'GET'</code>。</li>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 请求的路径。默认为 <code>'/'</code>。
+应包括查询字符串（如有的话）。如 <code>'/index.html?page=12'</code>。
+当请求的路径中包含非法字符时，会抛出异常。
+目前只有空字符会被拒绝，但未来可能会变化。</li>
+<li><code>headers</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> 一个包含请求头的对象。</li>
+<li><code>auth</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 基本身份验证，如 <code>'user:password'</code> 来计算 Authorization 头。</li>
+<li><code>agent</code> <a href="http.html#http_class_http_agent" class="type">&lt;http.Agent&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a> 控制 <a href="http.html#http_class_http_agent"><code>Agent</code></a> 的行为。
+可能的值有：<ul>
+<li><code>undefined</code> (默认): 对该主机和端口使用 <a href="http.html#http_http_globalagent"><code>http.globalAgent</code></a>。</li>
+<li><code>Agent</code> 对象：显式地使用传入的 <code>Agent</code>。</li>
+<li><code>false</code>: 产生一个新的使用默认值的 <code>Agent</code>。</li>
+</ul>
+</li>
+<li><code>createConnection</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> 当不使用 <code>agent</code> 选项时，产生一个用于请求的 socket/stream 的函数。
+这可以用于避免创建一个自定义的 <code>Agent</code> 类，只是为了覆盖默认的 <code>createConnection</code> 函数。详见 <a href="http.html#http_agent_createconnection_options_callback"><code>agent.createConnection()</code></a>。</li>
+<li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a>: 一个数值，指定 socket 超时的毫秒数。
+它会在 socket 被连接时设置超时。</li>
+</ul>
+</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li>返回: <a href="http.html#http_class_http_clientrequest" class="type">&lt;http.ClientRequest&gt;</a></li>
+</ul>
+<p>Node.js 维护每台服务器的多个连接来进行 HTTP 请求。
+该函数允许显式地发出请求。</p>
+<p><code>options</code> 可以是一个对象或一个字符串。
+如果 <code>options</code> 是一个字符串，它会被自动使用 <a href="url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost"><code>url.parse()</code></a> 解析。</p>
+<p>可选的 <code>callback</code> 参数会被添加为 <a href="http.html#http_event_response"><code>'response'</code></a> 事件的单次监听器。</p>
+<p><code>http.request()</code> 返回一个 <a href="http.html#http_class_http_clientrequest"><code>http.ClientRequest</code></a> 类的实例。
+<code>ClientRequest</code> 实例是一个可写流。
+如果需要通过 POST 请求上传一个文件，则写入到 <code>ClientRequest</code> 对象。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">var</span> postData <span class="sh_symbol">=</span> querystring<span class="sh_symbol">.</span><span class="sh_function">stringify</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span>
+  <span class="sh_string">'msg'</span> <span class="sh_symbol">:</span> <span class="sh_string">'Hello World!'</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">var</span> options <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  hostname<span class="sh_symbol">:</span> <span class="sh_string">'www.google.com'</span><span class="sh_symbol">,</span>
+  port<span class="sh_symbol">:</span> <span class="sh_number">80</span><span class="sh_symbol">,</span>
+  path<span class="sh_symbol">:</span> <span class="sh_string">'/upload'</span><span class="sh_symbol">,</span>
+  method<span class="sh_symbol">:</span> <span class="sh_string">'POST'</span><span class="sh_symbol">,</span>
+  headers<span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+    <span class="sh_string">'Content-Type'</span><span class="sh_symbol">:</span> <span class="sh_string">'application/x-www-form-urlencoded'</span><span class="sh_symbol">,</span>
+    <span class="sh_string">'Content-Length'</span><span class="sh_symbol">:</span> Buffer<span class="sh_symbol">.</span><span class="sh_function">byteLength</span><span class="sh_symbol">(</span>postData<span class="sh_symbol">)</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+
+<span class="sh_keyword">var</span> req <span class="sh_symbol">=</span> http<span class="sh_symbol">.</span><span class="sh_function">request</span><span class="sh_symbol">(</span>options<span class="sh_symbol">,</span> <span class="sh_symbol">(</span>res<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`STATUS<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>res<span class="sh_symbol">.</span>statusCode<span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`HEADERS<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>JSON<span class="sh_symbol">.</span><span class="sh_function">stringify</span><span class="sh_symbol">(</span>res<span class="sh_symbol">.</span>headers<span class="sh_symbol">)</span><span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">setEncoding</span><span class="sh_symbol">(</span><span class="sh_string">'utf8'</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'data'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>chunk<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`主体<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>chunk<span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+  res<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'end'</span><span class="sh_symbol">,</span> <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'响应中已无数据。'</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+
+req<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'error'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>e<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`请求遇到问题<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>e<span class="sh_symbol">.</span>message<span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+
+<span class="sh_comment">// 写入数据到请求主体</span>
+req<span class="sh_symbol">.</span><span class="sh_function">write</span><span class="sh_symbol">(</span>postData<span class="sh_symbol">);</span>
+req<span class="sh_symbol">.</span><span class="sh_function">end</span><span class="sh_symbol">();</span>
+</code></pre>
+<p>注意，在例子中调用了 <code>req.end()</code>。
+使用 <code>http.request()</code> 必须总是调用 <code>req.end()</code> 来表明请求已经结束，即使没有数据被写入请求主体。</p>
+<p>如果请求过程中遇到任何错误（DNS 解析错误、TCP 级的错误、或实际的 HTTP 解析错误），则在返回的请求对象中会触发 <code>'error'</code> 事件。
+对于所有的 <code>'error'</code> 事件，如果没有注册监听器，则抛出错误。</p>
+<p>以下是需要注意的几个特殊的请求头。</p>
+<ul>
+<li><p>发送一个 <code>'Connection: keep-alive'</code> 会通知 Node.js，服务器的连接应一直持续到下一个请求。</p>
+</li>
+<li><p>发送一个 <code>'Content-Length'</code> 请求头会禁用默认的块编码。</p>
+</li>
+<li><p>发送一个 <code>'Expect'</code> 请求头会立即发送请求头。
+通常情况下，当发送 <code>'Expect: 100-continue'</code> 时，应该设置一个超时并监听 <code>'continue'</code> 事件。
+详见 RFC2616 章节 8.2.3。</p>
+</li>
+<li><p>发送一个 Authorization 请求头会覆盖使用 <code>auth</code> 选项计算基本身份验证。</p>
+</li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+  <script src="res/api.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+</body></html>

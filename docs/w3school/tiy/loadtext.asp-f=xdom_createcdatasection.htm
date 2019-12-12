@@ -1,0 +1,37 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+x=xmlDoc.getElementsByTagName("book");
+
+newtext="Special Offer & Book Sale";
+
+for (i=0;i<x.length;i++)
+{
+newCDATA=xmlDoc.createCDATASection(newtext);
+x[i].appendChild(newCDATA);
+}
+
+for (i=0;i<x.length;i++)
+{
+document.write(x[i].getElementsByTagName("title")[0].childNodes[0].nodeValue);
+document.write(" - ");
+document.write(x[i].lastChild.nodeValue);
+document.write("<br />");
+}
+</script>
+</body>
+</html><br><hr><br>
+ This file is decompiled from a .CHM file <br>
+by an UNREGISTERED version of Easy CHM. <br>
+You can download Easy CHM at :
+
+<a href="http://www.etextwizard.com/" target=_blank>
+http://www.eTextWizard.com</a> <br><br>
+
+

@@ -1,0 +1,22 @@
+<attach for="element" event="onmouseover" handler="hig_lite" />
+<attach for="element" event="onmouseout" handler="low_lite" />
+
+<script type="text/javascript">
+function hig_lite()
+{
+element.style.color='red';
+}
+
+function low_lite()
+{
+element.style.color='blue';
+}
+</script><br><hr><br>
+ This file is decompiled from a .CHM file <br>
+by an UNREGISTERED version of Easy CHM. <br>
+You can download Easy CHM at :
+
+<a href="http://www.etextwizard.com/" target=_blank>
+http://www.eTextWizard.com</a> <br><br>
+
+

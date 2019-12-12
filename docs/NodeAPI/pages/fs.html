@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://nodejs.cn/api/fs.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>fs | Node.js API 文档</title>
+  <link rel="stylesheet" href="res/api.css">
+</head>
+<body class="alt apidoc" id="api-section-fs">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+</ul>
+<div class="line"></div>
+
+<ul>
+<li><a class="nav-assert" href="assert.html">Assert (断言)</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons" href="addons.html">C/C++ 插件</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+<li><a class="nav-cli" href="cli.html">CLI (命令行选项)</a></li>
+<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto (加密)</a></li>
+<li><a class="nav-debugger" href="debugger.html">Debugger (调试器)</a></li>
+<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+<li><a class="nav-errors" href="errors.html">Error (错误)</a></li>
+<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+<li><a class="nav-fs active" href="./fs_files/fs.htm">File System (文件系统)</a></li>
+<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+<li><a class="nav-http" href="http.html">HTTP</a></li>
+<li><a class="nav-https" href="https.html">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring" href="querystring.html">Query Strings (查询字符串)</a></li>
+<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+<li><a class="nav-timers" href="timers.html">Timer (定时器)</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty" href="tty.html">TTY (终端)</a></li>
+<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+</ul>
+<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="fs" class="interior">
+      <header>
+        <h1>Node.js v6.10.2 文档</h1>
+        <div id="gtoc">
+          <p>
+            <a href="" name="toc">返回文档首页</a>
+            <!--<a href="/api/all.html">单页面显示</a> |-->
+            <!--<a href="/api/fs.json">JSON格式</a> |-->
+            <!--<a href="/api/en/fs.html">查看英文版</a>-->
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>目录</h2>
+        <ul>
+<li><span class="stability_2"><a href="fs.html#fs_file_system">fs (文件系统)</a></span><ul>
+<li><span class="stability_undefined"><a href="fs.html#fs_buffer_api">Buffer API</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_class_fs_fswatcher">fs.FSWatcher 类</a></span><ul>
+<li><span class="stability_undefined"><a href="fs.html#fs_event_change">'change' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_event_error">'error' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_watcher_close">watcher.close()</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="fs.html#fs_class_fs_readstream">fs.ReadStream 类</a></span><ul>
+<li><span class="stability_undefined"><a href="fs.html#fs_event_open">'open' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_event_close">'close' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_readstream_bytesread">readStream.bytesRead</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_readstream_path">readStream.path</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="fs.html#fs_class_fs_stats">fs.Stats 类</a></span><ul>
+<li><span class="stability_undefined"><a href="fs.html#fs_stat_time_values">Stat 时间值</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="fs.html#fs_class_fs_writestream">fs.WriteStream 类</a></span><ul>
+<li><span class="stability_undefined"><a href="fs.html#fs_event_open_1">'open' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_event_close_1">'close' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_writestream_byteswritten">writeStream.bytesWritten</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_writestream_path">writeStream.path</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_access_path_mode_callback">fs.access(path[, mode], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_accesssync_path_mode">fs.accessSync(path[, mode])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_appendfile_file_data_options_callback">fs.appendFile(file, data[, options], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_appendfilesync_file_data_options">fs.appendFileSync(file, data[, options])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_chmod_path_mode_callback">fs.chmod(path, mode, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_chmodsync_path_mode">fs.chmodSync(path, mode)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_chown_path_uid_gid_callback">fs.chown(path, uid, gid, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_chownsync_path_uid_gid">fs.chownSync(path, uid, gid)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_close_fd_callback">fs.close(fd, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_closesync_fd">fs.closeSync(fd)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_constants">fs.constants</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_createreadstream_path_options">fs.createReadStream(path[, options])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_createwritestream_path_options">fs.createWriteStream(path[, options])</a></span></li>
+<li><span class="stability_0"><a href="fs.html#fs_fs_exists_path_callback">fs.exists(path, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_existssync_path">fs.existsSync(path)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_fchmod_fd_mode_callback">fs.fchmod(fd, mode, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_fchmodsync_fd_mode">fs.fchmodSync(fd, mode)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_fchown_fd_uid_gid_callback">fs.fchown(fd, uid, gid, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_fchownsync_fd_uid_gid">fs.fchownSync(fd, uid, gid)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_fdatasync_fd_callback">fs.fdatasync(fd, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_fdatasyncsync_fd">fs.fdatasyncSync(fd)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_fstat_fd_callback">fs.fstat(fd, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_fstatsync_fd">fs.fstatSync(fd)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_fsync_fd_callback">fs.fsync(fd, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_fsyncsync_fd">fs.fsyncSync(fd)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_ftruncate_fd_len_callback">fs.ftruncate(fd, len, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_ftruncatesync_fd_len">fs.ftruncateSync(fd, len)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_futimes_fd_atime_mtime_callback">fs.futimes(fd, atime, mtime, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_futimessync_fd_atime_mtime">fs.futimesSync(fd, atime, mtime)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_lchmod_path_mode_callback">fs.lchmod(path, mode, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_lchmodsync_path_mode">fs.lchmodSync(path, mode)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_lchown_path_uid_gid_callback">fs.lchown(path, uid, gid, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_lchownsync_path_uid_gid">fs.lchownSync(path, uid, gid)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_link_existingpath_newpath_callback">fs.link(existingPath, newPath, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_linksync_existingpath_newpath">fs.linkSync(existingPath, newPath)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_lstat_path_callback">fs.lstat(path, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_lstatsync_path">fs.lstatSync(path)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_mkdir_path_mode_callback">fs.mkdir(path[, mode], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_mkdirsync_path_mode">fs.mkdirSync(path[, mode])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_mkdtemp_prefix_options_callback">fs.mkdtemp(prefix[, options], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_mkdtempsync_prefix_options">fs.mkdtempSync(prefix[, options])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_open_path_flags_mode_callback">fs.open(path, flags[, mode], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_opensync_path_flags_mode">fs.openSync(path, flags[, mode])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_read_fd_buffer_offset_length_position_callback">fs.read(fd, buffer, offset, length, position, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_readdir_path_options_callback">fs.readdir(path[, options], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_readdirsync_path_options">fs.readdirSync(path[, options])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_readfile_file_options_callback">fs.readFile(file[, options], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_readfilesync_file_options">fs.readFileSync(file[, options])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_readlink_path_options_callback">fs.readlink(path[, options], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_readlinksync_path_options">fs.readlinkSync(path[, options])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_readsync_fd_buffer_offset_length_position">fs.readSync(fd, buffer, offset, length, position)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_realpath_path_options_callback">fs.realpath(path[, options], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_realpathsync_path_options">fs.realpathSync(path[, options])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_rename_oldpath_newpath_callback">fs.rename(oldPath, newPath, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_renamesync_oldpath_newpath">fs.renameSync(oldPath, newPath)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_rmdir_path_callback">fs.rmdir(path, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_rmdirsync_path">fs.rmdirSync(path)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_stat_path_callback">fs.stat(path, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_statsync_path">fs.statSync(path)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_symlink_target_path_type_callback">fs.symlink(target, path[, type], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_symlinksync_target_path_type">fs.symlinkSync(target, path[, type])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_truncate_path_len_callback">fs.truncate(path, len, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_truncatesync_path_len">fs.truncateSync(path, len)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_unlink_path_callback">fs.unlink(path, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_unlinksync_path">fs.unlinkSync(path)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_unwatchfile_filename_listener">fs.unwatchFile(filename[, listener])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_utimes_path_atime_mtime_callback">fs.utimes(path, atime, mtime, callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_utimessync_path_atime_mtime">fs.utimesSync(path, atime, mtime)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_watch_filename_options_listener">fs.watch(filename[, options][, listener])</a></span><ul>
+<li><span class="stability_undefined"><a href="fs.html#fs_caveats">说明</a></span><ul>
+<li><span class="stability_undefined"><a href="fs.html#fs_availability">可用性</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_inodes">索引节点</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_filename_argument">文件名参数</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_watchfile_filename_options_listener">fs.watchFile(filename[, options], listener)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_write_fd_buffer_offset_length_position_callback">fs.write(fd, buffer, offset, length[, position], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_write_fd_data_position_encoding_callback">fs.write(fd, data[, position[, encoding]], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_writefile_file_data_options_callback">fs.writeFile(file, data[, options], callback)</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_writefilesync_file_data_options">fs.writeFileSync(file, data[, options])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_writesync_fd_buffer_offset_length_position">fs.writeSync(fd, buffer, offset, length[, position])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_writesync_fd_data_position_encoding">fs.writeSync(fd, data[, position[, encoding]])</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_fs_constants_1">fs 常量</a></span><ul>
+<li><span class="stability_undefined"><a href="fs.html#fs_file_access_constants">文件访问常量</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_file_open_constants">文件打开常量</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_file_type_constants">文件类型常量</a></span></li>
+<li><span class="stability_undefined"><a href="fs.html#fs_file_mode_constants">文件模式常量</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>fs (文件系统)<span><a class="mark" href="fs.html#fs_file_system" id="fs_file_system">#</a></span></h1><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_file_system">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/file_system.md">参与翻译</a></p>
+<pre class="api_stability api_stability_2 sh_sourceCode">稳定性<span class="sh_symbol">:</span> <span class="sh_number">2</span> <span class="sh_symbol">-</span> 稳定的</pre><!--name=fs-->
+<p>文件 I/O 是由简单封装的标准 POSIX 函数提供的。
+通过 <code>require('fs')</code> 使用该模块。
+所有的方法都有异步和同步的形式。</p>
+<p>异步形式始终以完成回调作为它最后一个参数。
+传给完成回调的参数取决于具体方法，但第一个参数总是留给异常。
+如果操作成功完成，则第一个参数会是 <code>null</code> 或 <code>undefined</code>。</p>
+<p>当使用同步形式时，任何异常都会被立即抛出。
+可以使用 try/catch 来处理异常，或让它们往上冒泡。</p>
+<p>这是异步版本的例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> fs <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'fs'</span><span class="sh_symbol">);</span>
+
+fs<span class="sh_symbol">.</span><span class="sh_function">unlink</span><span class="sh_symbol">(</span><span class="sh_string">'/tmp/hello'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'successfully deleted /tmp/hello'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>这是同步版本的例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> fs <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'fs'</span><span class="sh_symbol">);</span>
+
+fs<span class="sh_symbol">.</span><span class="sh_function">unlinkSync</span><span class="sh_symbol">(</span><span class="sh_string">'/tmp/hello'</span><span class="sh_symbol">);</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'successfully deleted /tmp/hello'</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>异步方法不保证执行顺序。
+所以下面的例子容易出错：</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">rename</span><span class="sh_symbol">(</span><span class="sh_string">'/tmp/hello'</span><span class="sh_symbol">,</span> <span class="sh_string">'/tmp/world'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'renamed complete'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+fs<span class="sh_symbol">.</span><span class="sh_function">stat</span><span class="sh_symbol">(</span><span class="sh_string">'/tmp/world'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> stats<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`stats<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>JSON<span class="sh_symbol">.</span><span class="sh_function">stringify</span><span class="sh_symbol">(</span>stats<span class="sh_symbol">)</span><span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p><code>fs.stat</code> 可能在 <code>fs.rename</code> 之前执行。正确的方法是把回调链起来。</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">rename</span><span class="sh_symbol">(</span><span class="sh_string">'/tmp/hello'</span><span class="sh_symbol">,</span> <span class="sh_string">'/tmp/world'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+  fs<span class="sh_symbol">.</span><span class="sh_function">stat</span><span class="sh_symbol">(</span><span class="sh_string">'/tmp/world'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> stats<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`stats<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>JSON<span class="sh_symbol">.</span><span class="sh_function">stringify</span><span class="sh_symbol">(</span>stats<span class="sh_symbol">)</span><span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>在繁忙的进程中，<strong>强烈推荐</strong>开发者使用这些函数的异步版本。
+同步版本会阻塞整个进程，直到它们完成（停止所有连接）。</p>
+<p>可使用文件名的相对路径。
+但该路径是相对 <code>process.cwd()</code> 的。</p>
+<p>大部分 fs 函数会让你忽略回调参数。
+如果你这么做，一个默认的回调将用于抛出错误。
+为了追踪原始的调用点，可设置 <code>NODE_DEBUG</code> 环境变量：</p>
+<pre class="sh_sourceCode"><code class="lang-txt">$ cat script<span class="sh_symbol">.</span>js
+<span class="sh_keyword">function</span> <span class="sh_function">bad</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span>
+  <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'fs'</span><span class="sh_symbol">).</span><span class="sh_function">readFile</span><span class="sh_symbol">(</span><span class="sh_string">'/'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+<span class="sh_function">bad</span><span class="sh_symbol">();</span>
+
+$ env NODE_DEBUG<span class="sh_symbol">=</span>fs node script<span class="sh_symbol">.</span>js
+fs<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">88</span>
+        <span class="sh_keyword">throw</span> backtrace<span class="sh_symbol">;</span>
+        <span class="sh_symbol">^</span>
+<span class="sh_predef_func">Error</span><span class="sh_symbol">:</span> EISDIR<span class="sh_symbol">:</span> illegal operation on a directory<span class="sh_symbol">,</span> read
+    <span class="sh_symbol">&lt;</span>stack trace<span class="sh_symbol">.&gt;</span>
+</code></pre>
+<h2>Buffer API<span><a class="mark" href="fs.html#fs_buffer_api" id="fs_buffer_api">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_buffer_api">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/buffer_api.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v6.0.0</span>
+</div><p><code>fs</code> 函数支持传递和接收字符串路径与 Buffer 路径。
+后者的目的是使其可以在允许非 UTF-8 文件名的文件系统中工作。
+对于大多数普通用途，使用 Buffer 路径是不必要的，因为字符串 API 会自动与 UTF-8 相互转换。</p>
+<p><strong>注意</strong>，在某些文件系统（如 NTFS 和 HFS+），文件名总是被编码为 UTF-8。
+在这些文件系统中，传入非 UTF-8 编码的 Buffer 到 <code>fs</code> 函数将无法像预期那样工作。</p>
+<h2>fs.FSWatcher 类<span><a class="mark" href="fs.html#fs_class_fs_fswatcher" id="fs_class_fs_fswatcher">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_class_fs_fswatcher">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/class_fs_fswatcher.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.8</span>
+</div><p>从 <a href="fs.html#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a> 返回的对象是该类型。</p>
+<p>提供给 <code>fs.watch()</code> 的 <code>listener</code> 回调会接收返回的 FSWatcher 的 <code>change</code> 事件。</p>
+<p>该对象本身可触发以下事件：</p>
+<h3>'change' 事件<span><a class="mark" href="fs.html#fs_event_change" id="fs_event_change">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_event_change">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/event_change.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.8</span>
+</div><ul>
+<li><code>eventType</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> fs 变化的类型</li>
+<li><code>filename</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> 变化的文件名（如果是相关的/可用的）</li>
+</ul>
+<p>当一个被监视的目录或文件有变化时触发。
+详见 <a href="fs.html#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a>。</p>
+<p><code>filename</code> 参数可能不会被提供，这依赖于操作系统支持。
+如果提供了 <code>filename</code>，则若 <code>fs.watch()</code> 被调用时 <code>encoding</code> 选项被设置为 <code>'buffer'</code> 则它会是一个 <code>Buffer</code>，否则 <code>filename</code> 是一个字符串。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 例子，处理 fs.watch 监听器</span>
+fs<span class="sh_symbol">.</span><span class="sh_function">watch</span><span class="sh_symbol">(</span><span class="sh_string">'./tmp'</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span>encoding<span class="sh_symbol">:</span> <span class="sh_string">'buffer'</span><span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>eventType<span class="sh_symbol">,</span> filename<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>filename<span class="sh_symbol">)</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>filename<span class="sh_symbol">);</span>
+    <span class="sh_comment">// 输出: &lt;Buffer ...&gt;</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<h3>'error' 事件<span><a class="mark" href="fs.html#fs_event_error" id="fs_event_error">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_event_error">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/event_error.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.8</span>
+</div><ul>
+<li><code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
+</ul>
+<p>当发生错误时触发。</p>
+<h3>watcher.close()<span><a class="mark" href="fs.html#fs_watcher_close" id="fs_watcher_close">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_watcher_close">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/watcher_close.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.8</span>
+</div><p>停止监视给定的 <code>fs.FSWatcher</code> 的变化。</p>
+<h2>fs.ReadStream 类<span><a class="mark" href="fs.html#fs_class_fs_readstream" id="fs_class_fs_readstream">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_class_fs_readstream">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/class_fs_readstream.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.93</span>
+</div><p><code>ReadStream</code> 是一个<a href="stream.html#stream_class_stream_readable">可读流</a>。</p>
+<h3>'open' 事件<span><a class="mark" href="fs.html#fs_event_open" id="fs_event_open">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_event_open">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/event_open.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.93</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 被 ReadStream 使用的整数文件描述符。</li>
+</ul>
+<p>当 ReadStream 文件被打开时触发。</p>
+<h3>'close' 事件<span><a class="mark" href="fs.html#fs_event_close" id="fs_event_close">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_event_close">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/event_close.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.93</span>
+</div><p>当 <code>ReadStream</code> 底层的文件描述符已被使用 <code>fs.close()</code> 方法关闭时触发。</p>
+<h3>readStream.bytesRead<span><a class="mark" href="fs.html#fs_readstream_bytesread" id="fs_readstream_bytesread">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_readstream_bytesread">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/readstream_bytesread.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: 6.4.0</span>
+</div><p>已读取的字节数。</p>
+<h3>readStream.path<span><a class="mark" href="fs.html#fs_readstream_path" id="fs_readstream_path">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_readstream_path">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/readstream_path.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.93</span>
+</div><p>流正在读取的文件的路径，指定在 <code>fs.createReadStream()</code> 的第一个参数。
+如果 <code>path</code> 传入的是一个字符串，则 <code>readStream.path</code> 是一个字符串。
+如果 <code>path</code> 传入的是一个 <code>Buffer</code>，则 <code>readStream.path</code> 是一个 <code>Buffer</code>。</p>
+<h2>fs.Stats 类<span><a class="mark" href="fs.html#fs_class_fs_stats" id="fs_class_fs_stats">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_class_fs_stats">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/class_fs_stats.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><p>从 <a href="fs.html#fs_fs_stat_path_callback"><code>fs.stat()</code></a>、<a href="fs.html#fs_fs_lstat_path_callback"><code>fs.lstat()</code></a> 和 <a href="fs.html#fs_fs_fstat_fd_callback"><code>fs.fstat()</code></a> 及其同步版本返回的对象都是该类型。</p>
+<ul>
+<li><code>stats.isFile()</code></li>
+<li><code>stats.isDirectory()</code></li>
+<li><code>stats.isBlockDevice()</code></li>
+<li><code>stats.isCharacterDevice()</code></li>
+<li><code>stats.isSymbolicLink()</code> (仅对 <a href="fs.html#fs_fs_lstat_path_callback"><code>fs.lstat()</code></a> 有效)</li>
+<li><code>stats.isFIFO()</code></li>
+<li><code>stats.isSocket()</code></li>
+</ul>
+<p>对于一个普通文件，<a href="util.html#util_util_inspect_object_options"><code>util.inspect(stats)</code></a> 会返回一个类似如下的字符串：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_cbracket">{</span>
+  dev<span class="sh_symbol">:</span> <span class="sh_number">2114</span><span class="sh_symbol">,</span>
+  ino<span class="sh_symbol">:</span> <span class="sh_number">48064969</span><span class="sh_symbol">,</span>
+  mode<span class="sh_symbol">:</span> <span class="sh_number">33188</span><span class="sh_symbol">,</span>
+  nlink<span class="sh_symbol">:</span> <span class="sh_number">1</span><span class="sh_symbol">,</span>
+  uid<span class="sh_symbol">:</span> <span class="sh_number">85</span><span class="sh_symbol">,</span>
+  gid<span class="sh_symbol">:</span> <span class="sh_number">100</span><span class="sh_symbol">,</span>
+  rdev<span class="sh_symbol">:</span> <span class="sh_number">0</span><span class="sh_symbol">,</span>
+  size<span class="sh_symbol">:</span> <span class="sh_number">527</span><span class="sh_symbol">,</span>
+  blksize<span class="sh_symbol">:</span> <span class="sh_number">4096</span><span class="sh_symbol">,</span>
+  blocks<span class="sh_symbol">:</span> <span class="sh_number">8</span><span class="sh_symbol">,</span>
+  atime<span class="sh_symbol">:</span> Mon<span class="sh_symbol">,</span> <span class="sh_number">10</span> Oct <span class="sh_number">2011</span> <span class="sh_number">23</span><span class="sh_symbol">:</span><span class="sh_number">24</span><span class="sh_symbol">:</span><span class="sh_number">11</span> GMT<span class="sh_symbol">,</span>
+  mtime<span class="sh_symbol">:</span> Mon<span class="sh_symbol">,</span> <span class="sh_number">10</span> Oct <span class="sh_number">2011</span> <span class="sh_number">23</span><span class="sh_symbol">:</span><span class="sh_number">24</span><span class="sh_symbol">:</span><span class="sh_number">11</span> GMT<span class="sh_symbol">,</span>
+  ctime<span class="sh_symbol">:</span> Mon<span class="sh_symbol">,</span> <span class="sh_number">10</span> Oct <span class="sh_number">2011</span> <span class="sh_number">23</span><span class="sh_symbol">:</span><span class="sh_number">24</span><span class="sh_symbol">:</span><span class="sh_number">11</span> GMT<span class="sh_symbol">,</span>
+  birthtime<span class="sh_symbol">:</span> Mon<span class="sh_symbol">,</span> <span class="sh_number">10</span> Oct <span class="sh_number">2011</span> <span class="sh_number">23</span><span class="sh_symbol">:</span><span class="sh_number">24</span><span class="sh_symbol">:</span><span class="sh_number">11</span> GMT
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p>注意，<code>atime</code>、<code>mtime</code>、<code>birthtime</code> 和 <code>ctime</code> 是 <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a> 对象的实例，比较这些对象的值需要使用适当的方法。
+对于大多数一般用途，<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date/getTime"><code>getTime()</code></a> 会返回 <strong>1970年1月1日 00:00:00 UTC</strong> 至今已过的毫秒数，且该整数应该满足任何对比，当然也有可用于显示模糊信息的其他方法。
+详见 <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date">MDN JavaScript 手册</a>。</p>
+<h3>Stat 时间值<span><a class="mark" href="fs.html#fs_stat_time_values" id="fs_stat_time_values">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_stat_time_values">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/stat_time_values.md">参与翻译</a></p>
+<p>stat 对象中的时间有以下语义：</p>
+<ul>
+<li><code>atime</code> "访问时间" - 文件数据最近被访问的时间。
+会被 <a href="http://man7.org/linux/man-pages/man2/mknod.2.html">mknod(2)</a>、 <a href="http://man7.org/linux/man-pages/man2/utimes.2.html">utimes(2)</a> 和 <a href="http://man7.org/linux/man-pages/man2/read.2.html">read(2)</a> 系统调用改变。</li>
+<li><code>mtime</code> "修改时间" - 文件数据最近被修改的时间。
+会被 <a href="http://man7.org/linux/man-pages/man2/mknod.2.html">mknod(2)</a>、 <a href="http://man7.org/linux/man-pages/man2/utimes.2.html">utimes(2)</a> 和 <a href="http://man7.org/linux/man-pages/man2/write.2.html">write(2)</a> 系统调用改变。</li>
+<li><code>ctime</code> "变化时间" - 文件状态最近更改的时间（修改索引节点数据）
+会被 <a href="http://man7.org/linux/man-pages/man2/chmod.2.html">chmod(2)</a>、 <a href="http://man7.org/linux/man-pages/man2/chown.2.html">chown(2)</a>、 <a href="http://man7.org/linux/man-pages/man2/link.2.html">link(2)</a>、 <a href="http://man7.org/linux/man-pages/man2/mknod.2.html">mknod(2)</a>、 <a href="http://man7.org/linux/man-pages/man2/rename.2.html">rename(2)</a>、 <a href="http://man7.org/linux/man-pages/man2/unlink.2.html">unlink(2)</a>、 <a href="http://man7.org/linux/man-pages/man2/utimes.2.html">utimes(2)</a>、 <a href="http://man7.org/linux/man-pages/man2/read.2.html">read(2)</a> 和 <a href="http://man7.org/linux/man-pages/man2/write.2.html">write(2)</a> 系统调用改变。</li>
+<li><code>birthtime</code> "创建时间" -  文件创建的时间。
+当文件被创建时设定一次。
+在创建时间不可用的文件系统中，该字段可能被替代为 <code>ctime</code> 或 <code>1970-01-01T00:00Z</code>（如 Unix 的纪元时间戳 <code>0</code>）。
+注意，该值在此情况下可能会大于 <code>atime</code> 或 <code>mtime</code>。
+在 Darwin 和其它的 FreeBSD 衍生系统中，如果 <code>atime</code> 被使用 <a href="http://man7.org/linux/man-pages/man2/utimes.2.html">utimes(2)</a> 系统调用显式地设置为一个比当前 <code>birthtime</code> 更早的值，也会有这种情况。</li>
+</ul>
+<p>在 Node.js v0.12 之前的版本中，<code>ctime</code> 在 Windows 系统中保存 <code>birthtime</code>。
+注意，在 v0.12 中，<code>ctime</code> 不是“创建时间”，并且在 Unix 系统中，它从来都不是。</p>
+<h2>fs.WriteStream 类<span><a class="mark" href="fs.html#fs_class_fs_writestream" id="fs_class_fs_writestream">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_class_fs_writestream">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/class_fs_writestream.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.93</span>
+</div><p><code>WriteStream</code> 一个<a href="stream.html#stream_class_stream_writable">可写流</a>。</p>
+<h3>'open' 事件<span><a class="mark" href="fs.html#fs_event_open_1" id="fs_event_open_1">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_event_open_1">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/event_open_1.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.93</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 被 WriteStream 使用的整数文件描述符。</li>
+</ul>
+<p>当 WriteStream 文件被打开时触发。</p>
+<h3>'close' 事件<span><a class="mark" href="fs.html#fs_event_close_1" id="fs_event_close_1">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_event_close_1">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/event_close_1.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.93</span>
+</div><p>当 <code>WriteStream</code> 底层的文件描述符已被使用 <code>fs.close()</code> 方法关闭时触发。</p>
+<h3>writeStream.bytesWritten<span><a class="mark" href="fs.html#fs_writestream_byteswritten" id="fs_writestream_byteswritten">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_writestream_byteswritten">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/writestream_byteswritten.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.7</span>
+</div><p>已写入的字节数。
+不包括仍在排队等待写入的数据。</p>
+<h3>writeStream.path<span><a class="mark" href="fs.html#fs_writestream_path" id="fs_writestream_path">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_writestream_path">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/writestream_path.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.93</span>
+</div><p>流正在写入的文件的路径，指定在 <code>fs.createWriteStream()</code> 的第一个参数。
+如果 <code>path</code> 传入的是一个字符串，则 <code>writeStream.path</code> 是一个字符串。
+如果 <code>path</code> 传入的是一个 <code>Buffer</code>，则 <code>writeStream.path</code> 是一个 <code>Buffer</code>。</p>
+<h2>fs.access(path[, mode], callback)<span><a class="mark" href="fs.html#fs_fs_access_path_mode_callback" id="fs_fs_access_path_mode_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_access_path_mode_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_access_path_mode_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.15</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>测试 <code>path</code> 指定的文件或目录的用户权限。
+<code>mode</code> 是一个可选的整数，指定要执行的可访问性检查。
+以下常量定义了 <code>mode</code> 的可能值。
+可以创建由两个或更多个值的位或组成的掩码。</p>
+<ul>
+<li><code>fs.constants.F_OK</code> - <code>path</code> 文件对调用进程可见。
+这在确定文件是否存在时很有用，但不涉及 <code>rwx</code> 权限。
+如果没指定 <code>mode</code>，则默认为该值。</li>
+<li><code>fs.constants.R_OK</code> - <code>path</code> 文件可被调用进程读取。</li>
+<li><code>fs.constants.W_OK</code> - <code>path</code> 文件可被调用进程写入。</li>
+<li><code>fs.constants.X_OK</code> - <code>path</code> 文件可被调用进程执行。
+对 Windows 系统没作用（相当于 <code>fs.constants.F_OK</code>）。</li>
+</ul>
+<p>最后一个参数 <code>callback</code> 是一个回调函数，会带有一个可能的错误参数被调用。
+如果可访问性检查有任何的失败，则错误参数会被传入。
+下面的例子会检查 <code>/etc/passwd</code> 文件是否可以被当前进程读取和写入。</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">access</span><span class="sh_symbol">(</span><span class="sh_string">'/etc/passwd'</span><span class="sh_symbol">,</span> fs<span class="sh_symbol">.</span>constants<span class="sh_symbol">.</span>R_OK <span class="sh_symbol">|</span> fs<span class="sh_symbol">.</span>constants<span class="sh_symbol">.</span>W_OK<span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>err <span class="sh_symbol">?</span> <span class="sh_string">'no access!'</span> <span class="sh_symbol">:</span> <span class="sh_string">'can read/write'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>不建议在调用 <code>fs.open()</code> 、 <code>fs.readFile()</code> 或 <code>fs.writeFile()</code> 之前使用 <code>fs.access()</code> 检查一个文件的可访问性。
+如此处理会造成紊乱情况，因为其他进程可能在两个调用之间改变该文件的状态。
+作为替代，用户代码应该直接打开/读取/写入文件，当文件无法访问时再处理错误。</p>
+<p>例子：</p>
+<p><strong>写入（不推荐）</strong></p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">access</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(!</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span><span class="sh_string">'myfile already exists'</span><span class="sh_symbol">);</span>
+    <span class="sh_keyword">return</span><span class="sh_symbol">;</span>
+  <span class="sh_cbracket">}</span>
+
+  fs<span class="sh_symbol">.</span><span class="sh_function">open</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_string">'wx'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> fd<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+    <span class="sh_function">writeMyData</span><span class="sh_symbol">(</span>fd<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p><strong>写入（推荐）</strong></p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">open</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_string">'wx'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> fd<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">.</span>code <span class="sh_symbol">===</span> <span class="sh_string">"EEXIST"</span><span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+      console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span><span class="sh_string">'myfile already exists'</span><span class="sh_symbol">);</span>
+      <span class="sh_keyword">return</span><span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+      <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_cbracket">}</span>
+
+  <span class="sh_function">writeMyData</span><span class="sh_symbol">(</span>fd<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p><strong>读取（不推荐）</strong></p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">access</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">.</span>code <span class="sh_symbol">===</span> <span class="sh_string">"ENOENT"</span><span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+      console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span><span class="sh_string">'myfile does not exist'</span><span class="sh_symbol">);</span>
+      <span class="sh_keyword">return</span><span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+      <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_cbracket">}</span>
+
+  fs<span class="sh_symbol">.</span><span class="sh_function">open</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_string">'r'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> fd<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+    <span class="sh_function">readMyData</span><span class="sh_symbol">(</span>fd<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p><strong>读取（推荐）</strong></p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">open</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_string">'r'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> fd<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">.</span>code <span class="sh_symbol">===</span> <span class="sh_string">"ENOENT"</span><span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+      console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span><span class="sh_string">'myfile does not exist'</span><span class="sh_symbol">);</span>
+      <span class="sh_keyword">return</span><span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+      <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_cbracket">}</span>
+
+  <span class="sh_function">readMyData</span><span class="sh_symbol">(</span>fd<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>以上<strong>不推荐</strong>的例子检查可访问性之后再使用文件；
+<strong>推荐</strong>的例子更好，因为它们直接使用文件并处理任何错误。</p>
+<p>通常，仅在文件不会被直接使用时才检查一个文件的可访问性，例如当它的可访问性是来自另一个进程的信号。</p>
+<h2>fs.accessSync(path[, mode])<span><a class="mark" href="fs.html#fs_fs_accesssync_path_mode" id="fs_fs_accesssync_path_mode">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_accesssync_path_mode">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_accesssync_path_mode.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.15</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p><a href="fs.html#fs_fs_access_path_mode_callback"><code>fs.access()</code></a> 的同步版本。
+如果有任何可访问性检查失败则抛出错误，否则什么也不做。</p>
+<h2>fs.appendFile(file, data[, options], callback)<span><a class="mark" href="fs.html#fs_fs_appendfile_file_data_options_callback" id="fs_fs_appendfile_file_data_options_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_appendfile_file_data_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_appendfile_file_data_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.6.7</span>
+</div><ul>
+<li><code>file</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> 文件名或文件描述符</li>
+<li><code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type" class="type">&lt;Null&gt;</a> 默认 = <code>'utf8'</code></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 默认 = <code>0o666</code></li>
+<li><code>flag</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'a'</code></li>
+</ul>
+</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步地追加数据到一个文件，如果文件不存在则创建文件。
+<code>data</code> 可以是一个字符串或 buffer。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">appendFile</span><span class="sh_symbol">(</span><span class="sh_string">'message.txt'</span><span class="sh_symbol">,</span> <span class="sh_string">'data to append'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'The "data to append" was appended to file!'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>如果 <code>options</code> 是一个字符串，则它指定了字符编码。例如：</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">appendFile</span><span class="sh_symbol">(</span><span class="sh_string">'message.txt'</span><span class="sh_symbol">,</span> <span class="sh_string">'data to append'</span><span class="sh_symbol">,</span> <span class="sh_string">'utf8'</span><span class="sh_symbol">,</span> callback<span class="sh_symbol">);</span>
+</code></pre>
+<p>任何指定的文件描述符必须为了追加而被打开。</p>
+<p>注意：如果文件描述符被指定为 <code>file</code>，则不会被自动关闭。</p>
+<h2>fs.appendFileSync(file, data[, options])<span><a class="mark" href="fs.html#fs_fs_appendfilesync_file_data_options" id="fs_fs_appendfilesync_file_data_options">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_appendfilesync_file_data_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_appendfilesync_file_data_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.6.7</span>
+</div><ul>
+<li><code>file</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> 文件名或文件描述符</li>
+<li><code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type" class="type">&lt;Null&gt;</a> 默认 = <code>'utf8'</code></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 默认 = <code>0o666</code></li>
+<li><code>flag</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'a'</code></li>
+</ul>
+</li>
+</ul>
+<p><a href="fs.html#fs_fs_appendfile_file_data_options_callback"><code>fs.appendFile()</code></a> 的同步版本。
+返回 <code>undefined</code>。</p>
+<h2>fs.chmod(path, mode, callback)<span><a class="mark" href="fs.html#fs_fs_chmod_path_mode_callback" id="fs_fs_chmod_path_mode_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_chmod_path_mode_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_chmod_path_mode_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.30</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/chmod.2.html">chmod(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.chmodSync(path, mode)<span><a class="mark" href="fs.html#fs_fs_chmodsync_path_mode" id="fs_fs_chmodsync_path_mode">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_chmodsync_path_mode">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_chmodsync_path_mode.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.6.7</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/chmod.2.html">chmod(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.chown(path, uid, gid, callback)<span><a class="mark" href="fs.html#fs_fs_chown_path_uid_gid_callback" id="fs_fs_chown_path_uid_gid_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_chown_path_uid_gid_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_chown_path_uid_gid_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.97</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/chown.2.html">chown(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.chownSync(path, uid, gid)<span><a class="mark" href="fs.html#fs_fs_chownsync_path_uid_gid" id="fs_fs_chownsync_path_uid_gid">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_chownsync_path_uid_gid">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_chownsync_path_uid_gid.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.97</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/chown.2.html">chown(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.close(fd, callback)<span><a class="mark" href="fs.html#fs_fs_close_fd_callback" id="fs_fs_close_fd_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_close_fd_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_close_fd_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.2</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/close.2.html">close(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.closeSync(fd)<span><a class="mark" href="fs.html#fs_fs_closesync_fd" id="fs_fs_closesync_fd">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_closesync_fd">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_closesync_fd.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/close.2.html">close(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.constants<span><a class="mark" href="fs.html#fs_fs_constants" id="fs_fs_constants">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_constants">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_constants.md">参与翻译</a></p>
+<p>返回一个包含常用文件系统操作的常量的对象。
+具体的常量定义在 <a href="fs.html#fs_fs_constants_1">FS Constants</a> 中描述。</p>
+<h2>fs.createReadStream(path[, options])<span><a class="mark" href="fs.html#fs_fs_createreadstream_path_options" id="fs_fs_createreadstream_path_options">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_createreadstream_path_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_createreadstream_path_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>flags</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>autoClose</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a></li>
+<li><code>start</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>end</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>返回一个新建的 <a href="fs.html#fs_class_fs_readstream"><code>ReadStream</code></a> 对象（详见<a href="stream.html#stream_class_stream_readable">可读流</a>）。</p>
+<p>不同于在一个可读流上设置的 <code>highWaterMark</code> 默认值（16 kb），该方法在相同参数下返回的流具有 64 kb 的默认值。</p>
+<p><code>options</code> 是一个带有以下默认值的对象或字符串：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_cbracket">{</span>
+  flags<span class="sh_symbol">:</span> <span class="sh_string">'r'</span><span class="sh_symbol">,</span>
+  encoding<span class="sh_symbol">:</span> <span class="sh_keyword">null</span><span class="sh_symbol">,</span>
+  fd<span class="sh_symbol">:</span> <span class="sh_keyword">null</span><span class="sh_symbol">,</span>
+  mode<span class="sh_symbol">:</span> 0o666<span class="sh_symbol">,</span>
+  autoClose<span class="sh_symbol">:</span> <span class="sh_keyword">true</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p><code>options</code> 可以包括 <code>start</code> 和 <code>end</code> 值，使其可以从文件读取一定范围的字节而不是整个文件。
+<code>start</code> 和 <code>end</code> 都是包括在内的，并且起始值是 0。
+如果指定了 <code>fd</code> 且 <code>start</code> 不传或为 <code>undefined</code>，则 <code>fs.createReadStream()</code> 从当前文件位置按顺序地读取。
+<code>encoding</code> 可以是任何可以被 <a href="buffer.html#buffer_buffer"><code>Buffer</code></a> 接受的值。</p>
+<p>如果指定了 <code>fd</code>，则 <code>ReadStream</code> 会忽略 <code>path</code> 参数并且会使用指定的文件描述符。
+这意味着不会触发 <code>'open'</code> 事件。
+注意，<code>fd</code> 应该是阻塞的；非阻塞的 <code>fd</code> 们应该传给 <a href="net.html#net_class_net_socket"><code>net.Socket</code></a>。</p>
+<p>如果 <code>autoClose</code> 为 <code>false</code>，则文件描述符不会被关闭，即使有错误。
+你需要负责关闭它，并且确保没有文件描述符泄漏。
+如果 <code>autoClose</code> 被设置为 <code>true</code>（默认），则在 <code>error</code> 或 <code>end</code> 时，文件描述符会被自动关闭。</p>
+<p><code>mode</code> 用于设置文件模式（权限和粘结位），但仅限创建文件时。</p>
+<p>例子，从一个 100 字节长的文件中读取最后 10 个字节：</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">createReadStream</span><span class="sh_symbol">(</span><span class="sh_string">'sample.txt'</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span>start<span class="sh_symbol">:</span> <span class="sh_number">90</span><span class="sh_symbol">,</span> end<span class="sh_symbol">:</span> <span class="sh_number">99</span><span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>如果 <code>options</code> 是一个字符串，则它指定了字符编码。</p>
+<h2>fs.createWriteStream(path[, options])<span><a class="mark" href="fs.html#fs_fs_createwritestream_path_options" id="fs_fs_createwritestream_path_options">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_createwritestream_path_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_createwritestream_path_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>flags</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>defaultEncoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>autoClose</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a></li>
+<li><code>start</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+</li>
+</ul>
+<p>返回一个新建的 <a href="fs.html#fs_class_fs_writestream"><code>WriteStream</code></a> 对象（详见<a href="stream.html#stream_class_stream_writable">可写流</a>）。</p>
+<p><code>options</code> 是一个带有以下默认值的对象或字符串：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_cbracket">{</span>
+  flags<span class="sh_symbol">:</span> <span class="sh_string">'w'</span><span class="sh_symbol">,</span>
+  defaultEncoding<span class="sh_symbol">:</span> <span class="sh_string">'utf8'</span><span class="sh_symbol">,</span>
+  fd<span class="sh_symbol">:</span> <span class="sh_keyword">null</span><span class="sh_symbol">,</span>
+  mode<span class="sh_symbol">:</span> 0o666<span class="sh_symbol">,</span>
+  autoClose<span class="sh_symbol">:</span> <span class="sh_keyword">true</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p><code>options</code> 也可以包括一个 <code>start</code> 选项，使其可以写入数据到文件某个位置。
+如果是修改一个文件而不是覆盖它，则需要<code>flags</code> 模式为 <code>r+</code> 而不是默认的 <code>w</code> 模式。
+<code>defaultEncoding</code> 可以是任何可以被 <a href="buffer.html#buffer_buffer"><code>Buffer</code></a> 接受的值。</p>
+<p>如果 <code>autoClose</code> 被设置为 <code>true</code>（默认），则在 <code>error</code> 或 <code>end</code> 时，文件描述符会被自动关闭。
+如果 <code>autoClose</code> 为 <code>false</code>，则文件描述符不会被关闭，即使有错误。
+你需要负责关闭它，并且确保没有文件描述符泄漏。</p>
+<p>类似 <a href="fs.html#fs_class_fs_readstream"><code>ReadStream</code></a>，如果指定了 <code>fd</code>，则 <code>WriteStream</code> 会忽略 <code>path</code> 参数并且会使用指定的文件描述符。
+这意味着不会触发 <code>'open'</code> 事件。
+注意，<code>fd</code> 应该是阻塞的；非阻塞的 <code>fd</code> 们应该传给 <a href="net.html#net_class_net_socket"><code>net.Socket</code></a>。</p>
+<p>如果 <code>options</code> 是一个字符串，则它指定了字符编码。</p>
+<h2>fs.exists(path, callback)<span><a class="mark" href="fs.html#fs_fs_exists_path_callback" id="fs_fs_exists_path_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_exists_path_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_exists_path_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.2</span>
+<span>废弃于: v1.0.0 </span>
+</div><pre class="api_stability api_stability_0 sh_sourceCode">稳定性<span class="sh_symbol">:</span> <span class="sh_number">0</span> <span class="sh_symbol">-</span> 废弃的<span class="sh_symbol">:</span> 使用 <a href="fs.html#fs_fs_stat_path_callback"><code>fs<span class="sh_symbol">.</span><span class="sh_function">stat</span><span class="sh_symbol">()</span></code></a> 或 <a href="fs.html#fs_fs_access_path_mode_callback"><code>fs<span class="sh_symbol">.</span><span class="sh_function">access</span><span class="sh_symbol">()</span></code></a> 代替。</pre><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>Test whether or not the given path exists by checking with the file system.
+Then call the <code>callback</code> argument with either true or false.  Example:</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">exists</span><span class="sh_symbol">(</span><span class="sh_string">'/etc/passwd'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>exists<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>exists <span class="sh_symbol">?</span> <span class="sh_string">'it</span><span class="sh_specialchar">\'</span><span class="sh_string">s there'</span> <span class="sh_symbol">:</span> <span class="sh_string">'no passwd!'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p><strong>Note that the parameter to this callback is not consistent with other
+Node.js callbacks.</strong> Normally, the first parameter to a Node.js callback is
+an <code>err</code> parameter, optionally followed by other parameters. The
+<code>fs.exists()</code> callback has only one boolean parameter. This is one reason
+<code>fs.access()</code> is recommended instead of <code>fs.exists()</code>.</p>
+<p>Using <code>fs.exists()</code> to check for the existence of a file before calling
+<code>fs.open()</code>, <code>fs.readFile()</code> or <code>fs.writeFile()</code> is not recommended. Doing
+so introduces a race condition, since other processes may change the file's
+state between the two calls. Instead, user code should open/read/write the
+file directly and handle the error raised if the file does not exist.</p>
+<p>For example:</p>
+<p><strong>write (NOT RECOMMENDED)</strong></p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">exists</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>exists<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>exists<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span><span class="sh_string">'myfile already exists'</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+    fs<span class="sh_symbol">.</span><span class="sh_function">open</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_string">'wx'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> fd<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+      <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+      <span class="sh_function">writeMyData</span><span class="sh_symbol">(</span>fd<span class="sh_symbol">);</span>
+    <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p><strong>write (RECOMMENDED)</strong></p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">open</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_string">'wx'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> fd<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">.</span>code <span class="sh_symbol">===</span> <span class="sh_string">"EEXIST"</span><span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+      console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span><span class="sh_string">'myfile already exists'</span><span class="sh_symbol">);</span>
+      <span class="sh_keyword">return</span><span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+      <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_cbracket">}</span>
+  <span class="sh_function">writeMyData</span><span class="sh_symbol">(</span>fd<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p><strong>read (NOT RECOMMENDED)</strong></p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">exists</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>exists<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>exists<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    fs<span class="sh_symbol">.</span><span class="sh_function">open</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_string">'r'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> fd<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+      <span class="sh_function">readMyData</span><span class="sh_symbol">(</span>fd<span class="sh_symbol">);</span>
+    <span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span><span class="sh_string">'myfile does not exist'</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p><strong>read (RECOMMENDED)</strong></p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">open</span><span class="sh_symbol">(</span><span class="sh_string">'myfile'</span><span class="sh_symbol">,</span> <span class="sh_string">'r'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> fd<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">.</span>code <span class="sh_symbol">===</span> <span class="sh_string">"ENOENT"</span><span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+      console<span class="sh_symbol">.</span><span class="sh_function">error</span><span class="sh_symbol">(</span><span class="sh_string">'myfile does not exist'</span><span class="sh_symbol">);</span>
+      <span class="sh_keyword">return</span><span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+      <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+    <span class="sh_function">readMyData</span><span class="sh_symbol">(</span>fd<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>The "not recommended" examples above check for existence and then use the
+file; the "recommended" examples are better because they use the file directly
+and handle the error, if any.</p>
+<p>In general, check for the existence of a file only if the file won’t be
+used directly, for example when its existence is a signal from another
+process.</p>
+<h2>fs.existsSync(path)<span><a class="mark" href="fs.html#fs_fs_existssync_path" id="fs_fs_existssync_path">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_existssync_path">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_existssync_path.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p><a href="fs.html#fs_fs_exists_path_callback"><code>fs.exists()</code></a> 的同步版本。
+如果文件存在，则返回 <code>true</code>，否则返回 <code>false</code>。</p>
+<p>注意，虽然 <code>fs.exists()</code> 是废弃的，但 <code>fs.existsSync()</code> 不是。
+（<code>fs.exists()</code> 的回调接收的参数与其他 Node.js 回调不一致，<code>fs.existsSync()</code> 不使用回调。）</p>
+<h2>fs.fchmod(fd, mode, callback)<span><a class="mark" href="fs.html#fs_fs_fchmod_fd_mode_callback" id="fs_fs_fchmod_fd_mode_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_fchmod_fd_mode_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_fchmod_fd_mode_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.7</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/fchmod.2.html">fchmod(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.fchmodSync(fd, mode)<span><a class="mark" href="fs.html#fs_fs_fchmodsync_fd_mode" id="fs_fs_fchmodsync_fd_mode">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_fchmodsync_fd_mode">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_fchmodsync_fd_mode.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.7</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/fchmod.2.html">fchmod(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.fchown(fd, uid, gid, callback)<span><a class="mark" href="fs.html#fs_fs_fchown_fd_uid_gid_callback" id="fs_fs_fchown_fd_uid_gid_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_fchown_fd_uid_gid_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_fchown_fd_uid_gid_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.7</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/fchown.2.html">fchown(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.fchownSync(fd, uid, gid)<span><a class="mark" href="fs.html#fs_fs_fchownsync_fd_uid_gid" id="fs_fs_fchownsync_fd_uid_gid">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_fchownsync_fd_uid_gid">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_fchownsync_fd_uid_gid.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.7</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/fchown.2.html">fchown(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.fdatasync(fd, callback)<span><a class="mark" href="fs.html#fs_fs_fdatasync_fd_callback" id="fs_fs_fdatasync_fd_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_fdatasync_fd_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_fdatasync_fd_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.96</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/fdatasync.2.html">fdatasync(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.fdatasyncSync(fd)<span><a class="mark" href="fs.html#fs_fs_fdatasyncsync_fd" id="fs_fs_fdatasyncsync_fd">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_fdatasyncsync_fd">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_fdatasyncsync_fd.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.96</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/fdatasync.2.html">fdatasync(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.fstat(fd, callback)<span><a class="mark" href="fs.html#fs_fs_fstat_fd_callback" id="fs_fs_fstat_fd_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_fstat_fd_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_fstat_fd_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.95</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/fstat.2.html">fstat(2)</a>。
+回调获得两个参数 <code>(err, stats)</code>，其中 <code>stats</code> 是一个 <a href="fs.html#fs_class_fs_stats"><code>fs.Stats</code></a> 对象。
+<code>fstat()</code> 与 <a href="fs.html#fs_fs_stat_path_callback"><code>stat()</code></a> 类似，除了文件是通过文件描述符 <code>fd</code> 指定的。</p>
+<h2>fs.fstatSync(fd)<span><a class="mark" href="fs.html#fs_fs_fstatsync_fd" id="fs_fs_fstatsync_fd">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_fstatsync_fd">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_fstatsync_fd.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.95</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/fstat.2.html">fstat(2)</a>。返回一个 <a href="fs.html#fs_class_fs_stats"><code>fs.Stats</code></a> 实例。</p>
+<h2>fs.fsync(fd, callback)<span><a class="mark" href="fs.html#fs_fs_fsync_fd_callback" id="fs_fs_fsync_fd_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_fsync_fd_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_fsync_fd_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.96</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/fsync.2.html">fsync(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.fsyncSync(fd)<span><a class="mark" href="fs.html#fs_fs_fsyncsync_fd" id="fs_fs_fsyncsync_fd">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_fsyncsync_fd">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_fsyncsync_fd.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.96</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/fsync.2.html">fsync(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.ftruncate(fd, len, callback)<span><a class="mark" href="fs.html#fs_fs_ftruncate_fd_len_callback" id="fs_fs_ftruncate_fd_len_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_ftruncate_fd_len_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_ftruncate_fd_len_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.8.6</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>len</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 默认 = <code>0</code></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/ftruncate.2.html">ftruncate(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<p>如果文件描述符指向的文件大于 <code>len</code> 个字节，则只有前面 <code>len</code> 个字节会保留在文件中。</p>
+<p>例子，下面的程序会只保留文件前4个字节。</p>
+<pre class="sh_sourceCode"><code class="lang-js">console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>fs<span class="sh_symbol">.</span><span class="sh_function">readFileSync</span><span class="sh_symbol">(</span><span class="sh_string">'temp.txt'</span><span class="sh_symbol">,</span> <span class="sh_string">'utf8'</span><span class="sh_symbol">));</span>
+<span class="sh_comment">// 输出: Node.js</span>
+
+<span class="sh_comment">// 获取要截断的文件的文件描述符</span>
+<span class="sh_keyword">const</span> fd <span class="sh_symbol">=</span> fs<span class="sh_symbol">.</span><span class="sh_function">openSync</span><span class="sh_symbol">(</span><span class="sh_string">'temp.txt'</span><span class="sh_symbol">,</span> <span class="sh_string">'r+'</span><span class="sh_symbol">);</span>
+
+<span class="sh_comment">// 截断文件至前4个字节</span>
+fs<span class="sh_symbol">.</span><span class="sh_function">ftruncate</span><span class="sh_symbol">(</span>fd<span class="sh_symbol">,</span> <span class="sh_number">4</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  assert<span class="sh_symbol">.</span><span class="sh_function">ifError</span><span class="sh_symbol">(</span>err<span class="sh_symbol">);</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>fs<span class="sh_symbol">.</span><span class="sh_function">readFileSync</span><span class="sh_symbol">(</span><span class="sh_string">'temp.txt'</span><span class="sh_symbol">,</span> <span class="sh_string">'utf8'</span><span class="sh_symbol">));</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 输出: Node</span>
+</code></pre>
+<p>如果前面的文件小于 <code>len</code> 个字节，则扩展文件，且扩展的部分用空字节（'\0'）填充。例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>fs<span class="sh_symbol">.</span><span class="sh_function">readFileSync</span><span class="sh_symbol">(</span><span class="sh_string">'temp.txt'</span><span class="sh_symbol">,</span> <span class="sh_string">'utf-8'</span><span class="sh_symbol">));</span>
+<span class="sh_comment">// 输出: Node.js</span>
+
+<span class="sh_comment">// 获取要截断的文件的文件描述符</span>
+<span class="sh_keyword">const</span> fd <span class="sh_symbol">=</span> fs<span class="sh_symbol">.</span><span class="sh_function">openSync</span><span class="sh_symbol">(</span><span class="sh_string">'temp.txt'</span><span class="sh_symbol">,</span> <span class="sh_string">'r+'</span><span class="sh_symbol">);</span>
+
+<span class="sh_comment">// 截断文件至前10个字节，但实际大小是7个字节</span>
+fs<span class="sh_symbol">.</span><span class="sh_function">ftruncate</span><span class="sh_symbol">(</span>fd<span class="sh_symbol">,</span> <span class="sh_number">10</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  assert<span class="sh_symbol">.</span><span class="sh_function">ifError</span><span class="sh_symbol">(!</span>err<span class="sh_symbol">);</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>fs<span class="sh_symbol">.</span><span class="sh_function">readFileSync</span><span class="sh_symbol">(</span><span class="sh_string">'temp.txt'</span><span class="sh_symbol">));</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 输出: &lt;Buffer 4e 6f 64 65 2e 6a 73 00 00 00&gt;</span>
+<span class="sh_comment">// ('Node.js\0\0\0' in UTF8)</span>
+</code></pre>
+<p>最后3个字节是空字节（'\0'），用于补充超出的截断。</p>
+<h2>fs.ftruncateSync(fd, len)<span><a class="mark" href="fs.html#fs_fs_ftruncatesync_fd_len" id="fs_fs_ftruncatesync_fd_len">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_ftruncatesync_fd_len">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_ftruncatesync_fd_len.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.8.6</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>len</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 默认 = <code>0</code></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/ftruncate.2.html">ftruncate(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.futimes(fd, atime, mtime, callback)<span><a class="mark" href="fs.html#fs_fs_futimes_fd_atime_mtime_callback" id="fs_fs_futimes_fd_atime_mtime_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_futimes_fd_atime_mtime_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_futimes_fd_atime_mtime_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.2</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>atime</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>mtime</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>改变由所提供的文件描述符所指向的文件的文件时间戳。</p>
+<h2>fs.futimesSync(fd, atime, mtime)<span><a class="mark" href="fs.html#fs_fs_futimessync_fd_atime_mtime" id="fs_fs_futimessync_fd_atime_mtime">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_futimessync_fd_atime_mtime">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_futimessync_fd_atime_mtime.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.2</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>atime</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>mtime</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p><a href="fs.html#fs_fs_futimes_fd_atime_mtime_callback"><code>fs.futimes()</code></a> 的同步版本。返回 <code>undefined</code>。</p>
+<h2>fs.lchmod(path, mode, callback)<span><a class="mark" href="fs.html#fs_fs_lchmod_path_mode_callback" id="fs_fs_lchmod_path_mode_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_lchmod_path_mode_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_lchmod_path_mode_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>废弃于: v0.4.7 </span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="https://www.freebsd.org/cgi/man.cgi?query=lchmod&sektion=2">lchmod(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<p>只在 Mac OS X 有效。</p>
+<h2>fs.lchmodSync(path, mode)<span><a class="mark" href="fs.html#fs_fs_lchmodsync_path_mode" id="fs_fs_lchmodsync_path_mode">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_lchmodsync_path_mode">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_lchmodsync_path_mode.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>废弃于: v0.4.7 </span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p>同步的 <a href="https://www.freebsd.org/cgi/man.cgi?query=lchmod&sektion=2">lchmod(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.lchown(path, uid, gid, callback)<span><a class="mark" href="fs.html#fs_fs_lchown_path_uid_gid_callback" id="fs_fs_lchown_path_uid_gid_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_lchown_path_uid_gid_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_lchown_path_uid_gid_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>废弃于: v0.4.7 </span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/lchown.2.html">lchown(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.lchownSync(path, uid, gid)<span><a class="mark" href="fs.html#fs_fs_lchownsync_path_uid_gid" id="fs_fs_lchownsync_path_uid_gid">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_lchownsync_path_uid_gid">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_lchownsync_path_uid_gid.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>废弃于: v0.4.7 </span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>uid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>gid</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/lchown.2.html">lchown(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.link(existingPath, newPath, callback)<span><a class="mark" href="fs.html#fs_fs_link_existingpath_newpath_callback" id="fs_fs_link_existingpath_newpath_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_link_existingpath_newpath_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_link_existingpath_newpath_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>existingPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>newPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/link.2.html">link(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.linkSync(existingPath, newPath)<span><a class="mark" href="fs.html#fs_fs_linksync_existingpath_newpath" id="fs_fs_linksync_existingpath_newpath">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_linksync_existingpath_newpath">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_linksync_existingpath_newpath.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>existingPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>newPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/link.2.html">link(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.lstat(path, callback)<span><a class="mark" href="fs.html#fs_fs_lstat_path_callback" id="fs_fs_lstat_path_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_lstat_path_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_lstat_path_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.30</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/lstat.2.html">lstat(2)</a>。
+回调获得两个参数 <code>(err, stats)</code>，其中 <code>stats</code> 是一个 <a href="fs.html#fs_class_fs_stats"><code>fs.Stats</code></a> 对象。
+<code>lstat()</code> 与 <a href="fs.html#fs_fs_stat_path_callback"><code>stat()</code></a> 类似，除非 <code>path</code> 是一个符号链接，则自身就是该链接，它指向的并不是文件。</p>
+<h2>fs.lstatSync(path)<span><a class="mark" href="fs.html#fs_fs_lstatsync_path" id="fs_fs_lstatsync_path">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_lstatsync_path">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_lstatsync_path.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.30</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/lstat.2.html">lstat(2)</a>。返回一个 <a href="fs.html#fs_class_fs_stats"><code>fs.Stats</code></a> 实例。</p>
+<h2>fs.mkdir(path[, mode], callback)<span><a class="mark" href="fs.html#fs_fs_mkdir_path_mode_callback" id="fs_fs_mkdir_path_mode_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_mkdir_path_mode_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_mkdir_path_mode_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.8</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/mkdir.2.html">mkdir(2)</a>。
+完成回调只有一个可能的异常参数。
+<code>mode</code> 默认为 <code>0o777</code>。</p>
+<h2>fs.mkdirSync(path[, mode])<span><a class="mark" href="fs.html#fs_fs_mkdirsync_path_mode" id="fs_fs_mkdirsync_path_mode">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_mkdirsync_path_mode">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_mkdirsync_path_mode.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/mkdir.2.html">mkdir(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.mkdtemp(prefix[, options], callback)<span><a class="mark" href="fs.html#fs_fs_mkdtemp_prefix_options_callback" id="fs_fs_mkdtemp_prefix_options_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_mkdtemp_prefix_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_mkdtemp_prefix_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v5.10.0</span>
+</div><ul>
+<li><code>prefix</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'utf8'</code></li>
+</ul>
+</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>创建一个唯一的临时目录。</p>
+<p>生成六位随机字符附加到一个要求的 <code>prefix</code> 后面，然后创建一个唯一的临时目录。</p>
+<p>创建的目录路径会作为字符串传给回调的第二个参数。</p>
+<p>可选的 <code>options</code> 参数可以是一个字符串并指定一个字符编码，或是一个对象且由一个 <code>encoding</code> 属性指定使用的字符编码。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">mkdtemp</span><span class="sh_symbol">(</span><span class="sh_string">'/tmp/foo-'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> folder<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>folder<span class="sh_symbol">);</span>
+  <span class="sh_comment">// 输出: /tmp/foo-itXde2</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p><strong>注意</strong>：<code>fs.mkdtemp()</code> 方法会直接附加六位随机选择的字符串到 <code>prefix</code> 字符串。
+例如，指定一个目录 <code>/tmp</code>，如果目的是要在 <code>/tmp</code> 里创建一个临时目录，则 <code>prefix</code> <strong>必须</strong> 以一个指定平台的路径分隔符（<code>require('path').sep</code>）结尾。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 新建的临时目录的父目录</span>
+<span class="sh_keyword">const</span> tmpDir <span class="sh_symbol">=</span> <span class="sh_string">'/tmp'</span><span class="sh_symbol">;</span>
+
+<span class="sh_comment">// 该方法是 *错误的*：</span>
+fs<span class="sh_symbol">.</span><span class="sh_function">mkdtemp</span><span class="sh_symbol">(</span>tmpDir<span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> folder<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>folder<span class="sh_symbol">);</span>
+  <span class="sh_comment">// 会输出类似于 `/tmpabc123`。</span>
+  <span class="sh_comment">// 注意，一个新的临时目录会被创建在文件系统的根目录，而不是在 /tmp 目录里。</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+
+<span class="sh_comment">// 该方法是 *正确的*：</span>
+<span class="sh_keyword">const</span> path <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'path'</span><span class="sh_symbol">);</span>
+fs<span class="sh_symbol">.</span><span class="sh_function">mkdtemp</span><span class="sh_symbol">(</span>tmpDir <span class="sh_symbol">+</span> path<span class="sh_symbol">.</span>sep<span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> folder<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>folder<span class="sh_symbol">);</span>
+  <span class="sh_comment">// 会输出类似于 `/tmp/abc123`。</span>
+  <span class="sh_comment">// 一个新的临时目录会被创建在 /tmp 目录里。</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<h2>fs.mkdtempSync(prefix[, options])<span><a class="mark" href="fs.html#fs_fs_mkdtempsync_prefix_options" id="fs_fs_mkdtempsync_prefix_options">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_mkdtempsync_prefix_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_mkdtempsync_prefix_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v5.10.0</span>
+</div><ul>
+<li><code>prefix</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'utf8'</code></li>
+</ul>
+</li>
+</ul>
+<p><a href="fs.html#fs_fs_mkdtemp_prefix_options_callback"><code>fs.mkdtemp()</code></a> 的同步版本。
+返回创建的目录的路径。</p>
+<p>可选的 <code>options</code> 参数可以是一个字符串并指定一个字符编码，或是一个对象且由一个 <code>encoding</code> 属性指定使用的字符编码。</p>
+<h2>fs.open(path, flags[, mode], callback)<span><a class="mark" href="fs.html#fs_fs_open_path_flags_mode_callback" id="fs_fs_open_path_flags_mode_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_open_path_flags_mode_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_open_path_flags_mode_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.2</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>flags</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步地打开文件。详见 <a href="http://man7.org/linux/man-pages/man2/open.2.html">open(2)</a>。
+<code>flags</code> 可以是：</p>
+<ul>
+<li><p><code>'r'</code> - 以读取模式打开文件。如果文件不存在则发生异常。</p>
+</li>
+<li><p><code>'r+'</code> - 以读写模式打开文件。如果文件不存在则发生异常。</p>
+</li>
+<li><p><code>'rs+'</code> - 以同步读写模式打开文件。命令操作系统绕过本地文件系统缓存。</p>
+<p>这对 NFS 挂载模式下打开文件很有用，因为它可以让你跳过潜在的旧本地缓存。
+它对 I/O 的性能有明显的影响，所以除非需要，否则不要使用此标志。</p>
+<p>注意，这不会使 <code>fs.open()</code> 进入同步阻塞调用。
+如果那是你想要的，则应该使用 <code>fs.openSync()</code>。</p>
+</li>
+<li><p><code>'w'</code> - 以写入模式打开文件。文件会被创建（如果文件不存在）或截断（如果文件存在）。</p>
+</li>
+<li><p><code>'wx'</code> - 类似 <code>'w'</code>，但如果 <code>path</code> 存在，则失败。</p>
+</li>
+<li><p><code>'w+'</code> - 以读写模式打开文件。文件会被创建（如果文件不存在）或截断（如果文件存在）。</p>
+</li>
+<li><p><code>'wx+'</code> - 类似 <code>'w+'</code>，但如果 <code>path</code> 存在，则失败。</p>
+</li>
+<li><p><code>'a'</code> - 以追加模式打开文件。如果文件不存在，则会被创建。</p>
+</li>
+<li><p><code>'ax'</code> - 类似于 <code>'a'</code>，但如果 <code>path</code> 存在，则失败。</p>
+</li>
+<li><p><code>'a+'</code> - 以读取和追加模式打开文件。如果文件不存在，则会被创建。</p>
+</li>
+<li><p><code>'ax+'</code> - 类似于 <code>'a+'</code>，但如果 <code>path</code> 存在，则失败。</p>
+</li>
+</ul>
+<p><code>mode</code> 可设置文件模式（权限和 sticky 位），但只有当文件被创建时才有效。默认为 <code>0666</code>，可读写。</p>
+<p>该回调有两个参数 <code>(err, fd)</code>。</p>
+<p>特有的标志 <code>'x'</code>（在 <a href="http://man7.org/linux/man-pages/man2/open.2.html">open(2)</a> 中的 <code>O_EXCL</code> 标志）确保 <code>path</code> 是新创建的。
+在 POSIX 操作系统中，<code>path</code> 会被视为存在，即使是一个链接到一个不存在的文件的符号。
+该特有的标志有可能在网络文件系统中无法使用。</p>
+<p><code>flags</code> 也可以是一个数字，[open(2)] 文档中有描述；
+常用的常量可从 <code>fs.constants</code> 获取。
+在 Windows 系统中，标志会被转换为与它等同的替代者，例如，<code>O_WRONLY</code> 转换为 <code>FILE_GENERIC_WRITE</code>、或 <code>O_EXCL|O_CREAT</code> 转换为 <code>CREATE_NEW</code>，通过 CreateFileW 接受。</p>
+<p>在 Linux 中，当文件以追加模式打开时，定位的写入不起作用。
+内核会忽略位置参数，并总是附加数据到文件的末尾。</p>
+<p>注意：<code>fs.open()</code> 某些标志的行为是与平台相关的。
+因此，在 OS X 和 Linux 下用 <code>'a+'</code> 标志打开一个目录（见下面的例子），会返回一个错误。
+与此相反，在 Windows 和 FreeBSD，则会返回一个文件描述符。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// OS X 与 Linux</span>
+fs<span class="sh_symbol">.</span><span class="sh_function">open</span><span class="sh_symbol">(</span><span class="sh_string">'&lt;directory&gt;'</span><span class="sh_symbol">,</span> <span class="sh_string">'a+'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> fd<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// =&gt; [Error: EISDIR: illegal operation on a directory, open &lt;directory&gt;]</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+
+<span class="sh_comment">// Windows 与 FreeBSD</span>
+fs<span class="sh_symbol">.</span><span class="sh_function">open</span><span class="sh_symbol">(</span><span class="sh_string">'&lt;directory&gt;'</span><span class="sh_symbol">,</span> <span class="sh_string">'a+'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> fd<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// =&gt; null, &lt;fd&gt;</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<h2>fs.openSync(path, flags[, mode])<span><a class="mark" href="fs.html#fs_fs_opensync_path_flags_mode" id="fs_fs_opensync_path_flags_mode">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_opensync_path_flags_mode">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_opensync_path_flags_mode.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>flags</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p><a href="fs.html#fs_fs_open_path_flags_mode_callback"><code>fs.open()</code></a> 的同步版本。
+返回一个表示文件描述符的整数。</p>
+<h2>fs.read(fd, buffer, offset, length, position, callback)<span><a class="mark" href="fs.html#fs_fs_read_fd_buffer_offset_length_position_callback" id="fs_fs_read_fd_buffer_offset_length_position_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_read_fd_buffer_offset_length_position_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_read_fd_buffer_offset_length_position_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.2</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>buffer</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>offset</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>length</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>position</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>从 <code>fd</code> 指定的文件中读取数据。</p>
+<p><code>buffer</code> 是数据将被写入到的 buffer。</p>
+<p><code>offset</code> 是 buffer 中开始写入的偏移量。</p>
+<p><code>length</code> 是一个整数，指定要读取的字节数。</p>
+<p><code>position</code> 是一个整数，指定从文件中开始读取的位置。
+如果 <code>position</code> 为 <code>null</code>，则数据从当前文件位置开始读取。</p>
+<p>回调有三个参数 <code>(err, bytesRead, buffer)</code>。</p>
+<h2>fs.readdir(path[, options], callback)<span><a class="mark" href="fs.html#fs_fs_readdir_path_options_callback" id="fs_fs_readdir_path_options_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_readdir_path_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_readdir_path_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.8</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'utf8'</code></li>
+</ul>
+</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man3/readdir.3.html">readdir(3)</a>。
+读取一个目录的内容。
+回调有两个参数 <code>(err, files)</code>，其中 <code>files</code> 是目录中不包括 <code>'.'</code> 和 <code>'..'</code> 的文件名的数组。</p>
+<p>可选的 <code>options</code> 参数用于传入回调的文件名，它可以是一个字符串并指定一个字符编码，或是一个对象且由一个 <code>encoding</code> 属性指定使用的字符编码。
+如果 <code>encoding</code> 设为 <code>'buffer'</code>，则返回的文件名会被作为 <code>Buffer</code> 对象传入。</p>
+<h2>fs.readdirSync(path[, options])<span><a class="mark" href="fs.html#fs_fs_readdirsync_path_options" id="fs_fs_readdirsync_path_options">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_readdirsync_path_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_readdirsync_path_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'utf8'</code></li>
+</ul>
+</li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man3/readdir.3.html">readdir(3)</a>. 
+返回一个不包括 <code>'.'</code> 和 <code>'..'</code> 的文件名的数组。</p>
+<p>可选的 <code>options</code> 参数用于传入回调的文件名，它可以是一个字符串并指定一个字符编码，或是一个对象且由一个 <code>encoding</code> 属性指定使用的字符编码。
+如果 <code>encoding</code> 设为 <code>'buffer'</code>，则返回的文件名会被作为 <code>Buffer</code> 对象传入。</p>
+<h2>fs.readFile(file[, options], callback)<span><a class="mark" href="fs.html#fs_fs_readfile_file_options_callback" id="fs_fs_readfile_file_options_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_readfile_file_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_readfile_file_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.29</span>
+</div><ul>
+<li><code>file</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 文件名或文件描述符</li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type" class="type">&lt;Null&gt;</a> 默认 = <code>null</code></li>
+<li><code>flag</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'r'</code></li>
+</ul>
+</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的读取一个文件的全部内容。
+例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">readFile</span><span class="sh_symbol">(</span><span class="sh_string">'/etc/passwd'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">,</span> data<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>data<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>回调有两个参数 <code>(err, data)</code>，其中 <code>data</code> 是文件的内容。</p>
+<p>如果字符编码未指定，则返回原始的 buffer。</p>
+<p>如果 <code>options</code> 是一个字符串，则它指定了字符编码。
+例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">readFile</span><span class="sh_symbol">(</span><span class="sh_string">'/etc/passwd'</span><span class="sh_symbol">,</span> <span class="sh_string">'utf8'</span><span class="sh_symbol">,</span> callback<span class="sh_symbol">);</span>
+</code></pre>
+<p>任何指定的文件描述符必须支持读取。</p>
+<p>注意，如果一个文件描述符被指定为 <code>file</code>，则它不会被自动关闭。</p>
+<h2>fs.readFileSync(file[, options])<span><a class="mark" href="fs.html#fs_fs_readfilesync_file_options" id="fs_fs_readfilesync_file_options">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_readfilesync_file_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_readfilesync_file_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.8</span>
+</div><ul>
+<li><code>file</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 文件名或文件描述符</li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type" class="type">&lt;Null&gt;</a> 默认 = <code>null</code></li>
+<li><code>flag</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'r'</code></li>
+</ul>
+</li>
+</ul>
+<p><a href="fs.html#fs_fs_readfile_file_options_callback"><code>fs.readFile</code></a> 的同步版本。
+返回 <code>file</code> 的内容。</p>
+<p>如果指定了 <code>encoding</code> 选项，则该函数返回一个字符串，否则返回一个 buffer。</p>
+<h2>fs.readlink(path[, options], callback)<span><a class="mark" href="fs.html#fs_fs_readlink_path_options_callback" id="fs_fs_readlink_path_options_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_readlink_path_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_readlink_path_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'utf8'</code></li>
+</ul>
+</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/readlink.2.html">readlink(2)</a>。
+回调有两个参数  <code>(err, linkString)</code>。</p>
+<p>可选的 <code>options</code> 参数用于传入回调的链接路径，它可以是一个字符串并指定一个字符编码，或是一个对象且由一个 <code>encoding</code> 属性指定使用的字符编码。
+如果 <code>encoding</code> 设为 <code>'buffer'</code>，则返回的链接路径会被作为 <code>Buffer</code> 对象传入。</p>
+<h2>fs.readlinkSync(path[, options])<span><a class="mark" href="fs.html#fs_fs_readlinksync_path_options" id="fs_fs_readlinksync_path_options">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_readlinksync_path_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_readlinksync_path_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'utf8'</code></li>
+</ul>
+</li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/readlink.2.html">readlink(2)</a>。
+返回符号链接的字符串值。</p>
+<p>可选的 <code>options</code> 参数用于传入回调的链接路径，它可以是一个字符串并指定一个字符编码，或是一个对象且由一个 <code>encoding</code> 属性指定使用的字符编码。
+如果 <code>encoding</code> 设为 <code>'buffer'</code>，则返回的链接路径会被作为 <code>Buffer</code> 对象传入。</p>
+<h2>fs.readSync(fd, buffer, offset, length, position)<span><a class="mark" href="fs.html#fs_fs_readsync_fd_buffer_offset_length_position" id="fs_fs_readsync_fd_buffer_offset_length_position">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_readsync_fd_buffer_offset_length_position">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_readsync_fd_buffer_offset_length_position.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>buffer</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>offset</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>length</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>position</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p><a href="fs.html#fs_fs_read_fd_buffer_offset_length_position_callback"><code>fs.read()</code></a> 的同步版本。
+返回 <code>bytesRead</code> 的数量。</p>
+<h2>fs.realpath(path[, options], callback)<span><a class="mark" href="fs.html#fs_fs_realpath_path_options_callback" id="fs_fs_realpath_path_options_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_realpath_path_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_realpath_path_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'utf8'</code></li>
+</ul>
+</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man3/realpath.3.html">realpath(3)</a>。
+<code>callback</code> 有两个参数 <code>(err, resolvedPath)</code>。
+可以使用 <code>process.cwd</code> 解析相对路径。</p>
+<p>只支持可转换成 UTF8 字符串的路径。</p>
+<p>可选的 <code>options</code> 参数用于传入回调的路径，它可以是一个字符串并指定一个字符编码，或是一个对象且由一个 <code>encoding</code> 属性指定使用的字符编码。
+如果 <code>encoding</code> 设为 <code>'buffer'</code>，则返回的路径会被作为 <code>Buffer</code> 对象传入。</p>
+<h2>fs.realpathSync(path[, options])<span><a class="mark" href="fs.html#fs_fs_realpathsync_path_options" id="fs_fs_realpathsync_path_options">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_realpathsync_path_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_realpathsync_path_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a>;</li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'utf8'</code></li>
+</ul>
+</li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man3/realpath.3.html">realpath(3)</a>。
+返回解析的路径。</p>
+<p>只支持可转换成 UTF8 字符串的路径。</p>
+<p>可选的 <code>options</code> 参数用于传入回调的路径，它可以是一个字符串并指定一个字符编码，或是一个对象且由一个 <code>encoding</code> 属性指定使用的字符编码。
+如果 <code>encoding</code> 设为 <code>'buffer'</code>，则返回的路径会被作为 <code>Buffer</code> 对象传入。</p>
+<h2>fs.rename(oldPath, newPath, callback)<span><a class="mark" href="fs.html#fs_fs_rename_oldpath_newpath_callback" id="fs_fs_rename_oldpath_newpath_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_rename_oldpath_newpath_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_rename_oldpath_newpath_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.2</span>
+</div><ul>
+<li><code>oldPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>newPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/rename.2.html">rename(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.renameSync(oldPath, newPath)<span><a class="mark" href="fs.html#fs_fs_renamesync_oldpath_newpath" id="fs_fs_renamesync_oldpath_newpath">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_renamesync_oldpath_newpath">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_renamesync_oldpath_newpath.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>oldPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>newPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/rename.2.html">rename(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.rmdir(path, callback)<span><a class="mark" href="fs.html#fs_fs_rmdir_path_callback" id="fs_fs_rmdir_path_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_rmdir_path_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_rmdir_path_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.2</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/rmdir.2.html">rmdir(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.rmdirSync(path)<span><a class="mark" href="fs.html#fs_fs_rmdirsync_path" id="fs_fs_rmdirsync_path">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_rmdirsync_path">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_rmdirsync_path.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/rmdir.2.html">rmdir(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.stat(path, callback)<span><a class="mark" href="fs.html#fs_fs_stat_path_callback" id="fs_fs_stat_path_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_stat_path_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_stat_path_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.2</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/stat.2.html">stat(2)</a>。
+回调有两个参数 <code>(err, stats)</code> 其中 <code>stats</code> 是一个 <a href="fs.html#fs_class_fs_stats"><code>fs.Stats</code></a> 对象。</p>
+<p>如果发生错误，则 <code>err.code</code> 会是<a href="errors.html#errors_common_system_errors">常见系统错误</a>之一。</p>
+<p>不建议在调用 <code>fs.open()</code> 、<code>fs.readFile()</code> 或 <code>fs.writeFile()</code> 之前使用 <code>fs.stat()</code> 检查一个文件是否存在。
+作为替代，用户代码应该直接打开/读取/写入文件，当文件无效时再处理错误。</p>
+<p>如果要检查一个文件是否存在且不操作它，推荐使用 <a href="fs.html#fs_fs_access_path_mode_callback"><code>fs.access()</code></a>。</p>
+<h2>fs.statSync(path)<span><a class="mark" href="fs.html#fs_fs_statsync_path" id="fs_fs_statsync_path">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_statsync_path">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_statsync_path.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/stat.2.html">stat(2)</a>。
+返回一个 <a href="fs.html#fs_class_fs_stats"><code>fs.Stats</code></a> 实例。</p>
+<h2>fs.symlink(target, path[, type], callback)<span><a class="mark" href="fs.html#fs_fs_symlink_target_path_type_callback" id="fs_fs_symlink_target_path_type_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_symlink_target_path_type_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_symlink_target_path_type_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>target</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/symlink.2.html">symlink(2)</a>。
+完成回调只有一个可能的异常参数。
+<code>type</code> 参数可以设为 <code>'dir'</code>、<code>'file'</code> 或 <code>'junction'</code>（默认为 <code>'file'</code>），且仅在 Windows 上有效（在其他平台上忽略）。
+注意，Windows 结点要求目标路径是绝对的。
+当使用 <code>'junction'</code> 时，<code>target</code> 参数会被自动标准化为绝对路径。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">symlink</span><span class="sh_symbol">(</span><span class="sh_string">'./foo'</span><span class="sh_symbol">,</span> <span class="sh_string">'./new-port'</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>它创建了一个名为 "new-port" 且指向 "foo" 的符号链接。</p>
+<h2>fs.symlinkSync(target, path[, type])<span><a class="mark" href="fs.html#fs_fs_symlinksync_target_path_type" id="fs_fs_symlinksync_target_path_type">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_symlinksync_target_path_type">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_symlinksync_target_path_type.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>target</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/symlink.2.html">symlink(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.truncate(path, len, callback)<span><a class="mark" href="fs.html#fs_fs_truncate_path_len_callback" id="fs_fs_truncate_path_len_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_truncate_path_len_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_truncate_path_len_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.8.6</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>len</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 默认 = <code>0</code></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/truncate.2.html">truncate(2)</a>。
+完成回调只有一个可能的异常参数。
+文件描述符也可以作为第一个参数传入，在这种情况下，<code>fs.ftruncate()</code> 会被调用。</p>
+<h2>fs.truncateSync(path, len)<span><a class="mark" href="fs.html#fs_fs_truncatesync_path_len" id="fs_fs_truncatesync_path_len">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_truncatesync_path_len">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_truncatesync_path_len.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.8.6</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>len</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 默认 = <code>0</code></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/truncate.2.html">truncate(2)</a>。
+返回 <code>undefined</code>。
+文件描述符也可以作为第一个参数传入，在这种情况下，<code>fs.ftruncateSync()</code> 会被调用。</p>
+<h2>fs.unlink(path, callback)<span><a class="mark" href="fs.html#fs_fs_unlink_path_callback" id="fs_fs_unlink_path_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_unlink_path_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_unlink_path_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.2</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步的 <a href="http://man7.org/linux/man-pages/man2/unlink.2.html">unlink(2)</a>。
+完成回调只有一个可能的异常参数。</p>
+<h2>fs.unlinkSync(path)<span><a class="mark" href="fs.html#fs_fs_unlinksync_path" id="fs_fs_unlinksync_path">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_unlinksync_path">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_unlinksync_path.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+</ul>
+<p>同步的 <a href="http://man7.org/linux/man-pages/man2/unlink.2.html">unlink(2)</a>。返回 <code>undefined</code>。</p>
+<h2>fs.unwatchFile(filename[, listener])<span><a class="mark" href="fs.html#fs_fs_unwatchfile_filename_listener" id="fs_fs_unwatchfile_filename_listener">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_unwatchfile_filename_listener">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_unwatchfile_filename_listener.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>filename</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>listener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>停止监视 <code>filename</code> 文件的变化。
+如果指定了 <code>listener</code>，则只移除特定的监听器。
+否则，<strong>所有</strong>的监听器都会被移除，且已经有效地停止监视 <code>filename</code>。</p>
+<p>调用 <code>fs.unwatchFile()</code> 且带上一个未被监视的文件名，将会是一个空操作，而不是一个错误。</p>
+<p>注意：<a href="fs.html#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a> 比 <code>fs.watchFile()</code> 和 <code>fs.unwatchFile()</code> 更高效。
+可能的话，应该使用 <code>fs.watch()</code> 而不是 <code>fs.watchFile()</code> 和 <code>fs.unwatchFile()</code>。</p>
+<h2>fs.utimes(path, atime, mtime, callback)<span><a class="mark" href="fs.html#fs_fs_utimes_path_atime_mtime_callback" id="fs_fs_utimes_path_atime_mtime_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_utimes_path_atime_mtime_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_utimes_path_atime_mtime_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.2</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>atime</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>mtime</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>改变指定的路径所指向的文件的文件时间戳。</p>
+<p>注意：<code>atime</code> 和 <code>mtime</code> 参数遵循以下规则：</p>
+<ul>
+<li>值应该是一个以秒为单位的 Unix 时间戳。
+例如，<code>Date.now()</code> 返回毫秒，所以在传入前应该除以1000。</li>
+<li>如果值是一个数值字符串，如 <code>'123456789'</code>，则该值会被转换为对应的数值。</li>
+<li>如果值是 <code>NaN</code> 或 <code>Infinity</code>，则该值会被转换为 <code>Date.now() / 1000</code>。</li>
+</ul>
+<h2>fs.utimesSync(path, atime, mtime)<span><a class="mark" href="fs.html#fs_fs_utimessync_path_atime_mtime" id="fs_fs_utimessync_path_atime_mtime">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_utimessync_path_atime_mtime">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_utimessync_path_atime_mtime.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.4.2</span>
+</div><ul>
+<li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>atime</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>mtime</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<p><a href="fs.html#fs_fs_futimes_fd_atime_mtime_callback"><code>fs.utimes()</code></a> 的同步版本。返回 <code>undefined</code>。</p>
+<h2>fs.watch(filename[, options][, listener])<span><a class="mark" href="fs.html#fs_fs_watch_filename_options_listener" id="fs_fs_watch_filename_options_listener">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_watch_filename_options_listener">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_watch_filename_options_listener.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.10</span>
+</div><ul>
+<li><code>filename</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>persistent</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a> 指明如果文件正在被监视，进程是否应该继续运行。默认 = <code>true</code></li>
+<li><code>recursive</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a> 指明是否全部子目录应该被监视，或只是当前目录。
+适用于当一个目录被指定时，且只在支持的平台（详见 <a href="fs.html#fs_caveats">Caveats</a>）。默认 = <code>false</code></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 指定用于传给监听器的文件名的字符编码。默认 = <code>'utf8'</code></li>
+</ul>
+</li>
+<li><code>listener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>监视 <code>filename</code> 的变化，<code>filename</code> 可以是一个文件或一个目录。
+返回的对象是一个 <a href="fs.html#fs_class_fs_fswatcher"><code>fs.FSWatcher</code></a>。</p>
+<p>第二个参数是可选的。
+如果提供的 <code>options</code> 是一个字符串，则它指定了 <code>encoding</code>。
+否则 <code>options</code> 应该以一个对象传入。</p>
+<p>监听器回调有两个参数 <code>(eventType, filename)</code>。
+<code>eventType</code> 可以是 <code>'rename'</code> 或 <code>'change'</code>，<code>filename</code> 是触发事件的文件的名称。</p>
+<p>注意，在大多数平台，当一个文件出现或消失在一个目录里时，<code>'rename'</code> 会被触发。</p>
+<p>还需要注意，监听器回调是绑定在由 <a href="fs.html#fs_class_fs_fswatcher"><code>fs.FSWatcher</code></a> 触发的 <code>'change'</code> 事件上，但它跟 <code>eventType</code> 的 <code>'change'</code> 值不是同一个东西。</p>
+<h3>说明<span><a class="mark" href="fs.html#fs_caveats" id="fs_caveats">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_caveats">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/caveats.md">参与翻译</a></p>
+<!--type=misc-->
+<p><code>fs.watch</code> API 不是 100％ 跨平台一致的，且在某些情况下不可用。</p>
+<p>递归选项只支持 OS X 和 Windows。</p>
+<h4>可用性<span><a class="mark" href="fs.html#fs_availability" id="fs_availability">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_availability">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/availability.md">参与翻译</a></p>
+<!--type=misc-->
+<p>该特性依赖于底层操作系统提供的一种方法来通知文件系统的变化。</p>
+<ul>
+<li>在 Linux 系统中，使用 <a href="http://man7.org/linux/man-pages/man7/inotify.7.html"><code>inotify</code></a>。</li>
+<li>在 BSD 系统中，使用 <a href="https://www.freebsd.org/cgi/man.cgi?kqueue"><code>kqueue</code></a>。</li>
+<li>在 OS X 系统中，对文件使用 <a href="https://www.freebsd.org/cgi/man.cgi?kqueue"><code>kqueue</code></a>，对目录使用 <a href="https://developer.apple.com/library/mac/documentation/Darwin/Conceptual/FSEvents_ProgGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40005289-CH1-SW1"><code>FSEvents</code></a>。</li>
+<li>在 SunOS 系统（包括 Solaris 和 SmartOS）中，使用 <a href="http://illumos.org/man/port_create"><code>event ports</code></a>。</li>
+<li>在 Windows 系统中，该特性依赖 <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa365465%28v=vs.85%29.aspx"><code>ReadDirectoryChangesW</code></a>。</li>
+<li>在 Aix 系统中，该特性依赖 <a href="https://www.ibm.com/developerworks/aix/library/au-aix_event_infrastructure/"><code>AHAFS</code></a> 必须是启动的。</li>
+</ul>
+<p>如果底层功能因某些原因不可用，则 <code>fs.watch</code> 也无法正常工作。
+例如，当使用虚拟化软件如 Vagrant、Docker 等时，在网络文件系统（NFS、SMB 等）或主文件系统中监视文件或目录可能是不可靠的。</p>
+<p>你仍然可以使用 <code>fs.watchFile</code>，它使用状态查询，但它较慢且更不可靠。</p>
+<h4>索引节点<span><a class="mark" href="fs.html#fs_inodes" id="fs_inodes">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_inodes">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/inodes.md">参与翻译</a></p>
+<!--type=misc-->
+<p>在 Linux 或 OS X 系统中，<code>fs.watch()</code> 解析路径到一个<a href="https://en.wikipedia.org/wiki/Inode">索引节点</a>，并监视该索引节点。
+如果监视的路径被删除或重建，则它会被分配一个新的索引节点。
+监视器会发出一个删除事件，但会继续监视<strong>原始的</strong>索引节点。
+新建的索引节点的事件不会被触发。
+这是正常的行为。</p>
+<h4>文件名参数<span><a class="mark" href="fs.html#fs_filename_argument" id="fs_filename_argument">#</a></span></h4><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_filename_argument">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/filename_argument.md">参与翻译</a></p>
+<!--type=misc-->
+<p>回调中提供的 <code>filename</code> 参数仅在 Linux 和 Windows 系统上支持。
+即使在支持的平台中，<code>filename</code> 也不能保证提供。
+因此，不要以为 <code>filename</code> 参数总是在回调中提供，如果它是空的，需要有一定的后备逻辑。</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">watch</span><span class="sh_symbol">(</span><span class="sh_string">'somedir'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>eventType<span class="sh_symbol">,</span> filename<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`事件类型是<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>eventType<span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>filename<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`提供的文件名<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>filename<span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+    console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'未提供文件名'</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<h2>fs.watchFile(filename[, options], listener)<span><a class="mark" href="fs.html#fs_fs_watchfile_filename_options_listener" id="fs_fs_watchfile_filename_options_listener">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_watchfile_filename_options_listener">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_watchfile_filename_options_listener.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.31</span>
+</div><ul>
+<li><code>filename</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>persistent</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a></li>
+<li><code>interval</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+</li>
+<li><code>listener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>监视 <code>filename</code> 的变化。
+回调 <code>listener</code> 会在每次访问文件时被调用。</p>
+<p><code>options</code> 参数可被省略。
+如果提供的话，它应该是一个对象。
+<code>options</code> 对象可能包含一个名为 <code>persistent</code> 的布尔值，表明当文件正在被监视时，进程是否应该继续运行。
+<code>options</code> 对象可以指定一个 <code>interval</code> 属性，表示目标应该每隔多少毫秒被轮询。
+默认值为 <code>{ persistent: true, interval: 5007 }</code>。</p>
+<p><code>listener</code> 有两个参数，当前的状态对象和以前的状态对象：</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">watchFile</span><span class="sh_symbol">(</span><span class="sh_string">'message.text'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>curr<span class="sh_symbol">,</span> prev<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`the current mtime is<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>curr<span class="sh_symbol">.</span>mtime<span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`the previous mtime was<span class="sh_symbol">:</span> $<span class="sh_cbracket">{</span>prev<span class="sh_symbol">.</span>mtime<span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>These stat objects are instances of <code>fs.Stat</code>.
+这里的状态对象是 <code>fs.Stat</code> 实例。</p>
+<p>如果你想在文件被修改而不只是访问时得到通知，则需要比较 <code>curr.mtime</code> 和 <code>prev.mtime</code>。</p>
+<p>注意：当一个 <code>fs.watchFile</code> 的运行结果是一个 <code>ENOENT</code> 错误时，它会调用监听器一次，且将所有字段置零（或将日期设为 Unix 纪元）。
+在 Windows 中，<code>blksize</code> 和 <code>blocks</code> 字段会是 <code>undefined</code> 而不是零。
+如果文件是在那之后创建的，则监听器会被再次调用，且带上最新的状态对象。
+这是在 v0.10 版之后在功能上的变化。</p>
+<p>注意：<a href="fs.html#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a> 比 <code>fs.watchFile</code> 和 <code>fs.unwatchFile</code> 更高效。
+可能的话，应该使用 <code>fs.watch</code> 而不是 <code>fs.watchFile</code> 和 <code>fs.unwatchFile</code>。</p>
+<h2>fs.write(fd, buffer, offset, length[, position], callback)<span><a class="mark" href="fs.html#fs_fs_write_fd_buffer_offset_length_position_callback" id="fs_fs_write_fd_buffer_offset_length_position_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_write_fd_buffer_offset_length_position_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_write_fd_buffer_offset_length_position_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.2</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>buffer</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>offset</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>length</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>position</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>写入 <code>buffer</code> 到 <code>fd</code> 指定的文件。</p>
+<p><code>offset</code> 决定 buffer 中被写入的部分，<code>length</code> 是一个整数，指定要写入的字节数。</p>
+<p><code>position</code> 指向从文件开始写入数据的位置的偏移量。
+如果 <code>typeof position !== 'number'</code>，则数据从当前位置写入。详见 <a href="http://man7.org/linux/man-pages/man2/pwrite.2.html">pwrite(2)</a>。</p>
+<p>回调有三个参数 <code>(err, written, buffer)</code>，其中 <code>written</code> 指定从 <code>buffer</code> 写入了多少<strong>字节</strong>。</p>
+<p>注意，多次对同一文件使用 <code>fs.write</code> 且不等待回调，是不安全的。
+对于这种情况，强烈推荐使用 <code>fs.createWriteStream</code>。</p>
+<p>在 Linux 上，当文件以追加模式打开时，指定位置的写入是不起作用的。
+内核会忽略位置参数，并总是将数据追加到文件的末尾。</p>
+<h2>fs.write(fd, data[, position[, encoding]], callback)<span><a class="mark" href="fs.html#fs_fs_write_fd_data_position_encoding_callback" id="fs_fs_write_fd_data_position_encoding_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_write_fd_data_position_encoding_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_write_fd_data_position_encoding_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.5</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>position</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>写入 <code>data</code> 到 <code>fd</code> 指定的文件。
+如果 <code>data</code> 不是一个 Buffer 实例，则该值将被强制转换为一个字符串。</p>
+<p><code>position</code> 指向从文件开始写入数据的位置的偏移量。
+如果 <code>typeof position !== 'number'</code>，则数据从当前位置写入。详见 <a href="http://man7.org/linux/man-pages/man2/pwrite.2.html">pwrite(2)</a>。</p>
+<p><code>encoding</code> 是期望的字符串编码。</p>
+<p>回调有三个参数 <code>(err, written, string)</code>，其中 <code>written</code> 指定传入的字符串被写入多少字节。
+注意，写入的字节与字符串的字符是不同的。详见 <a href="buffer.html#buffer_class_method_buffer_bytelength_string_encoding"><code>Buffer.byteLength</code></a>。</p>
+<p>不同于写入 <code>buffer</code>，该方法整个字符串必须被写入。
+不能指定子字符串。
+这是因为结果数据的字节偏移量可能与字符串的偏移量不同。</p>
+<p>注意，多次对同一文件使用 <code>fs.write</code> 且不等待回调，是不安全的。
+对于这种情况，强烈推荐使用 <code>fs.createWriteStream</code>。</p>
+<p>在 Linux 上，当文件以追加模式打开时，指定位置的写入是不起作用的。
+内核会忽略位置参数，并总是将数据追加到文件的末尾。</p>
+<h2>fs.writeFile(file, data[, options], callback)<span><a class="mark" href="fs.html#fs_fs_writefile_file_data_options_callback" id="fs_fs_writefile_file_data_options_callback">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_writefile_file_data_options_callback">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_writefile_file_data_options_callback.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.29</span>
+</div><ul>
+<li><code>file</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 文件名或文件描述符</li>
+<li><code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type" class="type">&lt;Null&gt;</a> 默认 = <code>'utf8'</code></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 默认 = <code>0o666</code></li>
+<li><code>flag</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'w'</code></li>
+</ul>
+</li>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+</ul>
+<p>异步地写入数据到文件，如果文件已经存在，则替代文件。
+<code>data</code> 可以是一个字符串或一个 buffer。</p>
+<p>如果 <code>data</code> 是一个 buffer，则忽略 <code>encoding</code> 选项。它默认为 <code>'utf8'</code>。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">writeFile</span><span class="sh_symbol">(</span><span class="sh_string">'message.txt'</span><span class="sh_symbol">,</span> <span class="sh_string">'Hello Node.js'</span><span class="sh_symbol">,</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_keyword">throw</span> err<span class="sh_symbol">;</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'It</span><span class="sh_specialchar">\'</span><span class="sh_string">s saved!'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>如果 <code>options</code> 是一个字符串，则它指定了字符编码。例如：</p>
+<pre class="sh_sourceCode"><code class="lang-js">fs<span class="sh_symbol">.</span><span class="sh_function">writeFile</span><span class="sh_symbol">(</span><span class="sh_string">'message.txt'</span><span class="sh_symbol">,</span> <span class="sh_string">'Hello Node.js'</span><span class="sh_symbol">,</span> <span class="sh_string">'utf8'</span><span class="sh_symbol">,</span> callback<span class="sh_symbol">);</span>
+</code></pre>
+<p>任何指定的文件描述符必须支持写入。</p>
+<p>注意，多次对同一文件使用 <code>fs.writeFile</code> 且不等待回调，是不安全的。
+对于这种情况，强烈推荐使用 <code>fs.createWriteStream</code>。</p>
+<p><strong>注意：如果 <code>file</code> 指定为一个文件描述符，则它不会被自动关闭。</strong></p>
+<h2>fs.writeFileSync(file, data[, options])<span><a class="mark" href="fs.html#fs_fs_writefilesync_file_data_options" id="fs_fs_writefilesync_file_data_options">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_writefilesync_file_data_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_writefilesync_file_data_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.29</span>
+</div><ul>
+<li><code>file</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 文件名或文件描述符</li>
+<li><code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a><ul>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Null_type" class="type">&lt;Null&gt;</a> 默认 = <code>'utf8'</code></li>
+<li><code>mode</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a> 默认 = <code>0o666</code></li>
+<li><code>flag</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 默认 = <code>'w'</code></li>
+</ul>
+</li>
+</ul>
+<p><a href="fs.html#fs_fs_writefile_file_data_options_callback"><code>fs.writeFile()</code></a> 的同步版本。返回 <code>undefined</code>。</p>
+<h2>fs.writeSync(fd, buffer, offset, length[, position])<span><a class="mark" href="fs.html#fs_fs_writesync_fd_buffer_offset_length_position" id="fs_fs_writesync_fd_buffer_offset_length_position">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_writesync_fd_buffer_offset_length_position">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_writesync_fd_buffer_offset_length_position.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>buffer</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>offset</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>length</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>position</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+</ul>
+<h2>fs.writeSync(fd, data[, position[, encoding]])<span><a class="mark" href="fs.html#fs_fs_writesync_fd_data_position_encoding" id="fs_fs_writesync_fd_data_position_encoding">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_writesync_fd_data_position_encoding">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_writesync_fd_data_position_encoding.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.5</span>
+</div><ul>
+<li><code>fd</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
+<li><code>position</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Integer&gt;</a></li>
+<li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p><a href="fs.html#fs_fs_write_fd_buffer_offset_length_position_callback"><code>fs.write()</code></a> 的同步版本。返回写入的字节数。</p>
+<h2>fs 常量<span><a class="mark" href="fs.html#fs_fs_constants_1" id="fs_fs_constants_1">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_fs_constants_1">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/fs_constants_1.md">参与翻译</a></p>
+<p>以下常量由 <code>fs.constants</code> 输出。
+<strong>注意：</strong>不是所有的常量在每一个操作系统上都是可用的。</p>
+<h3>文件访问常量<span><a class="mark" href="fs.html#fs_file_access_constants" id="fs_file_access_constants">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_file_access_constants">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/file_access_constants.md">参与翻译</a></p>
+<p>以下常量用于 <a href="fs.html#fs_fs_access_path_mode_callback"><code>fs.access()</code></a>。</p>
+<table>
+  <tbody><tr>
+    <th>常量</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <td><code>F_OK</code></td>
+    <td>该标志表明文件对于调用进程是可见的。</td>
+  </tr>
+  <tr>
+    <td><code>R_OK</code></td>
+    <td>该标志表明文件可被调用进程读取。</td>
+  </tr>
+  <tr>
+    <td><code>W_OK</code></td>
+    <td>该标志表明文件可被调用进程写入。</td>
+  </tr>
+  <tr>
+    <td><code>X_OK</code></td>
+    <td>该标志表明文件可被调用进程执行。</td>
+  </tr>
+</tbody></table>
+
+
+<h3>文件打开常量<span><a class="mark" href="fs.html#fs_file_open_constants" id="fs_file_open_constants">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_file_open_constants">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/file_open_constants.md">参与翻译</a></p>
+<p>以下常量用于 <code>fs.open()</code>。</p>
+<table>
+  <tbody><tr>
+    <th>常量</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <td><code>O_RDONLY</code></td>
+    <td>该标志表明打开一个文件用于只读访问。</td>
+  </tr>
+  <tr>
+    <td><code>O_WRONLY</code></td>
+    <td>该标志表明打开一个文件用于只写访问。</td>
+  </tr>
+  <tr>
+    <td><code>O_RDWR</code></td>
+    <td>该标志表明打开一个文件用于读写访问。</td>
+  </tr>
+  <tr>
+    <td><code>O_CREAT</code></td>
+    <td>该标志表明如果文件不存在则创建一个文件。</td>
+  </tr>
+  <tr>
+    <td><code>O_EXCL</code></td>
+    <td>该标志表明如果设置了 <code>O_CREAT</code> 标志且文件已经存在，则打开一个文件应该失败。</td>
+  </tr>
+  <tr>
+    <td><code>O_NOCTTY</code></td>
+    <td>该标志表明如果路径是一个终端设备，则打开该路径不应该造成该终端变成进程的控制终端（如果进程还没有终端）。</td>
+  </tr>
+  <tr>
+    <td><code>O_TRUNC</code></td>
+    <td>该标志表明如果文件存在且为一个常规文件、且文件被成功打开为写入访问，则它的长度应该被截断至零。</td>
+  </tr>
+  <tr>
+    <td><code>O_APPEND</code></td>
+    <td>该标志表明数据会被追加到文件的末尾。</td>
+  </tr>
+  <tr>
+    <td><code>O_DIRECTORY</code></td>
+    <td>该标志表明如果路径不是一个目录，则打开应该失败。</td>
+  </tr>
+  <tr>
+  <td><code>O_NOATIME</code></td>
+    <td>该标志表明文件系统的读取访问权不再引起相关文件 <code>atime</code> 信息的更新。该标志只在 Linux 操作系统有效。</td>
+  </tr>
+  <tr>
+    <td><code>O_NOFOLLOW</code></td>
+    <td>该标志表明如果路径是一个符号链接，则打开应该失败。</td>
+  </tr>
+  <tr>
+    <td><code>O_SYNC</code></td>
+    <td>该标志表明文件打开用于同步 I/O。</td>
+  </tr>
+  <tr>
+    <td><code>O_SYMLINK</code></td>
+    <td>该标志表明打开符号链接自身，而不是它指向的资源。</td>
+  </tr>
+  <tr>
+    <td><code>O_DIRECT</code></td>
+    <td>当设置它时，会尝试最小化文件 I/O 的缓存效果。</td>
+  </tr>
+  <tr>
+    <td><code>O_NONBLOCK</code></td>
+    <td>该标志表明当可能时以非阻塞模式打开文件。</td>
+  </tr>
+</tbody></table>
+
+
+<h3>文件类型常量<span><a class="mark" href="fs.html#fs_file_type_constants" id="fs_file_type_constants">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_file_type_constants">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/file_type_constants.md">参与翻译</a></p>
+<p>以下常量用于 <a href="fs.html#fs_class_fs_stats"><code>fs.Stats</code></a> 对象中用于决定一个文件的类型的 <code>mode</code> 属性。</p>
+<table>
+  <tbody><tr>
+    <th>常量</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <td><code>S_IFMT</code></td>
+    <td>用于提取文件类型码的位掩码。</td>
+  </tr>
+  <tr>
+    <td><code>S_IFREG</code></td>
+    <td>表示一个常规文件的文件类型常量。</td>
+  </tr>
+  <tr>
+    <td><code>S_IFDIR</code></td>
+    <td>表示一个目录的文件类型常量。</td>
+  </tr>
+  <tr>
+    <td><code>S_IFCHR</code></td>
+    <td>表示一个面向字符的设备文件的文件类型常量。</td>
+  </tr>
+  <tr>
+    <td><code>S_IFBLK</code></td>
+    <td>表示一个面向块的设备文件的文件类型常量。</td>
+  </tr>
+  <tr>
+    <td><code>S_IFIFO</code></td>
+    <td>表示一个 FIFO/pipe 的文件类型常量。</td>
+  </tr>
+  <tr>
+    <td><code>S_IFLNK</code></td>
+    <td>表示一个符号链接的文件类型常量。</td>
+  </tr>
+  <tr>
+    <td><code>S_IFSOCK</code></td>
+    <td>表示一个 socket 的文件类型常量。</td>
+  </tr>
+</tbody></table>
+
+
+<h3>文件模式常量<span><a class="mark" href="fs.html#fs_file_mode_constants" id="fs_file_mode_constants">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/fs.html#fs_file_mode_constants">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/fs/file_mode_constants.md">参与翻译</a></p>
+<p>以下常量用于 <a href="fs.html#fs_class_fs_stats"><code>fs.Stats</code></a> 对象中用于决定一个文件访问权限的 <code>mode</code> 属性。</p>
+<table>
+  <tbody><tr>
+    <th>常量</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <td><code>S_IRWXU</code></td>
+    <td>该文件模式表明可被所有者读取、写入、执行。</td>
+  </tr>
+  <tr>
+    <td><code>S_IRUSR</code></td>
+    <td>该文件模式表明可被所有者读取。</td>
+  </tr>
+  <tr>
+    <td><code>S_IWUSR</code></td>
+    <td>该文件模式表明可被所有者写入。</td>
+  </tr>
+  <tr>
+    <td><code>S_IXUSR</code></td>
+    <td>该文件模式表明可被所有者执行。</td>
+  </tr>
+  <tr>
+    <td><code>S_IRWXG</code></td>
+    <td>该文件模式表明可被群组读取、写入、执行。</td>
+  </tr>
+  <tr>
+    <td><code>S_IRGRP</code></td>
+    <td>该文件模式表明可被群组读取。</td>
+  </tr>
+  <tr>
+    <td><code>S_IWGRP</code></td>
+    <td>该文件模式表明可被群组写入。</td>
+  </tr>
+  <tr>
+    <td><code>S_IXGRP</code></td>
+    <td>该文件模式表明可被群组执行。</td>
+  </tr>
+  <tr>
+    <td><code>S_IRWXO</code></td>
+    <td>该文件模式表明可被其他人读取、写入、执行。</td>
+  </tr>
+  <tr>
+    <td><code>S_IROTH</code></td>
+    <td>该文件模式表明可被其他人读取。</td>
+  </tr>
+  <tr>
+    <td><code>S_IWOTH</code></td>
+    <td>该文件模式表明可被其他人写入。</td>
+  </tr>
+  <tr>
+    <td><code>S_IXOTH</code></td>
+    <td>该文件模式表明可被其他人执行。</td>
+  </tr>
+</tbody></table>
+
+
+      </div>
+    </div>
+  </div>
+  <script src="res/api.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+</body></html>

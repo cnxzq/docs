@@ -1,0 +1,35 @@
+CATALOG
+{
+background-color: #ffffff;
+width: 100%;
+}
+CD
+{
+display: block;
+margin-bottom: 30pt;
+margin-left: 0;
+}
+TITLE
+{
+color: #FF0000;
+font-size: 20pt;
+}
+ARTIST
+{
+color: #0000FF;
+font-size: 20pt;
+}
+COUNTRY,PRICE,YEAR,COMPANY
+{
+display: block;
+color: #000000;
+margin-left: 20pt;
+}<br><hr><br>
+ This file is decompiled from a .CHM file <br>
+by an UNREGISTERED version of Easy CHM. <br>
+You can download Easy CHM at :
+
+<a href="http://www.etextwizard.com/" target=_blank>
+http://www.eTextWizard.com</a> <br><br>
+
+

@@ -1,0 +1,39 @@
+<html>
+<head>
+
+<script type="text/javascript">
+message="最好的学习方法，是学习实例。-www.W3School.com.cn"
+pos=0
+maxlength=message.length+1
+
+function writemsg()
+{
+if (pos<maxlength)
+	{
+	txt=message.substring(pos,0)
+	document.forms[0].msgfield.value=txt
+	pos++ 
+	timer=setTimeout("writemsg()", 50)
+	}
+}
+function stoptimer()
+{
+clearTimeout(timer)
+}
+</script>
+</head>
+
+<body onload="writemsg()" onunload="stoptimer()">
+<form>
+<input id="msgfield" size="65">
+</form>
+</body>
+</html><br><hr><br>
+ This file is decompiled from a .CHM file <br>
+by an UNREGISTERED version of Easy CHM. <br>
+You can download Easy CHM at :
+
+<a href="http://www.etextwizard.com/" target=_blank>
+http://www.eTextWizard.com</a> <br><br>
+
+

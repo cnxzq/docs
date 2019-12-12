@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://nodejs.cn/api/cli.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>命令行选项 | Node.js API 文档</title>
+  <link rel="stylesheet" href="res/api.css">
+</head>
+<body class="alt apidoc" id="api-section-cli">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+</ul>
+<div class="line"></div>
+
+<ul>
+<li><a class="nav-assert" href="assert.html">Assert (断言)</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons" href="addons.html">C/C++ 插件</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+<li><a class="nav-cli active" href="./命令行选项 _ Node.js API 文档_files/命令行选项 _ Node.js API 文档.html">CLI (命令行选项)</a></li>
+<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto (加密)</a></li>
+<li><a class="nav-debugger" href="debugger.html">Debugger (调试器)</a></li>
+<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+<li><a class="nav-errors" href="errors.html">Error (错误)</a></li>
+<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+<li><a class="nav-fs" href="fs.html">File System (文件系统)</a></li>
+<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+<li><a class="nav-http" href="http.html">HTTP</a></li>
+<li><a class="nav-https" href="https.html">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring" href="querystring.html">Query Strings (查询字符串)</a></li>
+<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+<li><a class="nav-timers" href="timers.html">Timer (定时器)</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty" href="tty.html">TTY (终端)</a></li>
+<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+</ul>
+<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="cli" class="interior">
+      <header>
+        <h1>Node.js v6.10.2 文档</h1>
+        <div id="gtoc">
+          <p>
+            <a href="" name="toc">返回文档首页</a>
+            <!--<a href="/api/all.html">单页面显示</a> |-->
+            <!--<a href="/api/cli.json">JSON格式</a> |-->
+            <!--<a href="/api/en/cli.html">查看英文版</a>-->
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>目录</h2>
+        <ul>
+<li><span class="stability_undefined"><a href="cli.html#cli_command_line_options">命令行选项</a></span><ul>
+<li><span class="stability_undefined"><a href="cli.html#cli_synopsis">概要</a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_options">选项</a></span><ul>
+<li><span class="stability_undefined"><a href="cli.html#cli_v_version"><code>-v</code>, <code>--version</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_h_help"><code>-h</code>, <code>--help</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_e_eval_script"><code>-e</code>, <code>--eval "script"</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_p_print_script"><code>-p</code>, <code>--print "script"</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_c_check"><code>-c</code>, <code>--check</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_i_interactive"><code>-i</code>, <code>--interactive</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_r_require_module"><code>-r</code>, <code>--require module</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_no_deprecation"><code>--no-deprecation</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_trace_deprecation"><code>--trace-deprecation</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_throw_deprecation"><code>--throw-deprecation</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_no_warnings"><code>--no-warnings</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_trace_warnings"><code>--trace-warnings</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_trace_sync_io"><code>--trace-sync-io</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_zero_fill_buffers"><code>--zero-fill-buffers</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_preserve_symlinks"><code>--preserve-symlinks</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_track_heap_objects"><code>--track-heap-objects</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_prof_process"><code>--prof-process</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_v8_options"><code>--v8-options</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_tls_cipher_list_list"><code>--tls-cipher-list=list</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_enable_fips"><code>--enable-fips</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_force_fips"><code>--force-fips</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_openssl_config_file"><code>--openssl-config=file</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_icu_data_dir_file"><code>--icu-data-dir=file</code></a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="cli.html#cli_environment_variables">环境变量</a></span><ul>
+<li><span class="stability_undefined"><a href="cli.html#cli_node_debug_module"><code>NODE_DEBUG=module[,…]</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_node_path_path"><code>NODE_PATH=path[:…]</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_node_disable_colors_1"><code>NODE_DISABLE_COLORS=1</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_node_icu_data_file"><code>NODE_ICU_DATA=file</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_node_repl_history_file"><code>NODE_REPL_HISTORY=file</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_node_tty_unsafe_async_1"><code>NODE_TTY_UNSAFE_ASYNC=1</code></a></span></li>
+<li><span class="stability_undefined"><a href="cli.html#cli_node_extra_ca_certs_file"><code>NODE_EXTRA_CA_CERTS=file</code></a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>命令行选项<span><a class="mark" href="cli.html#cli_command_line_options" id="cli_command_line_options">#</a></span></h1><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_command_line_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/command_line_options.md">参与翻译</a></p>
+<!--type=misc-->
+<p>Node.js 自带了各种命令行选项。
+这些选项对外暴露了内置调试、多种执行脚本的方式、以及其他有用的运行时选项。</p>
+<p>要在终端中查看本文档作为操作手册，运行 <code>man node</code>。</p>
+<h2>概要<span><a class="mark" href="cli.html#cli_synopsis" id="cli_synopsis">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_synopsis">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/synopsis.md">参与翻译</a></p>
+<p><code>node [options] [v8 options] [script.js | -e "script"] [arguments]</code></p>
+<p><code>node debug [script.js | -e "script" | &lt;host&gt;:&lt;port&gt;] …</code></p>
+<p><code>node --v8-options</code></p>
+<p>执行时不带参数，会启动 <a href="repl.html">REPL</a>。</p>
+<p>关于 <code>node debug</code> 的更多信息，详见<a href="debugger.html">调试器</a>文档。</p>
+<h2>选项<span><a class="mark" href="cli.html#cli_options" id="cli_options">#</a></span></h2>
+<h3><code>-v</code>, <code>--version</code><span><a class="mark" href="cli.html#cli_v_version" id="cli_v_version">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_v_version">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/v_version.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.3</span>
+</div><p>打印 node 的版本号。</p>
+<h3><code>-h</code>, <code>--help</code><span><a class="mark" href="cli.html#cli_h_help" id="cli_h_help">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_h_help">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/h_help.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.3</span>
+</div><p>打印 node 的命令行选项。
+此选项的输出不如本文档详细。</p>
+<h3><code>-e</code>, <code>--eval "script"</code><span><a class="mark" href="cli.html#cli_e_eval_script" id="cli_e_eval_script">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_e_eval_script">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/e_eval_script.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.2</span>
+</div><p>把跟随的参数作为 JavaScript 来执行。
+在 REPL 中预定义的模块也可以在 <code>script</code> 中使用。</p>
+<h3><code>-p</code>, <code>--print "script"</code><span><a class="mark" href="cli.html#cli_p_print_script" id="cli_p_print_script">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_p_print_script">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/p_print_script.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.6.4</span>
+</div><p>与 <code>-e</code> 相同，但会打印结果。</p>
+<h3><code>-c</code>, <code>--check</code><span><a class="mark" href="cli.html#cli_c_check" id="cli_c_check">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_c_check">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/c_check.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v5.0.0</span>
+</div><p>在不执行的情况下，对脚本进行语法检查。</p>
+<h3><code>-i</code>, <code>--interactive</code><span><a class="mark" href="cli.html#cli_i_interactive" id="cli_i_interactive">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_i_interactive">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/i_interactive.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.7.7</span>
+</div><p>打开 REPL，即使 stdin 看起来不像终端。</p>
+<h3><code>-r</code>, <code>--require module</code><span><a class="mark" href="cli.html#cli_r_require_module" id="cli_r_require_module">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_r_require_module">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/r_require_module.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v1.6.0</span>
+</div><p>在启动时预加载指定的模块。</p>
+<p>遵循 <code>require()</code> 的模块解析规则。
+<code>module</code> 可以是一个文件的路径，或一个 node 模块名称。</p>
+<h3><code>--no-deprecation</code><span><a class="mark" href="cli.html#cli_no_deprecation" id="cli_no_deprecation">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_no_deprecation">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/no_deprecation.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.8.0</span>
+</div><p>静默废弃的警告。</p>
+<h3><code>--trace-deprecation</code><span><a class="mark" href="cli.html#cli_trace_deprecation" id="cli_trace_deprecation">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_trace_deprecation">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/trace_deprecation.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.8.0</span>
+</div><p>打印废弃的堆栈跟踪。</p>
+<h3><code>--throw-deprecation</code><span><a class="mark" href="cli.html#cli_throw_deprecation" id="cli_throw_deprecation">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_throw_deprecation">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/throw_deprecation.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.14</span>
+</div><p>抛出废弃的错误。</p>
+<h3><code>--no-warnings</code><span><a class="mark" href="cli.html#cli_no_warnings" id="cli_no_warnings">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_no_warnings">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/no_warnings.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v6.0.0</span>
+</div><p>静默一切进程警告（包括废弃警告）。</p>
+<h3><code>--trace-warnings</code><span><a class="mark" href="cli.html#cli_trace_warnings" id="cli_trace_warnings">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_trace_warnings">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/trace_warnings.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v6.0.0</span>
+</div><p>打印进程警告的堆栈跟踪（包括废弃警告）。</p>
+<h3><code>--trace-sync-io</code><span><a class="mark" href="cli.html#cli_trace_sync_io" id="cli_trace_sync_io">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_trace_sync_io">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/trace_sync_io.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v2.1.0</span>
+</div><p>每当事件循环的第一帧之后检测到同步 I/O 时，打印堆栈跟踪。</p>
+<h3><code>--zero-fill-buffers</code><span><a class="mark" href="cli.html#cli_zero_fill_buffers" id="cli_zero_fill_buffers">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_zero_fill_buffers">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/zero_fill_buffers.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v6.0.0</span>
+</div><p>自动用 0 填充所有新分配的 <a href="buffer.html#buffer_buffer">Buffer</a> 和 <a href="buffer.html#buffer_class_slowbuffer">SlowBuffer</a> 实例。</p>
+<h3><code>--preserve-symlinks</code><span><a class="mark" href="cli.html#cli_preserve_symlinks" id="cli_preserve_symlinks">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_preserve_symlinks">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/preserve_symlinks.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v6.3.0</span>
+</div><p>当解析和缓存模块时，命令模块加载器保持符号连接。</p>
+<p>默认情况下，当 Node.js 从一个被符号连接到另一块磁盘位置的路径加载一个模块时，Node.js 会解引用该连接，并使用模块的真实磁盘的实际路径，作为定位其他依赖模块的标识符和根路径。
+大多数情况下，默认行为是可接受的。
+但是，当使用符号连接的同行依赖，如下例子所描述的，如果 <code>moduleA</code> 试图引入 <code>moduleB</code> 作为一个同行依赖，默认行为就会抛出异常：</p>
+<pre class="sh_sourceCode"><code class="lang-text"><span class="sh_cbracket">{</span>appDir<span class="sh_cbracket">}</span>
+ ├── app
+ │   ├── index<span class="sh_symbol">.</span>js
+ │   └── node_modules
+ │       ├── moduleA <span class="sh_symbol">-&gt;</span> <span class="sh_cbracket">{</span>appDir<span class="sh_cbracket">}</span><span class="sh_symbol">/</span>moduleA
+ │       └── moduleB
+ │           ├── index<span class="sh_symbol">.</span>js
+ │           └── package<span class="sh_symbol">.</span>json
+ └── moduleA
+     ├── index<span class="sh_symbol">.</span>js
+     └── package<span class="sh_symbol">.</span>json
+</code></pre>
+<p><code>--preserve-symlinks</code> 命令行标志命令 Node.js 使用模块的符号路径而不是真实路径，是符号连接的同行依赖能被找到。</p>
+<p>注意，使用 <code>--preserve-symlinks</code> 会有其他方面的影响。
+比如，如果符号连接的原生模块在依赖树里来自超过一个位置，它们会加载失败。
+（Node.js 会将它们视为两个独立的模块，且会试图多次加载模块，造成抛出异常。）</p>
+<h3><code>--track-heap-objects</code><span><a class="mark" href="cli.html#cli_track_heap_objects" id="cli_track_heap_objects">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_track_heap_objects">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/track_heap_objects.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v2.4.0</span>
+</div><p>为堆快照追踪堆栈对象的分配。</p>
+<h3><code>--prof-process</code><span><a class="mark" href="cli.html#cli_prof_process" id="cli_prof_process">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_prof_process">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/prof_process.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v6.0.0</span>
+</div><p>处理 v8 分析器的输出，通过使用 v8 选项 <code>--prof</code> 生成。</p>
+<h3><code>--v8-options</code><span><a class="mark" href="cli.html#cli_v8_options" id="cli_v8_options">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_v8_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/v8_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.3</span>
+</div><p>打印 v8 命令行选项。</p>
+<p>注意，v8 选项允许单词使用破折号（<code>-</code>）或下划线（<code>_</code>）分隔。</p>
+<p>例如，<code>--stack-trace-limit</code> 等同于 <code>--stack_trace_limit</code>。</p>
+<h3><code>--tls-cipher-list=list</code><span><a class="mark" href="cli.html#cli_tls_cipher_list_list" id="cli_tls_cipher_list_list">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_tls_cipher_list_list">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/tls_cipher_list_list.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v4.0.0</span>
+</div><p>指定备用的默认 TLS 加密列表。
+（需要 Node.js 被构建为支持加密。（默认））</p>
+<h3><code>--enable-fips</code><span><a class="mark" href="cli.html#cli_enable_fips" id="cli_enable_fips">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_enable_fips">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/enable_fips.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v6.0.0</span>
+</div><p>启动时启用符合 FIPS 标准的加密。
+（需要 Node.js 使用 <code>./configure --openssl-fips</code> 构建）</p>
+<h3><code>--force-fips</code><span><a class="mark" href="cli.html#cli_force_fips" id="cli_force_fips">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_force_fips">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/force_fips.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v6.0.0</span>
+</div><p>启动时强制使用符合 FIPS 标准的加密。
+（无法通过脚本代码禁用。）
+（要求同 <code>--enable-fips</code>）</p>
+<h3><code>--openssl-config=file</code><span><a class="mark" href="cli.html#cli_openssl_config_file" id="cli_openssl_config_file">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_openssl_config_file">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/openssl_config_file.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v6.9.0</span>
+</div><p>启动时加载 OpenSSL 配置文件。
+在其他用途中，如果 Node.js 使用 <code>./configure --openssl-fips</code> 构建，它可以用于启用符合 FIPS 标准的加密。</p>
+<h3><code>--icu-data-dir=file</code><span><a class="mark" href="cli.html#cli_icu_data_dir_file" id="cli_icu_data_dir_file">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_icu_data_dir_file">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/icu_data_dir_file.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.15</span>
+</div><p>指定 ICU 数据的加载路径。
+（覆盖 <code>NODE_ICU_DATA</code>）</p>
+<h2>环境变量<span><a class="mark" href="cli.html#cli_environment_variables" id="cli_environment_variables">#</a></span></h2>
+<h3><code>NODE_DEBUG=module[,…]</code><span><a class="mark" href="cli.html#cli_node_debug_module" id="cli_node_debug_module">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_node_debug_module">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/node_debug_module.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.32</span>
+</div><p>以 <code>','</code> 分隔的应该打印调试信息的核心模块列表。</p>
+<h3><code>NODE_PATH=path[:…]</code><span><a class="mark" href="cli.html#cli_node_path_path" id="cli_node_path_path">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_node_path_path">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/node_path_path.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.32</span>
+</div><p>以 <code>':'</code> 分隔的有模块搜索路径作前缀的目录列表。</p>
+<p>注意，在 Windows 中，列表是用 <code>';'</code> 分隔的。</p>
+<h3><code>NODE_DISABLE_COLORS=1</code><span><a class="mark" href="cli.html#cli_node_disable_colors_1" id="cli_node_disable_colors_1">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_node_disable_colors_1">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/node_disable_colors_1.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.3.0</span>
+</div><p>当设为 <code>1</code> 时，不会在 REPL 中使用颜色。</p>
+<h3><code>NODE_ICU_DATA=file</code><span><a class="mark" href="cli.html#cli_node_icu_data_file" id="cli_node_icu_data_file">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_node_icu_data_file">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/node_icu_data_file.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.11.15</span>
+</div><p>ICU（Intl 对象）数据的数据路径。
+当使用 <code>small-icu</code> 编译时，扩展链接的数据。</p>
+<h3><code>NODE_REPL_HISTORY=file</code><span><a class="mark" href="cli.html#cli_node_repl_history_file" id="cli_node_repl_history_file">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_node_repl_history_file">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/node_repl_history_file.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v3.0.0</span>
+</div><p>用于存储持久性的 REPL 历史记录的文件的路径。
+默认路径是 <code>~/.node_repl_history</code>，可被该变量覆盖。
+将值设为空字符串（<code>""</code> 或 <code>" "</code>）会禁用持久性的 REPL 历史记录。</p>
+<h3><code>NODE_TTY_UNSAFE_ASYNC=1</code><span><a class="mark" href="cli.html#cli_node_tty_unsafe_async_1" id="cli_node_tty_unsafe_async_1">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_node_tty_unsafe_async_1">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/node_tty_unsafe_async_1.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: 6.4.0</span>
+</div><p>当设为 <code>1</code> 时，当输出到一个支持异步输入输出的平台的 TTY 时，写入到 <code>stdout</code> 和 <code>stderr</code> 会是非阻塞与异步的。
+设置该值会使标准输入输出在程序退出时不会被交叉存取或丢弃。
+<strong>不建议使用这个模式。</strong></p>
+<h3><code>NODE_EXTRA_CA_CERTS=file</code><span><a class="mark" href="cli.html#cli_node_extra_ca_certs_file" id="cli_node_extra_ca_certs_file">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/cli.html#cli_node_extra_ca_certs_file">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/cli/node_extra_ca_certs_file.md">参与翻译</a></p>
+<p>当设置了此选项时，根 CA 证书（如 VeriSign）会被 <code>file</code> 指定的证书扩展。
+文件应该包括一个或多个可信的 PEM 格式的证书。
+如果文件丢失或格式错误，则 <a href="process.html#process_process_emitwarning_warning_name_ctor"><code>process.emitWarning()</code></a> 会触发一个消息。</p>
+<p>注意，当一个 TLS 或 HTTPS 的客户端或服务器的 <code>ca</code> 选项的属性被显式地指定时，则指定的证书不会被使用。</p>
+
+      </div>
+    </div>
+  </div>
+  <script src="res/api.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+</body></html>

@@ -2,4 +2,3 @@
 ## 插件：https://hexo.io/plugins/ #
 ## 主题：https://hexo.io/themes/
 theme: jekyll-theme-hacker # 当前主题名称。值为false时禁用主题
-language: zh-Hans-CN # 网站使用的语言

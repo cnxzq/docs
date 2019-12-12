@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://nodejs.cn/api/assert.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>assert | Node.js API 文档</title>
+  <link rel="stylesheet" href="res/api.css">
+</head>
+<body class="alt apidoc" id="api-section-assert">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+</ul>
+<div class="line"></div>
+
+<ul>
+<li><a class="nav-assert active" href="assert.html">Assert (断言)</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons" href="addons.html">C/C++ 插件</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+<li><a class="nav-cli" href="cli.html">CLI (命令行选项)</a></li>
+<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto (加密)</a></li>
+<li><a class="nav-debugger" href="debugger.html">Debugger (调试器)</a></li>
+<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+<li><a class="nav-errors" href="errors.html">Error (错误)</a></li>
+<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+<li><a class="nav-fs" href="fs.html">File System (文件系统)</a></li>
+<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+<li><a class="nav-http" href="http.html">HTTP</a></li>
+<li><a class="nav-https" href="https.html">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring" href="querystring.html">Query Strings (查询字符串)</a></li>
+<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+<li><a class="nav-timers" href="timers.html">Timer (定时器)</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty" href="tty.html">TTY (终端)</a></li>
+<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+</ul>
+<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="assert" class="interior">
+      <header>
+        <h1>Node.js v6.10.2 文档</h1>
+        <div id="gtoc">
+          <p>
+            <a href="" name="toc">返回文档首页</a>
+            <!--<a href="/api/all.html">单页面显示</a> |-->
+            <!--<a href="/api/assert.json">JSON格式</a> |-->
+            <!--<a href="/api/en/assert.html">查看英文版</a>-->
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>目录</h2>
+        <ul>
+<li><span class="stability_2"><a href="assert.html#assert_assert">assert (断言)</a></span><ul>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_value_message">assert(value[, message])</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_deepequal_actual_expected_message">assert.deepEqual(actual, expected[, message])</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_deepstrictequal_actual_expected_message">assert.deepStrictEqual(actual, expected[, message])</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_doesnotthrow_block_error_message">assert.doesNotThrow(block[, error][, message])</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_equal_actual_expected_message">assert.equal(actual, expected[, message])</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_fail_actual_expected_message_operator">assert.fail(actual, expected, message, operator)</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_iferror_value">assert.ifError(value)</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_notdeepequal_actual_expected_message">assert.notDeepEqual(actual, expected[, message])</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_notdeepstrictequal_actual_expected_message">assert.notDeepStrictEqual(actual, expected[, message])</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_notequal_actual_expected_message">assert.notEqual(actual, expected[, message])</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_notstrictequal_actual_expected_message">assert.notStrictEqual(actual, expected[, message])</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_ok_value_message">assert.ok(value[, message])</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_strictequal_actual_expected_message">assert.strictEqual(actual, expected[, message])</a></span></li>
+<li><span class="stability_undefined"><a href="assert.html#assert_assert_throws_block_error_message">assert.throws(block[, error][, message])</a></span></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>assert (断言)<span><a class="mark" href="assert.html#assert_assert" id="assert_assert">#</a></span></h1><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert.md">参与翻译</a></p>
+<pre class="api_stability api_stability_2 sh_sourceCode">稳定性<span class="sh_symbol">:</span> <span class="sh_number">2</span> <span class="sh_symbol">-</span> 稳定的</pre><p><code>assert</code> 模块提供了一组简单的断言测试集合，可被用于测试不变量。</p>
+<h2>assert(value[, message])<span><a class="mark" href="assert.html#assert_assert_value_message" id="assert_assert_value_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_value_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_value_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.9</span>
+</div><ul>
+<li><code>value</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p><a href="assert.html#assert_assert_ok_value_message"><code>assert.ok()</code></a> 的别名。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+<span class="sh_function">assert</span><span class="sh_symbol">(</span><span class="sh_keyword">true</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过</span>
+<span class="sh_function">assert</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过</span>
+<span class="sh_function">assert</span><span class="sh_symbol">(</span><span class="sh_keyword">false</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 "AssertionError: false == true"</span>
+<span class="sh_function">assert</span><span class="sh_symbol">(</span><span class="sh_number">0</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 "AssertionError: 0 == true"</span>
+<span class="sh_function">assert</span><span class="sh_symbol">(</span><span class="sh_keyword">false</span><span class="sh_symbol">,</span> <span class="sh_string">'不是真值'</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 "AssertionError: 不是真值"</span>
+</code></pre>
+<h2>assert.deepEqual(actual, expected[, message])<span><a class="mark" href="assert.html#assert_assert_deepequal_actual_expected_message" id="assert_assert_deepequal_actual_expected_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_deepequal_actual_expected_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_deepequal_actual_expected_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>actual</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>expected</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>测试 <code>actual</code> 参数与 <code>expected</code> 参数是否深度相等。
+原始值使用相等运算符（<code>==</code>）比较。</p>
+<p>只比较可枚举的自身属性。
+<code>deepEqual()</code> 不比较对象的原型、连接符、或不可枚举的属性。
+这可能会导致一些意料之外的结果。
+例如，下面的例子不会抛出 <code>AssertionError</code>，因为 <a href="errors.html#errors_class_error">Error</a> 对象的属性是不可枚举的：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 注意：这不会抛出 AssertionError！</span>
+assert<span class="sh_symbol">.</span><span class="sh_function">deepEqual</span><span class="sh_symbol">(</span><span class="sh_predef_func">Error</span><span class="sh_symbol">(</span><span class="sh_string">'a'</span><span class="sh_symbol">),</span> <span class="sh_predef_func">Error</span><span class="sh_symbol">(</span><span class="sh_string">'b'</span><span class="sh_symbol">));</span>
+</code></pre>
+<p>深度相等意味着子对象的可枚举的自身属性也会被比较：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">const</span> obj1 <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  a <span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+    b <span class="sh_symbol">:</span> <span class="sh_number">1</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+<span class="sh_keyword">const</span> obj2 <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  a <span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+    b <span class="sh_symbol">:</span> <span class="sh_number">2</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+<span class="sh_keyword">const</span> obj3 <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  a <span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+    b <span class="sh_symbol">:</span> <span class="sh_number">1</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+<span class="sh_keyword">const</span> obj4 <span class="sh_symbol">=</span> <span class="sh_predef_func">Object</span><span class="sh_symbol">.</span><span class="sh_function">create</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">);</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">deepEqual</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">,</span> obj1<span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过，对象与自身相等</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">deepEqual</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">,</span> obj2<span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: { a: { b: 1 } } deepEqual { a: { b: 2 } }</span>
+<span class="sh_comment">// b 的值不同</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">deepEqual</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">,</span> obj3<span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过，两个对象相等</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">deepEqual</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">,</span> obj4<span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: { a: { b: 1 } } deepEqual {}</span>
+<span class="sh_comment">// 原型会被忽略</span>
+</code></pre>
+<p>如果两个值不相等，则抛出一个带有 <code>message</code> 属性的 <code>AssertionError</code>，其中 <code>message</code> 属性的值等于传入的 <code>message</code> 参数的值。
+如果 <code>message</code> 参数为 <code>undefined</code>，则赋予默认的错误信息。</p>
+<h2>assert.deepStrictEqual(actual, expected[, message])<span><a class="mark" href="assert.html#assert_assert_deepstrictequal_actual_expected_message" id="assert_assert_deepstrictequal_actual_expected_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_deepstrictequal_actual_expected_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_deepstrictequal_actual_expected_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v1.2.0</span>
+</div><ul>
+<li><code>actual</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>expected</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>大多数情况下与 <code>assert.deepEqual()</code> 一样，但有两个例外。
+首先，原始值使用全等运算符（<code>===</code>）比较。
+其次，对象的比较包括检查它们的原型是否全等。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">deepEqual</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span>a<span class="sh_symbol">:</span><span class="sh_number">1</span><span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span>a<span class="sh_symbol">:</span><span class="sh_string">'1'</span><span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过，因为 1 == '1'</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">deepStrictEqual</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span>a<span class="sh_symbol">:</span><span class="sh_number">1</span><span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span>a<span class="sh_symbol">:</span><span class="sh_string">'1'</span><span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: { a: 1 } deepStrictEqual { a: '1' }</span>
+<span class="sh_comment">// 因为 1 !== '1' 使用全等运算符</span>
+</code></pre>
+<p>如果两个值不相等，则抛出一个带有 <code>message</code> 属性的 <code>AssertionError</code>，其中 <code>message</code> 属性的值等于传入的 <code>message</code> 参数的值。
+如果 <code>message</code> 参数为 <code>undefined</code>，则赋予默认的错误信息。</p>
+<h2>assert.doesNotThrow(block[, error][, message])<span><a class="mark" href="assert.html#assert_assert_doesnotthrow_block_error_message" id="assert_assert_doesnotthrow_block_error_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_doesnotthrow_block_error_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_doesnotthrow_block_error_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>block</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li><code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp" class="type">&lt;RegExp&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>断言 <code>block</code> 函数不会抛出错误。
+查看 <a href="assert.html#assert_assert_throws_block_error_message">assert.throws()</a> 了解更多。</p>
+<p>当 <code>assert.doesNotThrow()</code> 被调用时，它会立即调用 <code>block</code> 函数。</p>
+<p>如果抛出错误且错误类型与 <code>error</code> 参数指定的相同，则抛出 <code>AssertionError</code>。
+如果错误类型不相同，或 <code>error</code> 参数是 <code>undefined</code>，则错误会被抛回给调用者。</p>
+<p>以下例子会抛出 <a href="errors.html#errors_class_typeerror">TypeError</a>，因为在断言中没有匹配的错误类型：</p>
+<pre class="sh_sourceCode"><code class="lang-js">assert<span class="sh_symbol">.</span><span class="sh_function">doesNotThrow</span><span class="sh_symbol">(</span>
+  <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">throw</span> <span class="sh_keyword">new</span> <span class="sh_predef_func">TypeError</span><span class="sh_symbol">(</span><span class="sh_string">'错误'</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+  <span class="sh_predef_func">SyntaxError</span>
+<span class="sh_symbol">);</span>
+</code></pre>
+<p>以下例子会抛出一个带有 <code>Got unwanted exception (TypeError)..</code> 信息的 <code>AssertionError</code>：</p>
+<pre class="sh_sourceCode"><code class="lang-js">assert<span class="sh_symbol">.</span><span class="sh_function">doesNotThrow</span><span class="sh_symbol">(</span>
+  <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">throw</span> <span class="sh_keyword">new</span> <span class="sh_predef_func">TypeError</span><span class="sh_symbol">(</span><span class="sh_string">'错误'</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+  <span class="sh_predef_func">TypeError</span>
+<span class="sh_symbol">);</span>
+</code></pre>
+<p>如果抛出了 <code>AssertionError</code> 且有给 <code>message</code> 参数传值，则 <code>message</code> 的值会被附加到 <code>AssertionError</code> 的信息中：</p>
+<pre class="sh_sourceCode"><code class="lang-js">assert<span class="sh_symbol">.</span><span class="sh_function">doesNotThrow</span><span class="sh_symbol">(</span>
+  <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">throw</span> <span class="sh_keyword">new</span> <span class="sh_predef_func">TypeError</span><span class="sh_symbol">(</span><span class="sh_string">'错误'</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+  <span class="sh_predef_func">TypeError</span><span class="sh_symbol">,</span>
+  <span class="sh_string">'抛出错误'</span>
+<span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: Got unwanted exception (TypeError). 抛出错误</span>
+</code></pre>
+<h2>assert.equal(actual, expected[, message])<span><a class="mark" href="assert.html#assert_assert_equal_actual_expected_message" id="assert_assert_equal_actual_expected_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_equal_actual_expected_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_equal_actual_expected_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>actual</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>expected</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>使用相等运算符（<code>==</code>）测试 <code>actual</code> 参数与 <code>expected</code> 参数是否相等。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">equal</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_number">1</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过，1 == 1</span>
+assert<span class="sh_symbol">.</span><span class="sh_function">equal</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_string">'1'</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过，1 == '1'</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">equal</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_number">2</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: 1 == 2</span>
+assert<span class="sh_symbol">.</span><span class="sh_function">equal</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span>a<span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>b<span class="sh_symbol">:</span> <span class="sh_number">1</span><span class="sh_cbracket">}}</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span>a<span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>b<span class="sh_symbol">:</span> <span class="sh_number">1</span><span class="sh_cbracket">}}</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: { a: { b: 1 } } == { a: { b: 1 } }</span>
+</code></pre>
+<p>如果两个值不相等，则抛出一个带有 <code>message</code> 属性的 <code>AssertionError</code>，其中 <code>message</code> 属性的值等于传入的 <code>message</code> 参数的值。
+如果 <code>message</code> 参数为 <code>undefined</code>，则赋予默认的错误信息。</p>
+<h2>assert.fail(actual, expected, message, operator)<span><a class="mark" href="assert.html#assert_assert_fail_actual_expected_message_operator" id="assert_assert_fail_actual_expected_message_operator">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_fail_actual_expected_message_operator">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_fail_actual_expected_message_operator.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>actual</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>expected</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>operator</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p>抛出 <code>AssertionError</code>。
+如果 <code>message</code> 不存在，则错误信息会被设为 <code>actual</code> 的值加分隔符 <code>operator</code> 再加 <code>expected</code> 的值。
+否则，错误信息为 <code>message</code> 的值。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">fail</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_number">2</span><span class="sh_symbol">,</span> <span class="sh_predef_var">undefined</span><span class="sh_symbol">,</span> <span class="sh_string">'&gt;'</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: 1 &gt; 2</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">fail</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_number">2</span><span class="sh_symbol">,</span> <span class="sh_string">'错误信息'</span><span class="sh_symbol">,</span> <span class="sh_string">'&gt;'</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: 错误信息</span>
+</code></pre>
+<h2>assert.ifError(value)<span><a class="mark" href="assert.html#assert_assert_iferror_value" id="assert_assert_iferror_value">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_iferror_value">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_iferror_value.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.97</span>
+</div><ul>
+<li><code>value</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>如果 <code>value</code> 为真，则抛出 <code>value</code>。
+可用于测试回调函数的 <code>error</code> 参数。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">ifError</span><span class="sh_symbol">(</span><span class="sh_number">0</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过</span>
+assert<span class="sh_symbol">.</span><span class="sh_function">ifError</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 1</span>
+assert<span class="sh_symbol">.</span><span class="sh_function">ifError</span><span class="sh_symbol">(</span><span class="sh_string">'error'</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 'error'</span>
+assert<span class="sh_symbol">.</span><span class="sh_function">ifError</span><span class="sh_symbol">(</span><span class="sh_keyword">new</span> <span class="sh_predef_func">Error</span><span class="sh_symbol">());</span>
+<span class="sh_comment">// 抛出 Error</span>
+</code></pre>
+<h2>assert.notDeepEqual(actual, expected[, message])<span><a class="mark" href="assert.html#assert_assert_notdeepequal_actual_expected_message" id="assert_assert_notdeepequal_actual_expected_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_notdeepequal_actual_expected_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_notdeepequal_actual_expected_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>actual</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>expected</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>测试是否不深度相等。
+与 <a href="assert.html#assert_assert_deepequal_actual_expected_message"><code>assert.deepEqual()</code></a> 相反。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+<span class="sh_keyword">const</span> obj1 <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  a <span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+    b <span class="sh_symbol">:</span> <span class="sh_number">1</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+<span class="sh_keyword">const</span> obj2 <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  a <span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+    b <span class="sh_symbol">:</span> <span class="sh_number">2</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+<span class="sh_keyword">const</span> obj3 <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span>
+  a <span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+    b <span class="sh_symbol">:</span> <span class="sh_number">1</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+<span class="sh_keyword">const</span> obj4 <span class="sh_symbol">=</span> <span class="sh_predef_func">Object</span><span class="sh_symbol">.</span><span class="sh_function">create</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">);</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notDeepEqual</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">,</span> obj1<span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: { a: { b: 1 } } notDeepEqual { a: { b: 1 } }</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notDeepEqual</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">,</span> obj2<span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过，obj1 与 obj2 不深度相等</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notDeepEqual</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">,</span> obj3<span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: { a: { b: 1 } } notDeepEqual { a: { b: 1 } }</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notDeepEqual</span><span class="sh_symbol">(</span>obj1<span class="sh_symbol">,</span> obj4<span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过，obj1 与 obj4 不深度相等</span>
+</code></pre>
+<p>如果两个值深度相等，则抛出一个带有 <code>message</code> 属性的 <code>AssertionError</code>，其中 <code>message</code> 属性的值等于传入的 <code>message</code> 参数的值。
+如果 <code>message</code> 参数为 <code>undefined</code>，则赋予默认的错误信息。</p>
+<h2>assert.notDeepStrictEqual(actual, expected[, message])<span><a class="mark" href="assert.html#assert_assert_notdeepstrictequal_actual_expected_message" id="assert_assert_notdeepstrictequal_actual_expected_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_notdeepstrictequal_actual_expected_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_notdeepstrictequal_actual_expected_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v1.2.0</span>
+</div><ul>
+<li><code>actual</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>expected</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>测试是否不深度全等。
+与 <a href="assert.html#assert_assert_deepstrictequal_actual_expected_message"><code>assert.deepStrictEqual()</code></a> 相反。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notDeepEqual</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span>a<span class="sh_symbol">:</span><span class="sh_number">1</span><span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span>a<span class="sh_symbol">:</span><span class="sh_string">'1'</span><span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: { a: 1 } notDeepEqual { a: '1' }</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notDeepStrictEqual</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span>a<span class="sh_symbol">:</span><span class="sh_number">1</span><span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_cbracket">{</span>a<span class="sh_symbol">:</span><span class="sh_string">'1'</span><span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过</span>
+</code></pre>
+<p>如果两个值深度全等，则抛出一个带有 <code>message</code> 属性的 <code>AssertionError</code>，其中 <code>message</code> 属性的值等于传入的 <code>message</code> 参数的值。
+如果 <code>message</code> 参数为 <code>undefined</code>，则赋予默认的错误信息。</p>
+<h2>assert.notEqual(actual, expected[, message])<span><a class="mark" href="assert.html#assert_assert_notequal_actual_expected_message" id="assert_assert_notequal_actual_expected_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_notequal_actual_expected_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_notequal_actual_expected_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>actual</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>expected</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>使用不等运算符（<code>!=</code>）测试是否不相等。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notEqual</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_number">2</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notEqual</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_number">1</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: 1 != 1</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notEqual</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_string">'1'</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: 1 != '1'</span>
+</code></pre>
+<p>如果两个值相等，则抛出一个带有 <code>message</code> 属性的 <code>AssertionError</code>，其中 <code>message</code> 属性的值等于传入的 <code>message</code> 参数的值。
+如果 <code>message</code> 参数为 <code>undefined</code>，则赋予默认的错误信息。</p>
+<h2>assert.notStrictEqual(actual, expected[, message])<span><a class="mark" href="assert.html#assert_assert_notstrictequal_actual_expected_message" id="assert_assert_notstrictequal_actual_expected_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_notstrictequal_actual_expected_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_notstrictequal_actual_expected_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>actual</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>expected</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>使用不全等运算符（<code>!==</code>）测试是否不全等。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notStrictEqual</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_number">2</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notStrictEqual</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_number">1</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: 1 !== 1</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">notStrictEqual</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_string">'1'</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过</span>
+</code></pre>
+<p>如果两个值全等，则抛出一个带有 <code>message</code> 属性的 <code>AssertionError</code>，其中 <code>message</code> 属性的值等于传入的 <code>message</code> 参数的值。
+如果 <code>message</code> 参数为 <code>undefined</code>，则赋予默认的错误信息。</p>
+<h2>assert.ok(value[, message])<span><a class="mark" href="assert.html#assert_assert_ok_value_message" id="assert_assert_ok_value_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_ok_value_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_ok_value_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>value</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>测试 <code>value</code> 是否为真值。
+相当于 <code>assert.equal(!!value, true, message)</code>。</p>
+<p>如果 <code>value</code> 不为真值，则抛出一个带有 <code>message</code> 属性的 <code>AssertionError</code>，其中 <code>message</code> 属性的值等于传入的 <code>message</code> 参数的值。
+如果 <code>message</code> 参数为 <code>undefined</code>，则赋予默认的错误信息。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">ok</span><span class="sh_symbol">(</span><span class="sh_keyword">true</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过</span>
+assert<span class="sh_symbol">.</span><span class="sh_function">ok</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过</span>
+assert<span class="sh_symbol">.</span><span class="sh_function">ok</span><span class="sh_symbol">(</span><span class="sh_keyword">false</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 "AssertionError: false == true"</span>
+assert<span class="sh_symbol">.</span><span class="sh_function">ok</span><span class="sh_symbol">(</span><span class="sh_number">0</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 "AssertionError: 0 == true"</span>
+assert<span class="sh_symbol">.</span><span class="sh_function">ok</span><span class="sh_symbol">(</span><span class="sh_keyword">false</span><span class="sh_symbol">,</span> <span class="sh_string">'不是真值'</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 "AssertionError: 不是真值"</span>
+</code></pre>
+<h2>assert.strictEqual(actual, expected[, message])<span><a class="mark" href="assert.html#assert_assert_strictequal_actual_expected_message" id="assert_assert_strictequal_actual_expected_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_strictequal_actual_expected_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_strictequal_actual_expected_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>actual</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>expected</code> <span class="type">&lt;any&gt;</span></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>使用全等运算符（<code>===</code>）测试是否全等。</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> assert <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'assert'</span><span class="sh_symbol">);</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">strictEqual</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_number">2</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: 1 === 2</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">strictEqual</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_number">1</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 通过</span>
+
+assert<span class="sh_symbol">.</span><span class="sh_function">strictEqual</span><span class="sh_symbol">(</span><span class="sh_number">1</span><span class="sh_symbol">,</span> <span class="sh_string">'1'</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// 抛出 AssertionError: 1 === '1'</span>
+</code></pre>
+<p>如果两个值不全等，则抛出一个带有 <code>message</code> 属性的 <code>AssertionError</code>，其中 <code>message</code> 属性的值等于传入的 <code>message</code> 参数的值。
+如果 <code>message</code> 参数为 <code>undefined</code>，则赋予默认的错误信息。</p>
+<h2>assert.throws(block[, error][, message])<span><a class="mark" href="assert.html#assert_assert_throws_block_error_message" id="assert_assert_throws_block_error_message">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/assert.html#assert_assert_throws_block_error_message">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/assert/assert_throws_block_error_message.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.21</span>
+</div><ul>
+<li><code>block</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li><code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp" class="type">&lt;RegExp&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
+<li><code>message</code> <span class="type">&lt;any&gt;</span></li>
+</ul>
+<p>期望 <code>block</code> 函数抛出错误。</p>
+<p>如果指定了 <code>error</code>，<code>error</code> 可以是构造函数、<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">正则表达式</a>、或自定义的验证函数。</p>
+<p>如果指定了 <code>message</code>，则当 <code>block</code> 不抛出错误时，<code>message</code> 会作为 <code>AssertionError</code> 的错误信息。</p>
+<p>例子，使用构造函数验证实例：</p>
+<pre class="sh_sourceCode"><code class="lang-js">assert<span class="sh_symbol">.</span><span class="sh_keyword">throws</span><span class="sh_symbol">(</span>
+  <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">throw</span> <span class="sh_keyword">new</span> <span class="sh_predef_func">Error</span><span class="sh_symbol">(</span><span class="sh_string">'错误信息'</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+  <span class="sh_predef_func">Error</span>
+<span class="sh_symbol">);</span>
+</code></pre>
+<p>例子，使用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">正则表达式</a> 验证错误信息：</p>
+<pre class="sh_sourceCode"><code class="lang-js">assert<span class="sh_symbol">.</span><span class="sh_keyword">throws</span><span class="sh_symbol">(</span>
+  <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">throw</span> <span class="sh_keyword">new</span> <span class="sh_predef_func">Error</span><span class="sh_symbol">(</span><span class="sh_string">'错误信息'</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+  <span class="sh_regexp">/错误/</span>
+<span class="sh_symbol">);</span>
+</code></pre>
+<p>例子，自定义的错误验证函数：</p>
+<pre class="sh_sourceCode"><code class="lang-js">assert<span class="sh_symbol">.</span><span class="sh_keyword">throws</span><span class="sh_symbol">(</span>
+  <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">throw</span> <span class="sh_keyword">new</span> <span class="sh_predef_func">Error</span><span class="sh_symbol">(</span><span class="sh_string">'错误信息'</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+  <span class="sh_keyword">function</span><span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">if</span> <span class="sh_symbol">(</span> <span class="sh_symbol">(</span>err <span class="sh_keyword">instanceof</span> <span class="sh_predef_func">Error</span><span class="sh_symbol">)</span> <span class="sh_symbol">&amp;&amp;</span> <span class="sh_regexp">/错误/</span><span class="sh_symbol">.</span><span class="sh_function">test</span><span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+      <span class="sh_keyword">return</span> <span class="sh_keyword">true</span><span class="sh_symbol">;</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+  <span class="sh_string">'不是期望的错误'</span>
+<span class="sh_symbol">);</span>
+</code></pre>
+<p>注意，<code>error</code> 不能是一个字符串。
+如果第二个参数是一个字符串，则视为省略 <code>error</code> 参数，传入的字符串会被用于 <code>message</code>。
+这点比较容易搞错：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 这是错误的！不要这么做！</span>
+assert<span class="sh_symbol">.</span><span class="sh_keyword">throws</span><span class="sh_symbol">(</span>myFunction<span class="sh_symbol">,</span> <span class="sh_string">'错误'</span><span class="sh_symbol">,</span> <span class="sh_string">'没有抛出期望的信息'</span><span class="sh_symbol">);</span>
+
+<span class="sh_comment">// 应该这么做。</span>
+assert<span class="sh_symbol">.</span><span class="sh_keyword">throws</span><span class="sh_symbol">(</span>myFunction<span class="sh_symbol">,</span> <span class="sh_regexp">/错误/</span><span class="sh_symbol">,</span> <span class="sh_string">'没有抛出期望的信息'</span><span class="sh_symbol">);</span>
+</code></pre>
+
+      </div>
+    </div>
+  </div>
+  <script src="res/api.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+</body></html>

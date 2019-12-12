@@ -1,0 +1,33 @@
+<html>
+<body>
+<script type="text/javascript">
+var x=prompt("请输入 0 至 10 之间的数：","")
+try
+{ 
+if(x>10) 
+  throw "Err1" 
+else if(x<0)
+  throw "Err2"
+else if(isNaN(x))
+  throw "Err3"
+} 
+catch(er)
+{
+if(er=="Err1") 
+  alert("错误！该值太大！")
+if(er == "Err2") 
+  alert("错误！该值太小！") 
+if(er == "Err3") 
+  alert("错误！该值不是数字！") 
+}
+</script>
+</body>
+</html><br><hr><br>
+ This file is decompiled from a .CHM file <br>
+by an UNREGISTERED version of Easy CHM. <br>
+You can download Easy CHM at :
+
+<a href="http://www.etextwizard.com/" target=_blank>
+http://www.eTextWizard.com</a> <br><br>
+
+

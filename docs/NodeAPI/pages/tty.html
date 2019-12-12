@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://nodejs.cn/api/tty.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>tty | Node.js API 文档</title>
+  <link rel="stylesheet" href="res/api.css">
+</head>
+<body class="alt apidoc" id="api-section-tty">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+</ul>
+<div class="line"></div>
+
+<ul>
+<li><a class="nav-assert" href="assert.html">Assert (断言)</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons" href="addons.html">C/C++ 插件</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+<li><a class="nav-cli" href="cli.html">CLI (命令行选项)</a></li>
+<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto (加密)</a></li>
+<li><a class="nav-debugger" href="debugger.html">Debugger (调试器)</a></li>
+<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+<li><a class="nav-errors" href="errors.html">Error (错误)</a></li>
+<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+<li><a class="nav-fs" href="fs.html">File System (文件系统)</a></li>
+<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+<li><a class="nav-http" href="http.html">HTTP</a></li>
+<li><a class="nav-https" href="https.html">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring" href="querystring.html">Query Strings (查询字符串)</a></li>
+<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+<li><a class="nav-timers" href="timers.html">Timer (定时器)</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty active" href="./tty_files/tty.htm">TTY (终端)</a></li>
+<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+</ul>
+<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="tty" class="interior">
+      <header>
+        <h1>Node.js v6.10.2 文档</h1>
+        <div id="gtoc">
+          <p>
+            <a href="" name="toc">返回文档首页</a>
+            <!--<a href="/api/all.html">单页面显示</a> |-->
+            <!--<a href="/api/tty.json">JSON格式</a> |-->
+            <!--<a href="/api/en/tty.html">查看英文版</a>-->
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>目录</h2>
+        <ul>
+<li><span class="stability_2"><a href="tty.html#tty_tty">tty (终端)</a></span><ul>
+<li><span class="stability_undefined"><a href="tty.html#tty_class_tty_readstream">tty.ReadStream 类</a></span><ul>
+<li><span class="stability_undefined"><a href="tty.html#tty_readstream_israw">readStream.isRaw</a></span></li>
+<li><span class="stability_undefined"><a href="tty.html#tty_readstream_setrawmode_mode">readStream.setRawMode(mode)</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="tty.html#tty_class_tty_writestream">tty.WriteStream 类</a></span><ul>
+<li><span class="stability_undefined"><a href="tty.html#tty_event_resize">'resize' 事件</a></span></li>
+<li><span class="stability_undefined"><a href="tty.html#tty_writestream_columns">writeStream.columns</a></span></li>
+<li><span class="stability_undefined"><a href="tty.html#tty_writestream_rows">writeStream.rows</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="tty.html#tty_tty_isatty_fd">tty.isatty(fd)</a></span></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>tty (终端)<span><a class="mark" href="tty.html#tty_tty" id="tty_tty">#</a></span></h1><p style="font-size:12px;margin-top:-1em"><a href="en/tty.html#tty_tty">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/tty/tty.md">参与翻译</a></p>
+<pre class="api_stability api_stability_2 sh_sourceCode">稳定性<span class="sh_symbol">:</span> <span class="sh_number">2</span> <span class="sh_symbol">-</span> 稳定的</pre><p><code>tty</code> 模块提供了 <code>tty.ReadStream</code> 类和 <code>tty.WriteStream</code> 类。
+大多数情况下无需直接使用此模块。
+它可以通过以下方式使用：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> tty <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'tty'</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>当 Node.js 检测到它正被运行在一个文本终端（TTY）的上下文中时，则 <code>process.stdin</code> 默认会被初始化为一个 <code>tty.ReadStream</code> 实例，<code>process.stdout</code> 和 <code>process.stderr</code> 默认会被初始化为一个 <code>tty.WriteStream</code> 实例。
+判断 Node.js 是否正被运行在一个 TTY 上下文中的首选方法是去检查 <code>process.stdout.isTTY</code> 属性的值是否为 <code>true</code>：</p>
+<pre class="sh_sourceCode"><code class="lang-sh">$ node <span class="sh_symbol">-</span>p <span class="sh_symbol">-</span>e <span class="sh_string">"Boolean(process.stdout.isTTY)"</span>
+<span class="sh_keyword">true</span>
+$ node <span class="sh_symbol">-</span>p <span class="sh_symbol">-</span>e <span class="sh_string">"Boolean(process.stdout.isTTY)"</span> <span class="sh_symbol">|</span> cat
+<span class="sh_keyword">false</span>
+</code></pre>
+<p>大多数情况下，应用程序几乎没有理由创建 <code>tty.ReadStream</code> 类和 <code>tty.WriteStream</code> 类的实例。</p>
+<h2>tty.ReadStream 类<span><a class="mark" href="tty.html#tty_class_tty_readstream" id="tty_class_tty_readstream">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/tty.html#tty_class_tty_readstream">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/tty/class_tty_readstream.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.8</span>
+</div><p><code>tty.ReadStream</code> 类是 <code>net.Socket</code> 的一个子类，表示一个 TTY 的可读部分。
+正常情况下，<code>process.stdin</code> 是一个 Node.js 进程中唯一的 <code>tty.ReadStream</code> 实例，没有理由创建更多的实例。</p>
+<h3>readStream.isRaw<span><a class="mark" href="tty.html#tty_readstream_israw" id="tty_readstream_israw">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/tty.html#tty_readstream_israw">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/tty/readstream_israw.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.7.7</span>
+</div><p>一个 <code>boolean</code> 值，如果 TTY 当前被配置成作为一个原始设备来操作，则返回 <code>true</code>。
+默认为 <code>false</code>。</p>
+<h3>readStream.setRawMode(mode)<span><a class="mark" href="tty.html#tty_readstream_setrawmode_mode" id="tty_readstream_setrawmode_mode">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/tty.html#tty_readstream_setrawmode_mode">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/tty/readstream_setrawmode_mode.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.7.7</span>
+</div><p>允许配置 <code>tty.ReadStream</code> 作为一个原始设备来操作。</p>
+<p>当在原始模式中，输入总是按字符生效，但不包括修饰符。
+此外，终端对字符的所有特殊处理会被禁用，包括应答输入的字符。
+注意，该模式中 <code>CTRL</code>+<code>C</code> 不再产生一个 <code>SIGINT</code>。</p>
+<ul>
+<li><code>mode</code> <span class="type">&lt;boolean&gt;</span> 如果为 <code>true</code>，则配置 <code>tty.ReadStream</code> 作为一个原始设备来操作。
+如果为 <code>false</code>，则配置 <code>tty.ReadStream</code> 以默认模式来操作。
+<code>readStream.isRaw</code> 属性会被设为对应的值。</li>
+</ul>
+<h2>tty.WriteStream 类<span><a class="mark" href="tty.html#tty_class_tty_writestream" id="tty_class_tty_writestream">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/tty.html#tty_class_tty_writestream">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/tty/class_tty_writestream.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.8</span>
+</div><p><code>tty.WriteStream</code> 类是 <code>net.Socket</code> 的一个子类，表示一个 TTY 的可写部分。
+正常情况下，<code>process.stdout</code> 和 <code>process.stderr</code> 是一个 Node.js 进程中唯一的 <code>tty.WriteStream</code> 实例，没有理由创建更多的实例。</p>
+<h3>'resize' 事件<span><a class="mark" href="tty.html#tty_event_resize" id="tty_event_resize">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/tty.html#tty_event_resize">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/tty/event_resize.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.7.7</span>
+</div><p>当 <code>writeStream.columns</code> 属性或 <code>writeStream.rows</code> 属性发生变化时触发 <code>'resize'</code> 事件。
+监听器回调没有参数传入。</p>
+<pre class="sh_sourceCode"><code class="lang-js">process<span class="sh_symbol">.</span>stdout<span class="sh_symbol">.</span><span class="sh_function">on</span><span class="sh_symbol">(</span><span class="sh_string">'resize'</span><span class="sh_symbol">,</span> <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'屏幕大小已改变！'</span><span class="sh_symbol">);</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span>`$<span class="sh_cbracket">{</span>process<span class="sh_symbol">.</span>stdout<span class="sh_symbol">.</span>columns<span class="sh_cbracket">}</span>x$<span class="sh_cbracket">{</span>process<span class="sh_symbol">.</span>stdout<span class="sh_symbol">.</span>rows<span class="sh_cbracket">}</span>`<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">);</span>
+</code></pre>
+<h3>writeStream.columns<span><a class="mark" href="tty.html#tty_writestream_columns" id="tty_writestream_columns">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/tty.html#tty_writestream_columns">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/tty/writestream_columns.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.7.7</span>
+</div><p>一个 <code>number</code>，指明 TTY 当前具有的列数。
+当 <code>'resize'</code> 事件被触发时，该属性会被更新。</p>
+<h3>writeStream.rows<span><a class="mark" href="tty.html#tty_writestream_rows" id="tty_writestream_rows">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/tty.html#tty_writestream_rows">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/tty/writestream_rows.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.7.7</span>
+</div><p>一个 <code>number</code>，指明 TTY 当前具有的行数。
+当 <code>'resize'</code> 事件被触发时，该属性会被更新。</p>
+<h2>tty.isatty(fd)<span><a class="mark" href="tty.html#tty_tty_isatty_fd" id="tty_tty_isatty_fd">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/tty.html#tty_tty_isatty_fd">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/tty/tty_isatty_fd.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.5.8</span>
+</div><ul>
+<li><code>fd</code> <span class="type">&lt;number&gt;</span> 一个数值型的文件描述符。</li>
+</ul>
+<p>如果给定的 <code>fd</code> 与一个 TTY 相关联，则 <code>tty.isatty()</code> 方法返回 <code>true</code>，否则返回 <code>false</code>。</p>
+
+      </div>
+    </div>
+  </div>
+  <script src="res/api.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+</body></html>

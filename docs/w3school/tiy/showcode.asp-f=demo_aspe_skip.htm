@@ -1,0 +1,36 @@
+<html>
+
+<head><link rel="stylesheet" type="text/css" href="showcode.css" tppabs="http://www.w3school.com.cn/tiy/showcode.css" /></head>
+
+<body>
+
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+&lt;p&gt;文本文件中的前 4 个字符被略掉了：&lt;/p&gt;
+
+<code class="aspcode">&lt;%
+Set fs=Server.CreateObject(&quot;Scripting.FileSystemObject&quot;)
+
+Set f=fs.OpenTextFile(Server.MapPath(&quot;testread.txt&quot;), 1)
+f.Skip(4)
+Response.Write(f.ReadAll)
+f.Close
+
+Set f=Nothing
+Set fs=Nothing
+%&gt;</code>
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</body><br><hr><br>
+ This file is decompiled from a .CHM file <br>
+by an UNREGISTERED version of Easy CHM. <br>
+You can download Easy CHM at :
+
+<a href="http://www.etextwizard.com/" target=_blank>
+http://www.eTextWizard.com</a> <br><br>
+
+

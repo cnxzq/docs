@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://nodejs.cn/api/timers.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>定时器 | Node.js API 文档</title>
+  <link rel="stylesheet" href="res/api.css">
+</head>
+<body class="alt apidoc" id="api-section-timers">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+</ul>
+<div class="line"></div>
+
+<ul>
+<li><a class="nav-assert" href="assert.html">Assert (断言)</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons" href="addons.html">C/C++ 插件</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+<li><a class="nav-cli" href="cli.html">CLI (命令行选项)</a></li>
+<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto (加密)</a></li>
+<li><a class="nav-debugger" href="debugger.html">Debugger (调试器)</a></li>
+<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+<li><a class="nav-errors" href="errors.html">Error (错误)</a></li>
+<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+<li><a class="nav-fs" href="fs.html">File System (文件系统)</a></li>
+<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+<li><a class="nav-http" href="http.html">HTTP</a></li>
+<li><a class="nav-https" href="https.html">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring" href="querystring.html">Query Strings (查询字符串)</a></li>
+<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+<li><a class="nav-timers active" href="./timer_files/timer.htm">Timer (定时器)</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty" href="tty.html">TTY (终端)</a></li>
+<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+</ul>
+<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="timers" class="interior">
+      <header>
+        <h1>Node.js v6.10.2 文档</h1>
+        <div id="gtoc">
+          <p>
+            <a href="" name="toc">返回文档首页</a>
+            <!--<a href="/api/all.html">单页面显示</a> |-->
+            <!--<a href="/api/timers.json">JSON格式</a> |-->
+            <!--<a href="/api/en/timers.html">查看英文版</a>-->
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>目录</h2>
+        <ul>
+<li><span class="stability_3"><a href="timers.html#timers_timers">定时器</a></span><ul>
+<li><span class="stability_undefined"><a href="timers.html#timers_class_immediate">Immediate 类</a></span></li>
+<li><span class="stability_undefined"><a href="timers.html#timers_class_timeout">Timeout 类</a></span><ul>
+<li><span class="stability_undefined"><a href="timers.html#timers_timeout_ref">timeout.ref()</a></span></li>
+<li><span class="stability_undefined"><a href="timers.html#timers_timeout_unref">timeout.unref()</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="timers.html#timers_scheduling_timers">预定定时器</a></span><ul>
+<li><span class="stability_undefined"><a href="timers.html#timers_setimmediate_callback_args">setImmediate(callback[, ...args])</a></span></li>
+<li><span class="stability_undefined"><a href="timers.html#timers_setinterval_callback_delay_args">setInterval(callback, delay[, ...args])</a></span></li>
+<li><span class="stability_undefined"><a href="timers.html#timers_settimeout_callback_delay_args">setTimeout(callback, delay[, ...args])</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="timers.html#timers_cancelling_timers">取消定时器</a></span><ul>
+<li><span class="stability_undefined"><a href="timers.html#timers_clearimmediate_immediate">clearImmediate(immediate)</a></span></li>
+<li><span class="stability_undefined"><a href="timers.html#timers_clearinterval_timeout">clearInterval(timeout)</a></span></li>
+<li><span class="stability_undefined"><a href="timers.html#timers_cleartimeout_timeout">clearTimeout(timeout)</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>定时器<span><a class="mark" href="timers.html#timers_timers" id="timers_timers">#</a></span></h1><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_timers">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/timers.md">参与翻译</a></p>
+<pre class="api_stability api_stability_3 sh_sourceCode">稳定性<span class="sh_symbol">:</span> <span class="sh_number">3</span> <span class="sh_symbol">-</span> 锁定的</pre><p><code>timer</code> 模块暴露了一个全局的 API，用于在某个未来时间段调用调度函数。
+因为定时器函数是全局的，所以使用该 API 无需调用 <code>require('timers')</code>。</p>
+<p>Node.js 中的计时器函数实现了与 Web 浏览器提供的定时器类似的 API，除了它使用了一个不同的内部实现，它是基于 <a href="https://github.com/nodejs/node/blob/master/doc/topics/event-loop-timers-and-nexttick.md">Node.js 事件循环</a>构建的。</p>
+<h2>Immediate 类<span><a class="mark" href="timers.html#timers_class_immediate" id="timers_class_immediate">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_class_immediate">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/class_immediate.md">参与翻译</a></p>
+<p>该对象是内部创建的，并从 <a href="timers.html#timers_setimmediate_callback_args"><code>setImmediate()</code></a> 返回。
+它可以传给 <a href="timers.html#timers_clearimmediate_immediate"><code>clearImmediate()</code></a> 以便取消预定的动作。</p>
+<h2>Timeout 类<span><a class="mark" href="timers.html#timers_class_timeout" id="timers_class_timeout">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_class_timeout">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/class_timeout.md">参与翻译</a></p>
+<p>该对象是内部创建的，并从 <a href="timers.html#timers_settimeout_callback_delay_args"><code>setTimeout()</code></a> 和 <a href="timers.html#timers_setinterval_callback_delay_args"><code>setInterval()</code></a> 返回。
+它可以传给 <a href="timers.html#timers_cleartimeout_timeout"><code>clearTimeout()</code></a> 或 <a href="timers.html#timers_clearinterval_timeout"><code>clearInterval()</code></a> 以便取消预定的动作。</p>
+<p>默认情况下，当使用 <a href="timers.html#timers_settimeout_callback_delay_args"><code>setTimeout()</code></a> 或 <a href="timers.html#timers_setinterval_callback_delay_args"><code>setInterval()</code></a> 预定一个定时器时，只要定时器处于活动状态，Node.js 事件循环就会继续运行。
+每个由这些函数返回的 <code>Timeout</code> 对象都导出了可用于控制这个默认行为的 <code>timeout.ref()</code> 和 <code>timeout.unref()</code> 函数。</p>
+<h3>timeout.ref()<span><a class="mark" href="timers.html#timers_timeout_ref" id="timers_timeout_ref">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_timeout_ref">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/timeout_ref.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.9.1</span>
+</div><p>调用时，只要 <code>Timeout</code> 处于活动状态就要求 Node.js 事件循环不要退出。
+多次调用 <code>timeout.ref()</code> 没有效果。</p>
+<p>注意：默认情况下，所有 <code>Timeout</code> 对象都是 "ref'd" 的，通常不需要调用 <code>timeout.ref()</code>，除非之前调用了 <code>timeout.unref()</code>。</p>
+<p>返回 <code>Timeout</code> 的一个引用。</p>
+<h3>timeout.unref()<span><a class="mark" href="timers.html#timers_timeout_unref" id="timers_timeout_unref">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_timeout_unref">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/timeout_unref.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.9.1</span>
+</div><p>当调用时，活动的 <code>Timeout</code> 对象不要求 Node.js 事件循环保持活动。
+如果没有其他活动保持事件循环运行，则进程可能在 <code>Timeout</code> 对象的回调被调用之前退出。
+多次调用 <code>timeout.unref()</code> 没有效果。</p>
+<p>注意：调用 <code>timeout.unref()</code> 会创建一个内部定时器，它会唤醒 Node.js 的事件循环。
+创建太多这类定时器可能会对 Node.js 应用程序的性能产生负面影响。</p>
+<p>返回对 <code>Timeout</code> 的一个引用。</p>
+<h2>预定定时器<span><a class="mark" href="timers.html#timers_scheduling_timers" id="timers_scheduling_timers">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_scheduling_timers">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/scheduling_timers.md">参与翻译</a></p>
+<p>Node.js 中的计时器是一种会在一段时间后调用给定的函数的内部构造。
+定时器函数何时被调用取决于用来创建定时器的方法以及 Node.js 事件循环正在做的其他工作。</p>
+<h3>setImmediate(callback[, ...args])<span><a class="mark" href="timers.html#timers_setimmediate_callback_args" id="timers_setimmediate_callback_args">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_setimmediate_callback_args">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/setimmediate_callback_args.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.9.1</span>
+</div><ul>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> 在 <a href="https://github.com/nodejs/node/blob/master/doc/topics/event-loop-timers-and-nexttick.md">Node.js 事件循环</a>的当前回合结束时要调用的函数。</li>
+<li><code>...args</code> <span class="type">&lt;any&gt;</span> 当调用 <code>callback</code> 时要传入的可选参数。</li>
+</ul>
+<p>预定立即执行的 <code>callback</code>，它是在 I/O 事件的回调之后、在使用 <a href="timers.html#timers_settimeout_callback_delay_args"><code>setTimeout()</code></a> 和 <a href="timers.html#timers_setinterval_callback_delay_args"><code>setInterval()</code></a> 创建的计时器之前被触发。
+返回一个用于 <a href="timers.html#timers_clearimmediate_immediate"><code>clearImmediate()</code></a> 的 <code>Immediate</code>。</p>
+<p>当多次调用 <code>setImmediate()</code> 时，<code>callback</code> 函数会按照它们被创建的顺序依次执行。
+每次事件循环迭代都会处理整个回调队列。
+如果一个立即定时器是被一个正在执行的回调排入队列的，则该定时器直到下一次事件循环迭代才会被触发。</p>
+<p>如果 <code>callback</code> 不是一个函数，则抛出 <a href="errors.html#errors_class_typeerror"><code>TypeError</code></a>。</p>
+<h3>setInterval(callback, delay[, ...args])<span><a class="mark" href="timers.html#timers_setinterval_callback_delay_args" id="timers_setinterval_callback_delay_args">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_setinterval_callback_delay_args">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/setinterval_callback_delay_args.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.1</span>
+</div><ul>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> 当定时器到点时要调用的函数。</li>
+<li><code>delay</code> <span class="type">&lt;number&gt;</span> 调用 <code>callback</code> 之前要等待的毫秒数。</li>
+<li><code>...args</code> <span class="type">&lt;any&gt;</span> 当调用 <code>callback</code> 时要传入的可选参数。</li>
+</ul>
+<p>预定每隔 <code>delay</code> 毫秒重复执行的 <code>callback</code>。
+返回一个用于 <a href="timers.html#timers_clearinterval_timeout"><code>clearInterval()</code></a> 的 <code>Timeout</code>。</p>
+<p>当 <code>delay</code> 大于 <code>2147483647</code> 或小于 <code>1</code> 时，<code>delay</code> 会被设为 <code>1</code>。</p>
+<p>如果 <code>callback</code> 不是一个函数，则抛出 <a href="errors.html#errors_class_typeerror"><code>TypeError</code></a>。</p>
+<h3>setTimeout(callback, delay[, ...args])<span><a class="mark" href="timers.html#timers_settimeout_callback_delay_args" id="timers_settimeout_callback_delay_args">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_settimeout_callback_delay_args">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/settimeout_callback_delay_args.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.1</span>
+</div><ul>
+<li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> 当定时器到点时要调用的函数。</li>
+<li><code>delay</code> <span class="type">&lt;number&gt;</span> 调用 <code>callback</code> 之前要等待的毫秒数。</li>
+<li><code>...args</code> <span class="type">&lt;any&gt;</span> 当调用 <code>callback</code> 时要传入的可选参数。</li>
+</ul>
+<p>预定在 <code>delay</code> 毫秒之后执行的单次 <code>callback</code>。
+返回一个用于 <a href="timers.html#timers_cleartimeout_timeout"><code>clearTimeout()</code></a> 的 <code>Timeout</code>。</p>
+<p><code>callback</code> 可能不会精确地在 <code>delay</code> 毫秒被调用。
+Node.js 不能保证回调被触发的确切时间，也不能保证它们的顺序。
+回调会在尽可能接近所指定的时间上调用。</p>
+<p>注意：当 <code>delay</code> 大于 <code>2147483647</code> 或小于 <code>1</code> 时，<code>delay</code> 会被设为 <code>1</code>。</p>
+<p>如果 <code>callback</code> 不是一个函数，则抛出 <a href="errors.html#errors_class_typeerror"><code>TypeError</code></a>。</p>
+<h2>取消定时器<span><a class="mark" href="timers.html#timers_cancelling_timers" id="timers_cancelling_timers">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_cancelling_timers">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/cancelling_timers.md">参与翻译</a></p>
+<p><a href="timers.html#timers_setimmediate_callback_args"><code>setImmediate()</code></a>、<a href="timers.html#timers_setinterval_callback_delay_args"><code>setInterval()</code></a> 和 <a href="timers.html#timers_settimeout_callback_delay_args"><code>setTimeout()</code></a> 方法每次都会返回表示预定的计时器的对象。
+它们可用于取消定时器并防止触发。</p>
+<h3>clearImmediate(immediate)<span><a class="mark" href="timers.html#timers_clearimmediate_immediate" id="timers_clearimmediate_immediate">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_clearimmediate_immediate">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/clearimmediate_immediate.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.9.1</span>
+</div><ul>
+<li><code>immediate</code> <span class="type">&lt;Immediate&gt;</span> 一个 <a href="timers.html#timers_setimmediate_callback_args"><code>setImmediate()</code></a> 返回的 <code>Immediate</code> 对象。 </li>
+</ul>
+<p>取消一个由 <a href="timers.html#timers_setimmediate_callback_args"><code>setImmediate()</code></a> 创建的 <code>Immediate</code> 对象。</p>
+<h3>clearInterval(timeout)<span><a class="mark" href="timers.html#timers_clearinterval_timeout" id="timers_clearinterval_timeout">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_clearinterval_timeout">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/clearinterval_timeout.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.1</span>
+</div><ul>
+<li><code>timeout</code> <span class="type">&lt;Timeout&gt;</span> 一个 <a href="timers.html#timers_setinterval_callback_delay_args"><code>setInterval()</code></a> 返回的 <code>Timeout</code> 对象。 </li>
+</ul>
+<p>取消一个由 <a href="timers.html#timers_setinterval_callback_delay_args"><code>setInterval()</code></a> 创建的 <code>Timeout</code> 对象。</p>
+<h3>clearTimeout(timeout)<span><a class="mark" href="timers.html#timers_cleartimeout_timeout" id="timers_cleartimeout_timeout">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/timers.html#timers_cleartimeout_timeout">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/timers/cleartimeout_timeout.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.0.1</span>
+</div><ul>
+<li><code>timeout</code> <span class="type">&lt;Timeout&gt;</span> 一个 <a href="timers.html#timers_settimeout_callback_delay_args"><code>setTimeout()</code></a> 返回的 <code>Timeout</code> 对象。 </li>
+</ul>
+<p>取消一个由 <a href="timers.html#timers_settimeout_callback_delay_args"><code>setTimeout()</code></a> 创建的 <code>Timeout</code> 对象。</p>
+
+      </div>
+    </div>
+  </div>
+  <script src="res/api.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+</body></html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="15" uniqueCount="13">
+	<si>
+		<t>com.ygct.fcp.web.core.web</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>components</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>demo</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>plugins</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>res</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>scripts</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>themes</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>web</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>报表系统相关的前端样式</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>报表系统相关的前端脚本</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>打印、导出、基于ECP 相关的前端js资源</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>第三方、自定义、不基于ECP的前端资源</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+	<si>
+		<t>fcp之前规划的目录 未启用？</t>
+		<phoneticPr fontId="1" type="noConversion"/>
+	</si>
+</sst>

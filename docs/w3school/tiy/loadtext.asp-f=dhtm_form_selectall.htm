@@ -1,0 +1,42 @@
+<html>
+<head>
+<script type="text/javascript">
+function makeCheck(thisForm)
+{
+for (i = 0; i < thisForm.option.length; i++)
+	{
+	thisForm.option[i].checked=true
+	}
+}
+
+function makeUncheck(thisForm)
+{
+for (i = 0; i < thisForm.option.length; i++)
+	{
+	thisForm.option[i].checked=false
+	}
+}
+</script>
+</head>
+<body>
+
+<form name="myForm">
+<input type="button" value="选取" onclick="makeCheck(this.form)">
+<input type="button" value="取消" onclick="makeUncheck(this.form)">
+<br />
+<input type="checkbox" name="option">苹果<br />
+<input type="checkbox" name="option">桔子<br />
+<input type="checkbox" name="option">香蕉<br />
+<input type="checkbox" name="option">西瓜
+</form>
+
+</body>
+</html><br><hr><br>
+ This file is decompiled from a .CHM file <br>
+by an UNREGISTERED version of Easy CHM. <br>
+You can download Easy CHM at :
+
+<a href="http://www.etextwizard.com/" target=_blank>
+http://www.eTextWizard.com</a> <br><br>
+
+

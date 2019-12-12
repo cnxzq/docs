@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://nodejs.cn/api/debugger.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>debugger | Node.js API 文档</title>
+  <link rel="stylesheet" href="res/api.css">
+</head>
+<body class="alt apidoc" id="api-section-debugger">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+</ul>
+<div class="line"></div>
+
+<ul>
+<li><a class="nav-assert" href="assert.html">Assert (断言)</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons" href="addons.html">C/C++ 插件</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+<li><a class="nav-cli" href="cli.html">CLI (命令行选项)</a></li>
+<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto (加密)</a></li>
+<li><a class="nav-debugger active" href="./debugger _ Node.js API 文档_files/debugger _ Node.js API 文档.html">Debugger (调试器)</a></li>
+<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+<li><a class="nav-errors" href="errors.html">Error (错误)</a></li>
+<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+<li><a class="nav-fs" href="fs.html">File System (文件系统)</a></li>
+<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+<li><a class="nav-http" href="http.html">HTTP</a></li>
+<li><a class="nav-https" href="https.html">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring" href="querystring.html">Query Strings (查询字符串)</a></li>
+<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+<li><a class="nav-timers" href="timers.html">Timer (定时器)</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty" href="tty.html">TTY (终端)</a></li>
+<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+</ul>
+<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="debugger" class="interior">
+      <header>
+        <h1>Node.js v6.10.2 文档</h1>
+        <div id="gtoc">
+          <p>
+            <a href="" name="toc">返回文档首页</a>
+            <!--<a href="/api/all.html">单页面显示</a> |-->
+            <!--<a href="/api/debugger.json">JSON格式</a> |-->
+            <!--<a href="/api/en/debugger.html">查看英文版</a>-->
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>目录</h2>
+        <ul>
+<li><span class="stability_2"><a href="debugger.html#debugger_debugger">debugger (调试器)</a></span><ul>
+<li><span class="stability_undefined"><a href="debugger.html#debugger_watchers">监视器</a></span></li>
+<li><span class="stability_undefined"><a href="debugger.html#debugger_command_reference">命令参考手册</a></span><ul>
+<li><span class="stability_undefined"><a href="debugger.html#debugger_stepping">步进</a></span></li>
+<li><span class="stability_undefined"><a href="debugger.html#debugger_breakpoints">断点</a></span></li>
+<li><span class="stability_undefined"><a href="debugger.html#debugger_information">信息</a></span></li>
+<li><span class="stability_undefined"><a href="debugger.html#debugger_execution_control">执行控制</a></span></li>
+<li><span class="stability_undefined"><a href="debugger.html#debugger_various">杂项</a></span></li>
+</ul>
+</li>
+<li><span class="stability_undefined"><a href="debugger.html#debugger_advanced_usage">高级用法</a></span></li>
+<li><span class="stability_undefined"><a href="debugger.html#debugger_v8_inspector_integration_for_node_js">Node.js 的 V8 检查器集合</a></span></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>debugger (调试器)<span><a class="mark" href="debugger.html#debugger_debugger" id="debugger_debugger">#</a></span></h1><p style="font-size:12px;margin-top:-1em"><a href="en/debugger.html#debugger_debugger">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/debugger/debugger.md">参与翻译</a></p>
+<pre class="api_stability api_stability_2 sh_sourceCode">稳定性<span class="sh_symbol">:</span> <span class="sh_number">2</span> <span class="sh_symbol">-</span> 稳定的</pre><!-- type=misc -->
+<p>Node.js 包含一个进程外的调试工具，可以通过<a href="https://github.com/v8/v8/wiki/Debugging-Protocol">基于 TCP 的协议</a>和内置调试客户端访问。
+要使用它，可以带上 <code>debug</code> 参数启动 Node.js，并带上需要调试的脚本的路径；然后会显示一个提示，表明成功启动调试器：</p>
+<pre class="sh_sourceCode"><code class="lang-txt">$ node debug myscript<span class="sh_symbol">.</span>js
+<span class="sh_symbol">&lt;</span> <span class="sh_keyword">debugger</span> listening on port <span class="sh_number">5858</span>
+connecting<span class="sh_symbol">...</span> ok
+<span class="sh_keyword">break</span> <span class="sh_keyword">in</span> <span class="sh_regexp">/home/i</span><span class="sh_normal">ndutny</span><span class="sh_symbol">/</span><span class="sh_normal">Code</span><span class="sh_symbol">/</span><span class="sh_normal">git</span><span class="sh_symbol">/</span><span class="sh_normal">indutny</span><span class="sh_symbol">/</span>myscript<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">1</span>
+  <span class="sh_number">1</span> x <span class="sh_symbol">=</span> <span class="sh_number">5</span><span class="sh_symbol">;</span>
+  <span class="sh_number">2</span> <span class="sh_function">setTimeout</span><span class="sh_symbol">(()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_number">3</span>   <span class="sh_keyword">debugger</span><span class="sh_symbol">;</span>
+debug<span class="sh_symbol">&gt;</span>
+</code></pre>
+<p>Node.js 的调试器客户端还未支持全部特性，但可以做些简单的步骤和检测。</p>
+<p>在脚本的源代码中插入 <code>debugger;</code> 语句，则会在代码的那个位置启用一个断点：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// myscript.js</span>
+x <span class="sh_symbol">=</span> <span class="sh_number">5</span><span class="sh_symbol">;</span>
+<span class="sh_function">setTimeout</span><span class="sh_symbol">(()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">debugger</span><span class="sh_symbol">;</span>
+  console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'world'</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_number">1000</span><span class="sh_symbol">);</span>
+console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'hello'</span><span class="sh_symbol">);</span>
+</code></pre>
+<p>一旦运行调试器，则会在第 4 行出现一个断点：</p>
+<pre class="sh_sourceCode"><code class="lang-txt">$ node debug myscript<span class="sh_symbol">.</span>js
+<span class="sh_symbol">&lt;</span> <span class="sh_keyword">debugger</span> listening on port <span class="sh_number">5858</span>
+connecting<span class="sh_symbol">...</span> ok
+<span class="sh_keyword">break</span> <span class="sh_keyword">in</span> <span class="sh_regexp">/home/i</span><span class="sh_normal">ndutny</span><span class="sh_symbol">/</span><span class="sh_normal">Code</span><span class="sh_symbol">/</span><span class="sh_normal">git</span><span class="sh_symbol">/</span><span class="sh_normal">indutny</span><span class="sh_symbol">/</span>myscript<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">1</span>
+  <span class="sh_number">1</span> x <span class="sh_symbol">=</span> <span class="sh_number">5</span><span class="sh_symbol">;</span>
+  <span class="sh_number">2</span> <span class="sh_function">setTimeout</span><span class="sh_symbol">(()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_number">3</span>   <span class="sh_keyword">debugger</span><span class="sh_symbol">;</span>
+debug<span class="sh_symbol">&gt;</span> cont
+<span class="sh_symbol">&lt;</span> hello
+<span class="sh_keyword">break</span> <span class="sh_keyword">in</span> <span class="sh_regexp">/home/i</span><span class="sh_normal">ndutny</span><span class="sh_symbol">/</span><span class="sh_normal">Code</span><span class="sh_symbol">/</span><span class="sh_normal">git</span><span class="sh_symbol">/</span><span class="sh_normal">indutny</span><span class="sh_symbol">/</span>myscript<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">3</span>
+  <span class="sh_number">1</span> x <span class="sh_symbol">=</span> <span class="sh_number">5</span><span class="sh_symbol">;</span>
+  <span class="sh_number">2</span> <span class="sh_function">setTimeout</span><span class="sh_symbol">(()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_number">3</span>   <span class="sh_keyword">debugger</span><span class="sh_symbol">;</span>
+  <span class="sh_number">4</span>   console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'world'</span><span class="sh_symbol">);</span>
+  <span class="sh_number">5</span> <span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_number">1000</span><span class="sh_symbol">);</span>
+debug<span class="sh_symbol">&gt;</span> next
+<span class="sh_keyword">break</span> <span class="sh_keyword">in</span> <span class="sh_regexp">/home/i</span><span class="sh_normal">ndutny</span><span class="sh_symbol">/</span><span class="sh_normal">Code</span><span class="sh_symbol">/</span><span class="sh_normal">git</span><span class="sh_symbol">/</span><span class="sh_normal">indutny</span><span class="sh_symbol">/</span>myscript<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">4</span>
+  <span class="sh_number">2</span> <span class="sh_function">setTimeout</span><span class="sh_symbol">(()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+  <span class="sh_number">3</span>   <span class="sh_keyword">debugger</span><span class="sh_symbol">;</span>
+  <span class="sh_number">4</span>   console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'world'</span><span class="sh_symbol">);</span>
+  <span class="sh_number">5</span> <span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_number">1000</span><span class="sh_symbol">);</span>
+  <span class="sh_number">6</span> console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'hello'</span><span class="sh_symbol">);</span>
+debug<span class="sh_symbol">&gt;</span> repl
+Press Ctrl <span class="sh_symbol">+</span> C to leave debug repl
+<span class="sh_symbol">&gt;</span> x
+<span class="sh_number">5</span>
+<span class="sh_symbol">&gt;</span> <span class="sh_number">2+2</span>
+<span class="sh_number">4</span>
+debug<span class="sh_symbol">&gt;</span> next
+<span class="sh_symbol">&lt;</span> world
+<span class="sh_keyword">break</span> <span class="sh_keyword">in</span> <span class="sh_regexp">/home/i</span><span class="sh_normal">ndutny</span><span class="sh_symbol">/</span><span class="sh_normal">Code</span><span class="sh_symbol">/</span><span class="sh_normal">git</span><span class="sh_symbol">/</span><span class="sh_normal">indutny</span><span class="sh_symbol">/</span>myscript<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">5</span>
+  <span class="sh_number">3</span>   <span class="sh_keyword">debugger</span><span class="sh_symbol">;</span>
+  <span class="sh_number">4</span>   console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'world'</span><span class="sh_symbol">);</span>
+  <span class="sh_number">5</span> <span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_number">1000</span><span class="sh_symbol">);</span>
+  <span class="sh_number">6</span> console<span class="sh_symbol">.</span><span class="sh_function">log</span><span class="sh_symbol">(</span><span class="sh_string">'hello'</span><span class="sh_symbol">);</span>
+  <span class="sh_number">7</span>
+debug<span class="sh_symbol">&gt;</span> quit
+</code></pre>
+<p><code>repl</code> 命令用于运行代码。
+<code>next</code> 命令用于步入下一行。
+输入 <code>help</code> 可查看其他可用的命令。</p>
+<p>按下 <code>enter</code> 键且不输入命令，可重复上一个调试命令。</p>
+<h2>监视器<span><a class="mark" href="debugger.html#debugger_watchers" id="debugger_watchers">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/debugger.html#debugger_watchers">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/debugger/watchers.md">参与翻译</a></p>
+<p>可以在调试时监视表达式和变量的值。
+在每个断点上，监视器列表中的每个表达式都会在当前上下文中被执行，并在断点的源代码列表之前立即显示。</p>
+<p>输入 <code>watch('my_expression')</code> 开始监视一个表达式。
+<code>watchers</code> 命令会打印已激活的监视器。
+输入 <code>unwatch('my_expression')</code> 来移除一个监视器。</p>
+<h2>命令参考手册<span><a class="mark" href="debugger.html#debugger_command_reference" id="debugger_command_reference">#</a></span></h2>
+<h3>步进<span><a class="mark" href="debugger.html#debugger_stepping" id="debugger_stepping">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/debugger.html#debugger_stepping">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/debugger/stepping.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><code>cont</code>, <code>c</code> - 继续执行</li>
+<li><code>next</code>, <code>n</code> - 下一步</li>
+<li><code>step</code>, <code>s</code> - 跳进函数</li>
+<li><code>out</code>, <code>o</code> - 跳出函数</li>
+<li><code>pause</code> - 暂停运行代码（类似开发者工具中的暂停按钮）</li>
+</ul>
+</div><h3>断点<span><a class="mark" href="debugger.html#debugger_breakpoints" id="debugger_breakpoints">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/debugger.html#debugger_breakpoints">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/debugger/breakpoints.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><code>setBreakpoint()</code>, <code>sb()</code> - 在当前行设置断点</li>
+<li><code>setBreakpoint(line)</code>, <code>sb(line)</code> - 在指定行设置断点</li>
+<li><code>setBreakpoint('fn()')</code>, <code>sb(...)</code> - 在函数体的第一条语句设置断点</li>
+<li><code>setBreakpoint('script.js', 1)</code>, <code>sb(...)</code> - 在 script.js 的第 1 行设置断点</li>
+<li><code>clearBreakpoint('script.js', 1)</code>, <code>cb(...)</code> - 清除 script.js 第 1 行的断点</li>
+</ul>
+</div><p>也可以在一个还未被加载的文件（模块）中设置断点：</p>
+<pre class="sh_sourceCode"><code class="lang-txt">$ node debug <span class="sh_normal">test</span><span class="sh_symbol">/</span><span class="sh_normal">fixtures</span><span class="sh_symbol">/</span><span class="sh_keyword">break</span><span class="sh_symbol">-</span><span class="sh_keyword">in</span><span class="sh_symbol">-</span><span class="sh_normal">module</span><span class="sh_symbol">/</span>main<span class="sh_symbol">.</span>js
+<span class="sh_symbol">&lt;</span> <span class="sh_keyword">debugger</span> listening on port <span class="sh_number">5858</span>
+connecting to port <span class="sh_number">5858</span><span class="sh_symbol">...</span> ok
+<span class="sh_keyword">break</span> <span class="sh_keyword">in</span> <span class="sh_normal">test</span><span class="sh_symbol">/</span><span class="sh_normal">fixtures</span><span class="sh_symbol">/</span><span class="sh_keyword">break</span><span class="sh_symbol">-</span><span class="sh_keyword">in</span><span class="sh_symbol">-</span><span class="sh_normal">module</span><span class="sh_symbol">/</span>main<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">1</span>
+  <span class="sh_number">1</span> <span class="sh_keyword">var</span> mod <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./mod.js'</span><span class="sh_symbol">);</span>
+  <span class="sh_number">2</span> mod<span class="sh_symbol">.</span><span class="sh_function">hello</span><span class="sh_symbol">();</span>
+  <span class="sh_number">3</span> mod<span class="sh_symbol">.</span><span class="sh_function">hello</span><span class="sh_symbol">();</span>
+debug<span class="sh_symbol">&gt;</span> <span class="sh_function">setBreakpoint</span><span class="sh_symbol">(</span><span class="sh_string">'mod.js'</span><span class="sh_symbol">,</span> <span class="sh_number">23</span><span class="sh_symbol">)</span>
+Warning<span class="sh_symbol">:</span> script <span class="sh_string">'mod.js'</span> was not loaded yet<span class="sh_symbol">.</span>
+  <span class="sh_number">1</span> <span class="sh_keyword">var</span> mod <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'./mod.js'</span><span class="sh_symbol">);</span>
+  <span class="sh_number">2</span> mod<span class="sh_symbol">.</span><span class="sh_function">hello</span><span class="sh_symbol">();</span>
+  <span class="sh_number">3</span> mod<span class="sh_symbol">.</span><span class="sh_function">hello</span><span class="sh_symbol">();</span>
+debug<span class="sh_symbol">&gt;</span> c
+<span class="sh_keyword">break</span> <span class="sh_keyword">in</span> <span class="sh_normal">test</span><span class="sh_symbol">/</span><span class="sh_normal">fixtures</span><span class="sh_symbol">/</span><span class="sh_keyword">break</span><span class="sh_symbol">-</span><span class="sh_keyword">in</span><span class="sh_symbol">-</span><span class="sh_normal">module</span><span class="sh_symbol">/</span>mod<span class="sh_symbol">.</span>js<span class="sh_symbol">:</span><span class="sh_number">23</span>
+ <span class="sh_number">21</span>
+ <span class="sh_number">22</span> exports<span class="sh_symbol">.</span>hello <span class="sh_symbol">=</span> <span class="sh_symbol">()</span> <span class="sh_symbol">=&gt;</span> <span class="sh_cbracket">{</span>
+ <span class="sh_number">23</span>   <span class="sh_keyword">return</span> <span class="sh_string">'hello from module'</span><span class="sh_symbol">;</span>
+ <span class="sh_number">24</span> <span class="sh_cbracket">}</span><span class="sh_symbol">;</span>
+ <span class="sh_number">25</span>
+debug<span class="sh_symbol">&gt;</span>
+</code></pre>
+<h3>信息<span><a class="mark" href="debugger.html#debugger_information" id="debugger_information">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/debugger.html#debugger_information">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/debugger/information.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><code>backtrace</code>, <code>bt</code> - 打印当前执行框架的回溯</li>
+<li><code>list(5)</code> - 列出脚本源代码的 5 行上下文（前后各 5 行）</li>
+<li><code>watch(expr)</code> - 添加表达式到监视列表</li>
+<li><code>unwatch(expr)</code> - 从监视列表移除表达式</li>
+<li><code>watchers</code> - 列出所有监视器和它们的值（每个断点会自动列出）</li>
+<li><code>repl</code> - 打开调试器的 repl，用于在所调试的脚本的上下文中进行执行</li>
+<li><code>exec expr</code> - 在所调试的脚本的上下文中执行一个表达式</li>
+</ul>
+</div><h3>执行控制<span><a class="mark" href="debugger.html#debugger_execution_control" id="debugger_execution_control">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/debugger.html#debugger_execution_control">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/debugger/execution_control.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><code>run</code> - 运行脚本（调试器开始时自动运行）</li>
+<li><code>restart</code> - 重新启动脚本</li>
+<li><code>kill</code> - 终止脚本</li>
+</ul>
+</div><h3>杂项<span><a class="mark" href="debugger.html#debugger_various" id="debugger_various">#</a></span></h3><p style="font-size:12px;margin-top:-1em"><a href="en/debugger.html#debugger_various">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/debugger/various.md">参与翻译</a></p>
+<div class="signature"><ul>
+<li><code>scripts</code> - 列出所有已加载的脚本</li>
+<li><code>version</code> - 显示 V8 引擎的版本号</li>
+</ul>
+</div><h2>高级用法<span><a class="mark" href="debugger.html#debugger_advanced_usage" id="debugger_advanced_usage">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/debugger.html#debugger_advanced_usage">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/debugger/advanced_usage.md">参与翻译</a></p>
+<p>启用和访问调试器的另一种方式，是启动 Node.js 时带上 <code>--debug</code> 命令行标志，或向一个已存在的 Node.js 进程发送 <code>SIGUSR1</code> 信号。</p>
+<p>一旦一个进程以这种方式被设为调试模式，它就可以被 Node.js 调试器使用，通过连接到正在运行的进程的 <code>pid</code> 或通过正在监听的调试器的 URI 引用：</p>
+<ul>
+<li><code>node debug -p &lt;pid&gt;</code> - 通过 <code>pid</code> 连接进程</li>
+<li><code>node debug &lt;URI&gt;</code> - 通过 URI 连接进程，如 localhost:5858</li>
+</ul>
+<h2>Node.js 的 V8 检查器集合<span><a class="mark" href="debugger.html#debugger_v8_inspector_integration_for_node_js" id="debugger_v8_inspector_integration_for_node_js">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/debugger.html#debugger_v8_inspector_integration_for_node_js">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/debugger/v8_inspector_integration_for_node_js.md">参与翻译</a></p>
+<p><strong>注意：这是一个试验的特性。</strong></p>
+<p>V8 的检查器集成可以附加 Chrome 的开发者工具到 Node.js 实例以用于调试和性能分析。</p>
+<p>当启动一个 Node.js 应用时，V8 检查器可以通过传入 <code>--inspect</code> 标志启用。
+也可以通过该标志提供一个自定义的端口，如 <code>--inspect=9222</code> 会在 9222 端口接受开发者工具连接。</p>
+<p>要想在应用代码的第一行断开，可以在除 <code>--inspect</code> 之外再提供 <code>--debug-brk</code> 标志。</p>
+<pre class="sh_sourceCode"><code class="lang-txt">$ node <span class="sh_symbol">--</span>inspect index<span class="sh_symbol">.</span>js
+Debugger listening on port <span class="sh_number">9229</span><span class="sh_symbol">.</span>
+Warning<span class="sh_symbol">:</span> This is an experimental feature and could change at any time<span class="sh_symbol">.</span>
+To start debugging<span class="sh_symbol">,</span> open the following URL <span class="sh_keyword">in</span> Chrome<span class="sh_symbol">:</span>
+    chrome<span class="sh_symbol">-</span>devtools<span class="sh_symbol">:</span><span class="sh_comment">//devtools/remote/serve_file/@60cd6e859b9f557d2312f5bf532f6aec5f284980/inspector.html?experiments=true&amp;v8only=true&amp;ws=localhost:9229/node</span>
+</code></pre>
+
+      </div>
+    </div>
+  </div>
+  <script src="res/api.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+
+</body></html>

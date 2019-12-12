@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://nodejs.cn/api/querystring.html -->
+<html lang="zh-cmn-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>querystring | Node.js API 文档</title>
+  <link rel="stylesheet" href="res/api.css">
+</head>
+<body class="alt apidoc" id="api-section-querystring">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="http://nodejs.cn/">
+          Node.js 中文网
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">关于本文档</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">用法与例子</a></li>
+</ul>
+<div class="line"></div>
+
+<ul>
+<li><a class="nav-assert" href="assert.html">Assert (断言)</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons" href="addons.html">C/C++ 插件</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes (子进程)</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster (集群)</a></li>
+<li><a class="nav-cli" href="cli.html">CLI (命令行选项)</a></li>
+<li><a class="nav-console" href="console.html">Console (控制台)</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto (加密)</a></li>
+<li><a class="nav-debugger" href="debugger.html">Debugger (调试器)</a></li>
+<li><a class="nav-dns" href="dns.html">DNS (域名服务器)</a></li>
+<li><a class="nav-domain" href="domain.html">Domain (域)</a></li>
+<li><a class="nav-errors" href="errors.html">Error (错误)</a></li>
+<li><a class="nav-events" href="events.html">Events (事件)</a></li>
+<li><a class="nav-fs" href="fs.html">File System (文件系统)</a></li>
+<li><a class="nav-globals" href="globals.html">Global (全局变量)</a></li>
+<li><a class="nav-http" href="http.html">HTTP</a></li>
+<li><a class="nav-https" href="https.html">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Module (模块)</a></li>
+<li><a class="nav-net" href="net.html">Net (网络)</a></li>
+<li><a class="nav-os" href="os.html">OS (操作系统)</a></li>
+<li><a class="nav-path" href="path.html">Path (路径)</a></li>
+<li><a class="nav-process" href="process.html">Process (进程)</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring active" href="./querystring_files/querystring.htm">Query Strings (查询字符串)</a></li>
+<li><a class="nav-readline" href="readline.html">Readline (逐行读取)</a></li>
+<li><a class="nav-repl" href="repl.html">REPL (交互式解释器)</a></li>
+<li><a class="nav-stream" href="stream.html">Stream (流)</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder (字符串解码器)</a></li>
+<li><a class="nav-timers" href="timers.html">Timer (定时器)</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty" href="tty.html">TTY (终端)</a></li>
+<li><a class="nav-dgram" href="dgram.html">UDP/Datagram (数据报)</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Util (实用工具)</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM (虚拟机)</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB (压缩)</a></li>
+</ul>
+<div class="line"></div>
+
+
+    </div>
+
+    <div id="column1" data-id="querystring" class="interior">
+      <header>
+        <h1>Node.js v6.10.2 文档</h1>
+        <div id="gtoc">
+          <p>
+            <a href="" name="toc">返回文档首页</a>
+            <!--<a href="/api/all.html">单页面显示</a> |-->
+            <!--<a href="/api/querystring.json">JSON格式</a> |-->
+            <!--<a href="/api/en/querystring.html">查看英文版</a>-->
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>目录</h2>
+        <ul>
+<li><span class="stability_2"><a href="querystring.html#querystring_query_string">querystring (查询字符串)</a></span><ul>
+<li><span class="stability_undefined"><a href="querystring.html#querystring_querystring_escape_str">querystring.escape(str)</a></span></li>
+<li><span class="stability_undefined"><a href="querystring.html#querystring_querystring_parse_str_sep_eq_options">querystring.parse(str[, sep[, eq[, options]]])</a></span></li>
+<li><span class="stability_undefined"><a href="querystring.html#querystring_querystring_stringify_obj_sep_eq_options">querystring.stringify(obj[, sep[, eq[, options]]])</a></span></li>
+<li><span class="stability_undefined"><a href="querystring.html#querystring_querystring_unescape_str">querystring.unescape(str)</a></span></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>querystring (查询字符串)<span><a class="mark" href="querystring.html#querystring_query_string" id="querystring_query_string">#</a></span></h1><p style="font-size:12px;margin-top:-1em"><a href="en/querystring.html#querystring_query_string">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/querystring/query_string.md">参与翻译</a></p>
+<pre class="api_stability api_stability_2 sh_sourceCode">Stability<span class="sh_symbol">:</span> <span class="sh_number">2</span> <span class="sh_symbol">-</span> Stable</pre><!--name=querystring-->
+<p><code>querystring</code> 模块提供了一些实用工具，用于解析与格式化 URL 查询字符串。它可以通过以下方式被使用：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_keyword">const</span> querystring <span class="sh_symbol">=</span> <span class="sh_function">require</span><span class="sh_symbol">(</span><span class="sh_string">'querystring'</span><span class="sh_symbol">);</span>
+</code></pre>
+<h2>querystring.escape(str)<span><a class="mark" href="querystring.html#querystring_querystring_escape_str" id="querystring_querystring_escape_str">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/querystring.html#querystring_querystring_escape_str">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/querystring/querystring_escape_str.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.25</span>
+</div><ul>
+<li><code>str</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p><code>querystring.escape()</code> 方法对给定的 <code>str</code> 执行 URL 百分号编码。</p>
+<p><code>querystring.escape()</code> 方法是供 <code>querystring.stringify()</code> 使用的，且通常不被直接使用。
+它之所以对外开放，是为了在需要时可以通过给 <code>querystring.escape</code> 赋值一个函数来重写编码的实现。</p>
+<h2>querystring.parse(str[, sep[, eq[, options]]])<span><a class="mark" href="querystring.html#querystring_querystring_parse_str_sep_eq_options" id="querystring_querystring_parse_str_sep_eq_options">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/querystring.html#querystring_querystring_parse_str_sep_eq_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/querystring/querystring_parse_str_sep_eq_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.25</span>
+</div><ul>
+<li><code>str</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 要解析的 URL 查询字符串。</li>
+<li><code>sep</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 用于界定查询字符串中的键值对的子字符串。默认为 <code>'&amp;'</code>。</li>
+<li><code>eq</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 用于界定查询字符串中的键与值的子字符串。默认为 <code>'='</code>。</li>
+<li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a><ul>
+<li><code>decodeURIComponent</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> 当解码查询字符串中百分号编码的字符时使用的函数。默认为 <code>querystring.unescape()</code>。</li>
+<li><code>maxKeys</code> <span class="type">&lt;number&gt;</span> 指定要解析的键的最大数量。默认为 <code>1000</code>。指定为 <code>0</code> 则移除键数的限制。</li>
+</ul>
+</li>
+</ul>
+<p><code>querystring.parse()</code> 方法能把一个 URL 查询字符串（<code>str</code>）解析成一个键值对的集合。</p>
+<p>例子，查询字符串 <code>'foo=bar&amp;abc=xyz&amp;abc=123'</code> 被解析成：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_cbracket">{</span>
+  foo<span class="sh_symbol">:</span> <span class="sh_string">'bar'</span><span class="sh_symbol">,</span>
+  abc<span class="sh_symbol">:</span> <span class="sh_symbol">[</span><span class="sh_string">'xyz'</span><span class="sh_symbol">,</span> <span class="sh_string">'123'</span><span class="sh_symbol">]</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+<p>注意：<code>querystring.parse()</code> 方法返回的对象不继承自 JavaScript 的 <code>Object</code>。
+这意味着典型的 <code>Object</code> 方法如 <code>obj.toString()</code>、<code>obj.hasOwnProperty()</code> 等没有被定义且无法使用。</p>
+<p>默认情况下，查询字符串中的百分号编码的字符会被认为使用了 UTF-8 编码。
+如果使用的是另一种字符编码，则 <code>decodeURIComponent</code> 选项需要被指定，如以下例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 假设 gbkDecodeURIComponent 函数已存在。</span>
+
+querystring<span class="sh_symbol">.</span><span class="sh_function">parse</span><span class="sh_symbol">(</span><span class="sh_string">'w=%D6%D0%CE%C4&amp;foo=bar'</span><span class="sh_symbol">,</span> <span class="sh_keyword">null</span><span class="sh_symbol">,</span> <span class="sh_keyword">null</span><span class="sh_symbol">,</span>
+  <span class="sh_cbracket">{</span> <span class="sh_predef_func">decodeURIComponent</span><span class="sh_symbol">:</span> gbkDecodeURIComponent <span class="sh_cbracket">}</span><span class="sh_symbol">)</span>
+</code></pre>
+<h2>querystring.stringify(obj[, sep[, eq[, options]]])<span><a class="mark" href="querystring.html#querystring_querystring_stringify_obj_sep_eq_options" id="querystring_querystring_stringify_obj_sep_eq_options">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/querystring.html#querystring_querystring_stringify_obj_sep_eq_options">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/querystring/querystring_stringify_obj_sep_eq_options.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.25</span>
+</div><ul>
+<li><code>obj</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> 要序列化成一个 URL 查询字符串的对象。</li>
+<li><code>sep</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 用于界定查询字符串中的键值对的子字符串。默认为 <code>'&amp;'</code>。</li>
+<li><code>eq</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> 用于界定查询字符串中的键与值的子字符串。默认为 <code>'='</code>。</li>
+<li><code>options</code><ul>
+<li><code>encodeURIComponent</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> 当把对 URL 不安全的字符转换成查询字符串中的百分号编码时使用的函数。默认为 <code>querystring.escape()</code>。</li>
+</ul>
+</li>
+</ul>
+<p><code>querystring.stringify()</code> 方法通过遍历对象的自有属性，从一个给定的 <code>obj</code> 产生一个 URL 查询字符串。</p>
+<p>例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js">querystring<span class="sh_symbol">.</span><span class="sh_function">stringify</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span> foo<span class="sh_symbol">:</span> <span class="sh_string">'bar'</span><span class="sh_symbol">,</span> baz<span class="sh_symbol">:</span> <span class="sh_symbol">[</span><span class="sh_string">'qux'</span><span class="sh_symbol">,</span> <span class="sh_string">'quux'</span><span class="sh_symbol">],</span> corge<span class="sh_symbol">:</span> <span class="sh_string">''</span> <span class="sh_cbracket">}</span><span class="sh_symbol">)</span>
+<span class="sh_comment">// 返回 'foo=bar&amp;baz=qux&amp;baz=quux&amp;corge='</span>
+
+querystring<span class="sh_symbol">.</span><span class="sh_function">stringify</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span>foo<span class="sh_symbol">:</span> <span class="sh_string">'bar'</span><span class="sh_symbol">,</span> baz<span class="sh_symbol">:</span> <span class="sh_string">'qux'</span><span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_string">';'</span><span class="sh_symbol">,</span> <span class="sh_string">':'</span><span class="sh_symbol">)</span>
+<span class="sh_comment">// 返回 'foo:bar;baz:qux'</span>
+</code></pre>
+<p>默认情况下，查询字符串中需要百分号编码的字符会作为 UTF-8 被编码。
+如果需要的是另一种编码，则 <code>encodeURIComponent</code> 选项需要被指定，如以下例子：</p>
+<pre class="sh_sourceCode"><code class="lang-js"><span class="sh_comment">// 假设 gbkEncodeURIComponent 函数已存在。</span>
+
+querystring<span class="sh_symbol">.</span><span class="sh_function">stringify</span><span class="sh_symbol">(</span><span class="sh_cbracket">{</span> w<span class="sh_symbol">:</span> <span class="sh_string">'中文'</span><span class="sh_symbol">,</span> foo<span class="sh_symbol">:</span> <span class="sh_string">'bar'</span> <span class="sh_cbracket">}</span><span class="sh_symbol">,</span> <span class="sh_keyword">null</span><span class="sh_symbol">,</span> <span class="sh_keyword">null</span><span class="sh_symbol">,</span>
+  <span class="sh_cbracket">{</span> <span class="sh_predef_func">encodeURIComponent</span><span class="sh_symbol">:</span> gbkEncodeURIComponent <span class="sh_cbracket">}</span><span class="sh_symbol">)</span>
+</code></pre>
+<h2>querystring.unescape(str)<span><a class="mark" href="querystring.html#querystring_querystring_unescape_str" id="querystring_querystring_unescape_str">#</a></span></h2><p style="font-size:12px;margin-top:-1em"><a href="en/querystring.html#querystring_querystring_unescape_str">查看英文版</a> / <a rel="nofollow" target="_blank" href="https://github.com/nodejscn/node-api-cn/edit/master/querystring/querystring_unescape_str.md">参与翻译</a></p>
+<div class="api_metadata">
+<span>新增于: v0.1.25</span>
+</div><ul>
+<li><code>str</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
+</ul>
+<p><code>querystring.unescape()</code> 方法对给定的 <code>str</code> 上的 URL 百分号编码的字符执行解码。</p>
+<p><code>querystring.unescape()</code> 方法是供 <code>querystring.parse()</code> 使用的，且通常不被直接使用。
+它之所以对外开放，是为了在需要时可以通过给 <code>querystring.unescape</code> 赋值一个函数来重写解码的实现。</p>
+<p><code>querystring.unescape()</code> 方法默认使用 JavaScript 内置的 <code>decodeURIComponent()</code> 方法来解码。</p>
+
+      </div>
+    </div>
+  </div>
+  <script src="res/api.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+</body></html>
